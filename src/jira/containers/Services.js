@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
-import ServerInfos from '../components/ServerInfos'
+import ServiceInfos from '../components/ServiceInfos'
 
-const getServerInfos = (serverInfos) => {
-  return serverInfos
+const getServiceInfos = (serviceInfos) => {
+  return serviceInfos
 }
 
 const mapStateToProps = state => ({
-  serverInfos: getServerInfos(state.serverInfos)
+  serviceInfos: getServiceInfos(state.serviceInfos)
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -15,4 +15,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ServerInfos)
+)(ServiceInfos)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Server from './jira/containers/Server'
+import Services from './jira/containers/Services'
 import './App.css';
 
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
         <p className="App-intro">
           Dev Central.
         </p>
-        <Server/>
+        <Services/>
       </div>
     );
   }
