@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import serverInfo from './serverInfo'
+import serverInfos from './serverInfos'
 
 export default combineReducers({
-  serverInfo
+  serverInfos
 })

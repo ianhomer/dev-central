@@ -25,6 +25,6 @@ render(
 );
 registerServiceWorker();
 
-store.dispatch(receiveServerInfo({version : '1.2.3'}))
-const action = type => store.dispatch({type})
+store.dispatch(receiveServerInfo({version : '1.2.5'}))
+//const action = type => store.dispatch({type})
 

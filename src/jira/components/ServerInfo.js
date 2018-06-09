@@ -1,15 +1,14 @@
-import React from 'react'
+import React from 'react';
 import PropTypes from 'prop-types'
 
-const ServerInfo = ({ serverInfo }) => (
+const ServerInfo = ({ version }) => (
   <div>
-    <div>Server Info : { JSON.stringify(serverInfo) } </div>
-    <div>Version : { JSON.stringify(serverInfo[0]) } </div>
+    <div>Version : { version }</div>
   </div>
 )
 
 ServerInfo.propTypes = {
-  serverInfo: PropTypes.array.isRequired
+  version: PropTypes.string.isRequired
 }
 
 export default ServerInfo

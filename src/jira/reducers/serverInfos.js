@@ -4,7 +4,7 @@ import {
 } from '../actions'
 
 
-const serverInfo = (state = [], action) => {
+const serverInfos = (state = [], action) => {
   switch (action.type) {
     case REQUEST_SERVER_INFO:
       return [
@@ -16,6 +16,7 @@ const serverInfo = (state = [], action) => {
       return [
         ...state,
         {
+          id:'purplepip.com',
           isFetching: false,
           version: action.serverInfo.version,
           lastUpdated: action.receivedAt
@@ -26,4 +27,4 @@ const serverInfo = (state = [], action) => {
   }
 }
 
-export default serverInfo
+export default serverInfos
