@@ -12,9 +12,9 @@ const ServiceInfos = ({ serviceInfos }) => (
 
 ServiceInfos.propTypes = {
   serviceInfos: PropTypes.arrayOf(
-    PropTypes.shape({
-      version: PropTypes.string.isRequired
-    })
+    PropTypes.shape(
+      ServiceInfo.propTypes
+    )
   ).isRequired
 }
 

@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const ServerInfo = ({ version }) => (
+const ServiceInfo = ({ version }) => (
   <div>
     <div>Version : { version }</div>
   </div>
 )
 
-ServerInfo.propTypes = {
+ServiceInfo.propTypes = {
   version: PropTypes.string.isRequired
 }
 
-export default ServerInfo
+export default ServiceInfo
