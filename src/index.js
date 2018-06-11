@@ -16,6 +16,7 @@ import { saga } from './saga'
 
 const persistConfig = {
   key: 'services',
+  whitelist: ['handles'],
   storage,
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
