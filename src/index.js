@@ -3,12 +3,12 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import rootReducer from './jira/reducers'
+import rootReducer from './reducers'
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { receiveServerInfo } from './jira/actions'
-import { saga } from './jira/saga'
+import { receiveServerInfo } from './actions'
+import { saga } from './saga'
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(

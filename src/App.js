@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Services from './jira/containers/Services'
+import Services from './containers/Services'
 import './App.css';
 
 class App extends Component {
