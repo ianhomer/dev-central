@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import Services from './containers/Services'
+import AllServices from './containers/AllServices'
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Dev Central</h1>
-        </header>
-        <p className="App-intro">
-          Dev Central.
-        </p>
-        <Services/>
+      <div>
+        <nav className="navbar navbar-dark bg-dark">
+          <a className="navbar-brand" href=".">Dev Central</a>
+        </nav>
+        <AllServices/>
       </div>
     );
   }

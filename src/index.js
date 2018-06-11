@@ -7,7 +7,7 @@ import rootReducer from './reducers'
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { receiveServerInfo } from './actions'
+import { addService } from './actions'
 import { saga } from './saga'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -25,6 +25,8 @@ render(
 );
 registerServiceWorker();
 
-store.dispatch(receiveServerInfo({version : '1.2.5'}))
+
+store.dispatch(addService('localhost'))
+//store.dispatch(receiveServiceInfo({version : '1.2.5'}))
 //const action = type => store.dispatch({type})
 

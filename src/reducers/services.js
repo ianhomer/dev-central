@@ -1,24 +1,30 @@
 import {
-  REQUEST_SERVER_INFO,
-  RECEIVE_SERVER_INFO
+  ADD_SERVICE,
+  REQUEST_SERVICE_INFO,
+  RECEIVE_SERVICE_INFO
 } from '../actions'
 
-
-const serverInfos = (state = [], action) => {
+const services = (state = [], action) => {
   switch (action.type) {
-    case REQUEST_SERVER_INFO:
+    case ADD_SERVICE:
+      return [
+        ...state, {
+          url: action.url
+        }
+      ]
+    case REQUEST_SERVICE_INFO:
       return [
         ...state, {
           isFetching: true,
         }
       ]
-    case RECEIVE_SERVER_INFO:
+    case RECEIVE_SERVICE_INFO:
       return [
         ...state,
         {
           id:'purplepip.com',
           isFetching: false,
-          version: action.serverInfo.version,
+          version: action.service.version,
           lastUpdated: action.receivedAt
         }
       ]
@@ -27,4 +33,4 @@ const serverInfos = (state = [], action) => {
   }
 }
 
-export default serverInfos
+export default services

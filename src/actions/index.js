@@ -1,16 +1,25 @@
-export const REQUEST_SERVER_INFO = 'REQUEST_SERVER_INFO'
+export const ADD_SERVICE = 'ADD_SERVICE'
 
-export function requestServerInfo() {
+export function addService(url) {
   return {
-    type: REQUEST_SERVER_INFO
+    type: ADD_SERVICE,
+    url
   }
 }
 
-export const RECEIVE_SERVER_INFO = 'RECEIVE_SERVER_INFO'
+export const REQUEST_SERVICE_INFO = 'REQUEST_SERVICE_INFO'
 
-export function receiveServerInfo(serverInfo) {
+export function requestServiceInfo() {
   return {
-    type: RECEIVE_SERVER_INFO,
-    serverInfo
+    type: REQUEST_SERVICE_INFO
+  }
+}
+
+export const RECEIVE_SERVICE_INFO = 'RECEIVE_SERVER_INFO'
+
+export function receiveServiceInfo(serviceInfo) {
+  return {
+    type: RECEIVE_SERVICE_INFO,
+    serviceInfo
   }
 }
