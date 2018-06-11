@@ -1,21 +1,19 @@
 import {
   ADD_SERVICE,
+  RECEIVE_SERVICE_INFO,
   REQUEST_SERVICE_INFO,
-  RECEIVE_SERVICE_INFO
+  REMOVE_SERVICE,
 } from '../actions'
 
 const services = (state = [], action) => {
   switch (action.type) {
     case ADD_SERVICE:
+      if (state.some(service => service.url === action.url)) {
+        return state
+      }
       return [
         ...state, {
           url: action.url
-        }
-      ]
-    case REQUEST_SERVICE_INFO:
-      return [
-        ...state, {
-          isFetching: true,
         }
       ]
     case RECEIVE_SERVICE_INFO:
@@ -28,6 +26,14 @@ const services = (state = [], action) => {
           lastUpdated: action.receivedAt
         }
       ]
+    case REQUEST_SERVICE_INFO:
+      return [
+        ...state, {
+          isFetching: true,
+        }
+      ]
+    case REMOVE_SERVICE:
+      return state.filter(service => service.url !== action.url)
     default:
       return state
   }

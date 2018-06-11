@@ -7,6 +7,15 @@ export function addService(url) {
   }
 }
 
+export const RECEIVE_SERVICE_INFO = 'RECEIVE_SERVER_INFO'
+
+export function receiveServiceInfo(serviceInfo) {
+  return {
+    type: RECEIVE_SERVICE_INFO,
+    serviceInfo
+  }
+}
+
 export const REQUEST_SERVICE_INFO = 'REQUEST_SERVICE_INFO'
 
 export function requestServiceInfo() {
@@ -15,11 +24,11 @@ export function requestServiceInfo() {
   }
 }
 
-export const RECEIVE_SERVICE_INFO = 'RECEIVE_SERVER_INFO'
+export const REMOVE_SERVICE = 'REMOVE_SERVICE'
 
-export function receiveServiceInfo(serviceInfo) {
+export function removeService(url) {
   return {
-    type: RECEIVE_SERVICE_INFO,
-    serviceInfo
+    type: REMOVE_SERVICE,
+    url
   }
 }
