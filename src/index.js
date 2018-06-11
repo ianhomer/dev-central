@@ -9,11 +9,12 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { addService } from './actions'
 import { saga } from './saga'
+import logger from 'redux-logger'
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
   rootReducer,
-  applyMiddleware(sagaMiddleware)
+  applyMiddleware(sagaMiddleware, logger)
 )
 sagaMiddleware.run(saga)
 
