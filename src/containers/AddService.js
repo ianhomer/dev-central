@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addService } from '../actions'
+import { addHandle } from '../actions'
 
 const AddService = ({ dispatch }) => {
   let input
@@ -13,7 +13,7 @@ const AddService = ({ dispatch }) => {
           if (!input.value.trim()) {
             return
           }
-          dispatch(addService(input.value))
+          dispatch(addHandle(input.value))
           input.value = ''
         }}
       >

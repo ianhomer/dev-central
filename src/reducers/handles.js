@@ -1,14 +1,14 @@
 import {
-  ADD_SERVICE,
-  RECEIVE_SERVICE_INFO,
-  REQUEST_SERVICE_INFO,
-  REMOVE_SERVICE,
+  ADD_HANDLE,
+  RECEIVE_HANDLE_INFO,
+  REQUEST_HANDLE_INFO,
+  REMOVE_HANDLE
 } from '../actions'
 
-const services = (state = [], action) => {
+const handles = (state = [], action) => {
   switch (action.type) {
-    case ADD_SERVICE:
-      if (state.some(service => service.url === action.url)) {
+    case ADD_HANDLE:
+      if (state.some(handle => handle.url === action.url)) {
         return state
       }
       return [
@@ -16,27 +16,27 @@ const services = (state = [], action) => {
           url: action.url
         }
       ]
-    case RECEIVE_SERVICE_INFO:
+    case RECEIVE_HANDLE_INFO:
       return [
         ...state,
         {
           id:'purplepip.com',
           isFetching: false,
-          version: action.service.version,
+          version: action.handle.version,
           lastUpdated: action.receivedAt
         }
       ]
-    case REQUEST_SERVICE_INFO:
+    case REQUEST_HANDLE_INFO:
       return [
         ...state, {
           isFetching: true,
         }
       ]
-    case REMOVE_SERVICE:
-      return state.filter(service => service.url !== action.url)
+    case REMOVE_HANDLE:
+      return state.filter(handle => handle.url !== action.url)
     default:
       return state
   }
 }
 
-export default services
+export default handles

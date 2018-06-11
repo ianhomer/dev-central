@@ -1,20 +1,20 @@
 import { connect } from 'react-redux'
-import Services from '../components/Services'
-import { removeService } from '../actions'
+import Handles from '../components/Handles'
+import { removeHandle } from '../actions'
 
-const getServices = (services) => {
-  return services
+const getHandles = (handles) => {
+  return handles
 }
 
 const mapStateToProps = state => ({
-  services: getServices(state.services)
+  handles: getHandles(state.handles)
 })
 
 const mapDispatchToProps = dispatch => ({
-  onRemove: url => dispatch(removeService(url))
+  onRemove: url => dispatch(removeHandle(url))
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Services)
+)(Handles)

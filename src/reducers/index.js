@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import services from './services'
+import handles from './handles'
 
 export default combineReducers({
-  services
+  handles
 })

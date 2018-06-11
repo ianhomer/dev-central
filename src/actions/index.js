@@ -1,34 +1,34 @@
-export const ADD_SERVICE = 'ADD_SERVICE'
+export const ADD_HANDLE = 'ADD_HANDLE'
 
-export function addService(url) {
+export function addHandle(url) {
   return {
-    type: ADD_SERVICE,
+    type: ADD_HANDLE,
     url
   }
 }
 
-export const RECEIVE_SERVICE_INFO = 'RECEIVE_SERVER_INFO'
+export const RECEIVE_HANDLE_INFO = 'RECEIVE_HANDLE_INFO'
 
-export function receiveServiceInfo(serviceInfo) {
+export function receiveServiceInfo(handleInfo) {
   return {
-    type: RECEIVE_SERVICE_INFO,
-    serviceInfo
+    type: RECEIVE_HANDLE_INFO,
+    handleInfo
   }
 }
 
-export const REQUEST_SERVICE_INFO = 'REQUEST_SERVICE_INFO'
+export const REQUEST_HANDLE_INFO = 'REQUEST_HANDLE_INFO'
 
-export function requestServiceInfo() {
+export function requestHandleInfo() {
   return {
-    type: REQUEST_SERVICE_INFO
+    type: REQUEST_HANDLE_INFO
   }
 }
 
-export const REMOVE_SERVICE = 'REMOVE_SERVICE'
+export const REMOVE_HANDLE = 'REMOVE_HANDLE'
 
-export function removeService(url) {
+export function removeHandle(url) {
   return {
-    type: REMOVE_SERVICE,
+    type: REMOVE_HANDLE,
     url
   }
 }

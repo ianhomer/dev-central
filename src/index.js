@@ -12,7 +12,6 @@ import rootReducer from './reducers'
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { addService } from './actions'
 import { saga } from './saga'
 
 const persistConfig = {
@@ -40,7 +39,7 @@ render(
 registerServiceWorker();
 
 
-store.dispatch(addService('localhost'))
+//store.dispatch(addService('localhost'))
 //store.dispatch(receiveServiceInfo({version : '1.2.5'}))
 //const action = type => store.dispatch({type})
 
