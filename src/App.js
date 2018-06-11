@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AllServices from './containers/AllServices'
+import AddService from './containers/AddService'
 import './App.css';
 
 class App extends Component {
@@ -9,7 +10,10 @@ class App extends Component {
         <nav className="navbar navbar-dark bg-dark">
           <a className="navbar-brand" href=".">Dev Central</a>
         </nav>
-        <AllServices/>
+        <div className="container">
+          <AllServices/>
+          <AddService/>
+        </div>
       </div>
     );
   }
