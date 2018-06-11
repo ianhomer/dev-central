@@ -2,6 +2,7 @@
   <dictionary name="ian">
     <words>
       <w>jira</w>
+      <w>persistor</w>
     </words>
   </dictionary>
 </component>
