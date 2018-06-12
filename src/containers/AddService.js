@@ -19,8 +19,7 @@ const AddService = ({ dispatch }) => {
       >
         <div className="form-group row">
           <div className="col-sm-2">&nbsp;</div>
-          <input className="col-sm-5 form-control" ref={node => input = node}
-          />
+          <input className="col-sm-5 form-control" ref={node => input = node}/>
           <button className="col-sm-2 btn btn-primary" type="submit">
             Add Service
           </button>

@@ -13,7 +13,8 @@ const handles = (state = [], action) => {
       }
       return [
         ...state, {
-          url: action.url
+          url: action.url,
+          isAuthenticated: false
         }
       ]
     case RECEIVE_HANDLE_INFO:

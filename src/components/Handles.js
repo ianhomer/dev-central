@@ -14,9 +14,9 @@ const Handles = ({ handles, onRemove }) => (
 
 Handles.propTypes = {
   handles: PropTypes.arrayOf(
-    PropTypes.shape(
-      Handle.propTypes
-    )
+    PropTypes.shape({
+      url: PropTypes.string.isRequired,
+    })
   ).isRequired
 }
 
