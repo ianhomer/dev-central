@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Handles from '../components/Handles'
+import HandleNavs from '../components/HandleNavs'
 import { removeHandle } from '../actions'
 
 const getHandles = (handles) => {
@@ -17,4 +17,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Handles)
+)(HandleNavs)

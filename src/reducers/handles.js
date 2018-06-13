@@ -8,12 +8,12 @@ import {
 const handles = (state = [], action) => {
   switch (action.type) {
     case ADD_HANDLE:
-      if (state.some(handle => handle.url === action.url)) {
+      if (state.some(handle => handle.name === action.name)) {
         return state
       }
       return [
         ...state, {
-          url: action.url,
+          name: action.name,
           isAuthenticated: false
         }
       ]
@@ -34,7 +34,7 @@ const handles = (state = [], action) => {
         }
       ]
     case REMOVE_HANDLE:
-      return state.filter(handle => handle.url !== action.url)
+      return state.filter(handle => handle.name !== action.name)
     default:
       return state
   }

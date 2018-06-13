@@ -1,9 +1,18 @@
 export const ADD_HANDLE = 'ADD_HANDLE'
 
-export function addHandle(url) {
+export function addHandle(name) {
   return {
     type: ADD_HANDLE,
-    url
+    name
+  }
+}
+
+export const AUTHENTICATE = 'AUTHENTICATE'
+
+export function authenticate(username) {
+  return {
+    type: AUTHENTICATE,
+    username
   }
 }
 
@@ -26,9 +35,9 @@ export function requestHandleInfo() {
 
 export const REMOVE_HANDLE = 'REMOVE_HANDLE'
 
-export function removeHandle(url) {
+export function removeHandle(name) {
   return {
     type: REMOVE_HANDLE,
-    url
+    name
   }
 }
