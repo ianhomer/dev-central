@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31e32c79-7f9e-4875-b24b-cef9ef21f6e2" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/AllServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/AllServices.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,11 +34,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Service.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Service.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+            <state relative-caret-position="180">
+              <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/App.css">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="index.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/index.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -60,7 +75,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AllServices.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AllServices.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/AllServices.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
@@ -129,10 +144,8 @@
         <option value="$PROJECT_DIR$/src/jira/components/ServiceInfo.js" />
         <option value="$PROJECT_DIR$/src/jira/components/ServiceInfos.js" />
         <option value="$PROJECT_DIR$/src/services/jira/README.md" />
-        <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/reducers/serviceInfos.js" />
         <option value="$PROJECT_DIR$/src/containers/Services.js" />
-        <option value="$PROJECT_DIR$/src/index.css" />
         <option value="$PROJECT_DIR$/src/reducers/services.js" />
         <option value="$PROJECT_DIR$/src/components/Services.js" />
         <option value="$PROJECT_DIR$/src/reducers/index.js" />
@@ -148,8 +161,10 @@
         <option value="$PROJECT_DIR$/src/components/HandleNavs.js" />
         <option value="$PROJECT_DIR$/src/containers/AddService.js" />
         <option value="$PROJECT_DIR$/src/containers/ActiveService.js" />
-        <option value="$PROJECT_DIR$/src/components/Service.js" />
         <option value="$PROJECT_DIR$/src/containers/AllServices.js" />
+        <option value="$PROJECT_DIR$/src/index.css" />
+        <option value="$PROJECT_DIR$/src/App.css" />
+        <option value="$PROJECT_DIR$/src/components/Service.js" />
       </list>
     </option>
   </component>
@@ -711,12 +726,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.test.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -800,13 +809,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/ActiveService.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -818,6 +820,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="67" selection-start-line="4" selection-start-column="67" selection-end-line="4" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
         </state>
       </provider>
     </entry>
