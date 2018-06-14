@@ -19,7 +19,7 @@ const ActiveService = ({ match, handle, onRemove }) => {
 const mapStateToProps = (state,route) => ({
   handle : state.handles.find(it =>
     it.name === route.match.params.currentServiceName
-  )
+  ) || state.handles[0]
 })
 
 const mapDispatchToProps = dispatch => ({
