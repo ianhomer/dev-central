@@ -22,7 +22,8 @@ class App extends Component {
               </div>
               <div>
                 <Route exact path="/" component={Home} />
-                <Route path="/service/" component={ActiveService} />
+                <Route path="/service/:currentServiceName"
+                   component={ActiveService} />
               </div>
             </div>
           </div>

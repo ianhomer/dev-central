@@ -4,7 +4,6 @@ import { addHandle } from '../actions'
 
 const AddService = ({ dispatch }) => {
   let input
-
   return (
     <div>
       <form

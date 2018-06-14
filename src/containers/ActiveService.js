@@ -3,16 +3,19 @@ import { connect } from 'react-redux'
 import Service from '../components/Service'
 import { removeHandle } from '../actions'
 
-const ActiveService = ({ dispatch }) => {
+const ActiveService = ({ match, handle }) => {
   return (
     <div>
-      <Service/>
+      <Service handle={handle}/>
     </div>
   )
 }
 
-const mapStateToProps = state => ({
-  x: 'x'
+
+const mapStateToProps = (state,route) => ({
+  handle : state.handles.find(it =>
+    it.name === route.match.params.currentServiceName
+  )
 })
 
 const mapDispatchToProps = dispatch => ({
