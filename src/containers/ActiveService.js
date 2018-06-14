@@ -3,10 +3,14 @@ import { connect } from 'react-redux'
 import Service from '../components/Service'
 import { removeHandle } from '../actions'
 
-const ActiveService = ({ match, handle }) => {
+const ActiveService = ({ match, handle, onRemove }) => {
   return (
     <div>
-      <Service handle={handle}/>
+      {handle &&
+        <Service handle={handle}
+          onRemove={() => onRemove(handle.name)}
+        />
+      }
     </div>
   )
 }

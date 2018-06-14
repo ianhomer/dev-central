@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const Service = ({ handle }) => {
+const Service = ({ handle, onRemove }) => {
   return (
   <div>
     <h2>{handle.name}</h2>
@@ -15,12 +15,18 @@ const Service = ({ handle }) => {
         <div className="col-sm-6">{ handle.isAuthenticated.toString() }</div>
       </div>
     </div>
+    <ul>
+      <li>
+        <span onClick={onRemove}>delete</span>
+      </li>
+    </ul>
     <p>{ JSON.stringify(handle) }</p>
   </div>
 )}
 
 Service.propTypes = {
   handle: PropTypes.object.isRequired,
+  onRemove: PropTypes.func.isRequired
 }
 
 export default Service
