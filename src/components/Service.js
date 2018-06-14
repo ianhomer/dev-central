@@ -7,7 +7,7 @@ const Service = ({ handle, onRemove }) => {
     <h2>{handle.name}</h2>
     <div className="container">
       <div className="row">
-        <div className="col-sm-6">Service Name</div>
+        <div className="col-sm-6">Name</div>
         <div className="col-sm-6">{ handle.name }</div>
       </div>
       <div className="row">
@@ -15,6 +15,7 @@ const Service = ({ handle, onRemove }) => {
         <div className="col-sm-6">{ handle.isAuthenticated.toString() }</div>
       </div>
     </div>
+    <h2>Actions</h2>
     <ul>
       <li>
         <span onClick={onRemove}>delete</span>

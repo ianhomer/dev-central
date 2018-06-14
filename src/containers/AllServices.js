@@ -1,12 +1,8 @@
 import { connect } from 'react-redux'
 import HandleNavs from '../components/HandleNavs'
 
-const getHandles = (handles) => {
-  return handles
-}
-
 const mapStateToProps = state => ({
-  handles: getHandles(state.handles)
+  handles: state.handles.sort((a, b) => a.name.localeCompare(b.name))
 })
 
 const mapDispatchToProps = dispatch => ({
