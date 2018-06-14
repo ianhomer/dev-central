@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import { Link } from "react-router-dom";
 
-const HandleNav = ({ name, isAuthenticated, onRemove }) => {
+const HandleNav = ({ name, isAuthenticated }) => {
   return (
   <div className="bd-toc-item">
     <Link to={'/service/' + name }>{ name }</Link>
@@ -10,8 +10,7 @@ const HandleNav = ({ name, isAuthenticated, onRemove }) => {
 )}
 
 HandleNav.propTypes = {
-  name: PropTypes.string.isRequired,
-  onRemove: PropTypes.func.isRequired
+  name: PropTypes.string.isRequired
 }
 
 export default HandleNav
