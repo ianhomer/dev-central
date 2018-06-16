@@ -14,7 +14,7 @@ const ActiveService = ({ match, handle, workLog, onChangeHandleProperty,
           workLog={workLog}
           onChangeHandleProperty={onChangeHandleProperty}
           onRemove={() => onRemove(handle.name)}
-          onRefreshWork={onRefreshWork}
+          onRefreshWork={() => onRefreshWork(handle)}
         />
       }
     </div>
@@ -33,7 +33,7 @@ const mapDispatchToProps = dispatch => ({
   onChangeHandleProperty: (handleName, propertyName, value) =>
     dispatch(changePropertyValue(handleName, propertyName, value)),
   onRemove: name => dispatch(removeHandle(name)),
-  onRefreshWork: () => dispatch(jiraWorkRefresh())
+  onRefreshWork: (handle) => dispatch(jiraWorkRefresh(handle))
 })
 
 export default connect(

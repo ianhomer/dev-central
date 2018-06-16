@@ -1,7 +1,10 @@
-import mockWorkLogUpdated from '../services/jira/mock/workLogUpdated'
+import { fetchMock } from 'fetch-mock'
+import mockWorkLogUpdated from './workLogUpdated'
 
-var scope = nock(/atlassian.net/)
-  .get('/rest/api/2/worklog/updated')
-  .reply(200, function() {
-    mockWorkLogUpdated()
-  })
+export default function mock(callback) {
+  fetchMock('*', mockWorkLogUpdated())
+  const result = callback()
+  console.log(result)
+  fetchMock.restore()
+  return result
+}

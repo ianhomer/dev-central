@@ -5,17 +5,17 @@ import {
   JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED
 } from '../services/jira/actions'
 import mockWorkLogUpdated from '../services/jira/mock/workLogUpdated'
+//import mock from '../services/jira/mock'
 
-function fetchWorkLogApi() {
+function fetchWorkLogApi(handle) {
   return mockWorkLogUpdated()
-    //return fetch(restRoot + '/' + path, {
-    //  method: 'POST',
-    //  headers: {
-    //    'Content-Type': 'application/json'
-    //  }, body: JSON.stringify(entity)
-    //})
-    //  .then(response => response.json())
-    //  .catch(reason => console.error(reason))
+  //fetch(handle.url + '/rest/api/2/worklog/updated', {
+  //    method: 'GET',
+  //    headers: {
+  //      'Content-Type': 'application/json'
+  //    }
+  //  })
+  //.then(response => response.json())
 }
 
 
@@ -23,7 +23,7 @@ function fetchWorkLogApi() {
 // /rest/api/2/worklog/updated
 function* fetchWorkLogUpdated(action) {
    try {
-      const workLog = yield call(fetchWorkLogApi);
+      const workLog = yield call(fetchWorkLogApi, action.handle);
       yield put(
         {type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, workLog: workLog});
    } catch (e) {

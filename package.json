@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "fetch-mock": "^6.4.4",
     "nock": "^9.3.3",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
