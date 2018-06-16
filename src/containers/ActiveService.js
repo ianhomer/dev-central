@@ -5,11 +5,13 @@ import { removeHandle } from '../actions'
 import { jiraWorkRefresh } from '../services/jira/actions'
 
 
-const ActiveService = ({ match, handle, onRemove, onRefreshWork }) => {
+const ActiveService = ({ match, handle, workLog, onRemove, onRefreshWork }) => {
   return (
     <div>
       {handle &&
-        <Service handle={handle}
+        <Service
+          handle={handle}
+          workLog={workLog}
           onRemove={() => onRemove(handle.name)}
           onRefreshWork={onRefreshWork}
         />
@@ -22,7 +24,8 @@ const ActiveService = ({ match, handle, onRemove, onRefreshWork }) => {
 const mapStateToProps = (state,route) => ({
   handle : state.handles.find(it =>
     it.name === route.match.params.currentServiceName
-  ) || state.handles[0]
+  ) || state.handles[0],
+  workLog : state.jira.workLog
 })
 
 const mapDispatchToProps = dispatch => ({

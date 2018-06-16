@@ -4,9 +4,10 @@ import {
   JIRA_WORK_LOG_UPDATED_FETCH_FAILED,
   JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED
 } from '../services/jira/actions'
+import mockWorkLogUpdated from '../services/jira/mock/workLogUpdated'
 
-function fetchWorkLogsApi() {
-  return require('../services/jira/mock/workLogUpdated')
+function fetchWorkLogApi() {
+  return mockWorkLogUpdated()
     //return fetch(restRoot + '/' + path, {
     //  method: 'POST',
     //  headers: {
@@ -22,9 +23,9 @@ function fetchWorkLogsApi() {
 // /rest/api/2/worklog/updated
 function* fetchWorkLogUpdated(action) {
    try {
-      const workLogs = yield call(fetchWorkLogsApi);
+      const workLog = yield call(fetchWorkLogApi);
       yield put(
-        {type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, workLogs: workLogs});
+        {type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, workLog: workLog});
    } catch (e) {
       yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_FAILED, message: e.message});
    }

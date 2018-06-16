@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const Work = ({ handle, onRefresh }) => {
+const Work = ({ workLog, onRefresh }) => {
   return (
   <div>
-    work
+    last updated : { workLog.lastUpdated }
     <div>
       <a className="btn btn-primary btn-lg active"
         onClick={onRefresh}>Refresh</a>
@@ -13,7 +13,7 @@ const Work = ({ handle, onRefresh }) => {
 )}
 
 Work.propTypes = {
-  handle: PropTypes.object.isRequired,
+  workLog: PropTypes.object.isRequired,
   onRefresh: PropTypes.func.isRequired
 }
 
