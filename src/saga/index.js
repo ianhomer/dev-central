@@ -8,8 +8,7 @@ import {
   SYSTEM_MOCK_BACKEND
 } from '../actions'
 
-import mockWorkLogUpdated from '../services/jira/mock/workLogUpdated'
-import fetchMock from 'fetch-mock'
+import { mockAll, unMockAll } from '../mock'
 
 function fetchWorkLogApi(handle) {
   return fetch(handle.url + '/rest/api/2/worklog/updated', {
@@ -47,11 +46,9 @@ function* fetchWorkLogUpdated(action) {
 function* mockBackend(action) {
   yield call(function(action) {
     if (action.enable) {
-      fetchMock.get('*', mockWorkLogUpdated())
-      console.log("Backend is mocked")
+      mockAll()
     } else {
-      fetchMock.restore();
-      console.log("Backend is NOT mocked")
+      unMockAll()
     }
   }, action)
 }
