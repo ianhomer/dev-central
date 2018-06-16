@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 
 const WorkLogItem = ({ item }) => {
-  let updated =new Date(item.updated)
+  let updated = new Date(item.updated)
   return (
     <div>
       <div className="row">
