@@ -6,7 +6,7 @@ const Work = ({ workLog, onRefresh }) => {
   return (
   <div>
     { workLog.records.map( (it) => (
-        <WorkLogItem key={it.worklogId} item={it}/>
+        <WorkLogItem key={it.id} item={it}/>
       ))
     }
     last updated : { workLog.lastUpdated }

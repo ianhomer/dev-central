@@ -8,7 +8,12 @@ const workLog = (state = {
   }, action) => {
   switch (action.type) {
     case JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED:
-      const newWorkLogs = action.workLog.values
+      const newWorkLogs = action.workLog.values.map(workLog => {
+        return {
+          id: workLog.worklogId,
+          updated: workLog.updatedTime
+        }
+      })
       const newWorkLogsIds = newWorkLogs.map(workLog => workLog.id)
       return {
           lastUpdated : Math.max(
