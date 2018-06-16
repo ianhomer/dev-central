@@ -1,4 +1,4 @@
-const json = {
+const workLogUpdated = {
   'values': [
     {
       'worklogId': 103,
@@ -22,4 +22,4 @@ const json = {
   'nextPage': 'http://www.example.com/jira/worklog/updated/updated?since=1438013671136&since=1438013693136',
   'lastPage': true
 }
-export default json
+export default workLogUpdated
