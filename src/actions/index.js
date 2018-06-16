@@ -41,3 +41,12 @@ export function removeHandle(name) {
     name
   }
 }
+
+export const MOCK_BACKEND = 'MOCK_BACKEND'
+
+export function mockBackend(enable) {
+  return {
+    type: MOCK_BACKEND,
+    enable
+  }
+}
