@@ -1,17 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Service from '../components/Service'
-import { removeHandle } from '../actions'
+import { changePropertyValue, removeHandle } from '../actions'
 import { jiraWorkRefresh } from '../services/jira/actions'
 
-
-const ActiveService = ({ match, handle, workLog, onRemove, onRefreshWork }) => {
+const ActiveService = ({ match, handle, workLog, onChangeHandleProperty,
+    onRemove, onRefreshWork }) => {
   return (
     <div>
       {handle &&
         <Service
           handle={handle}
           workLog={workLog}
+          onChangeHandleProperty={onChangeHandleProperty}
           onRemove={() => onRemove(handle.name)}
           onRefreshWork={onRefreshWork}
         />
@@ -29,6 +30,8 @@ const mapStateToProps = (state,route) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  onChangeHandleProperty: (handleName, propertyName, value) =>
+    dispatch(changePropertyValue(handleName, propertyName, value)),
   onRemove: name => dispatch(removeHandle(name)),
   onRefreshWork: () => dispatch(jiraWorkRefresh())
 })

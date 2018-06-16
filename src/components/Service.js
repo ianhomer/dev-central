@@ -4,7 +4,8 @@ import { Route, Link } from "react-router-dom";
 import Profile from './Profile'
 import Work from './Work'
 
-const Service = ({ handle, workLog, onRemove, onRefreshWork }) => {
+const Service = ({ handle, workLog, onChangeHandleProperty, onRemove,
+    onRefreshWork }) => {
   return (
   <div>
     <h2>{handle.name}</h2>
@@ -23,8 +24,12 @@ const Service = ({ handle, workLog, onRemove, onRefreshWork }) => {
         render={props => (<Work {...props}
           workLog={workLog} onRefresh={onRefreshWork}/>)}/>
       <Route path="/service/:currentServiceName/profile"
-        render={props => (<Profile {...props}
-          handle={handle} onRemove={onRemove}/>)}/>
+        render={props => (
+          <Profile {...props}
+            handle={handle}
+            onChangeProperty={onChangeHandleProperty}
+            onRemove={onRemove}
+          />)}/>
     </div>
   </div>
 )}
@@ -32,6 +37,7 @@ const Service = ({ handle, workLog, onRemove, onRefreshWork }) => {
 Service.propTypes = {
   handle: PropTypes.object.isRequired,
   workLog: PropTypes.object.isRequired,
+  onChangeHandleProperty: PropTypes.func.isRequired,
   onRefreshWork: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired
 }

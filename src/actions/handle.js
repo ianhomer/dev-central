@@ -14,6 +14,21 @@ export function authenticate(username) {
   }
 }
 
+export const CHANGE_PROPERTY_VALUE = 'CHANGE_PROPERTY_VALUE'
+export function changePropertyValue(name, propertyName, value) {
+  return {
+    type: CHANGE_PROPERTY_VALUE,
+    name, propertyName, value
+  }
+}
+
+export const ENSURE_HANDLES_VALID = 'ENSURE_HANDLES_VALID'
+export function ensureHandlesValid() {
+  return {
+    type: ENSURE_HANDLES_VALID
+  }
+}
+
 export const RECEIVE_HANDLE_INFO = 'RECEIVE_HANDLE_INFO'
 export function receiveServiceInfo(handleInfo) {
   return {

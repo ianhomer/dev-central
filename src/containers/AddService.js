@@ -7,7 +7,6 @@ const AddService = ({ dispatch }) => {
   let input
 
   var onAddHandle = function(e) {
-    console.log(e.nativeEvent)
     e.preventDefault()
     if (e.nativeEvent.type === 'submit') {
       if (!input.value.trim()) {

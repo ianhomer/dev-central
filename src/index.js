@@ -13,6 +13,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { saga } from './saga'
+import { ensureHandlesValid } from './actions'
 
 const persistConfig = {
   key: 'services',
@@ -24,10 +25,13 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
   persistedReducer,
-  applyMiddleware(sagaMiddleware, logger)
+  applyMiddleware(sagaMiddleware, logger),
 )
 sagaMiddleware.run(saga)
-const persistor = persistStore(store)
+const persistor = persistStore(store, null, function() {
+  // Ensure that store is not corrupted
+  store.dispatch(ensureHandlesValid())
+})
 
 render(
   <Provider store={store}>

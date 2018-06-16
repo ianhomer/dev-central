@@ -1,7 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const Profile = ({ handle, onRemove }) => {
+const Profile = ({ handle, onChangeProperty, onRemove }) => {
+  let url
+
+  var onChangeUrl = function(e) {
+    console.log(e)
+    e.preventDefault()
+    if (!url.value.trim()) {
+      return
+    }
+    onChangeProperty(handle.name, 'url', url.value)
+  }
+
   return (
   <div>
     <div>
@@ -20,6 +31,15 @@ const Profile = ({ handle, onRemove }) => {
         <div className="col-sm-6">isAuthenticated</div>
         <div className="col-sm-6">{ handle.isAuthenticated.toString() }</div>
       </div>
+      <div className="row">
+        <div className="col-sm-6">URL</div>
+        <div className="col-sm-6">
+          <input type="text" value={handle.url}
+            ref={node => url = node}
+            onChange={onChangeUrl}/>
+        </div>
+      </div>
+
     </div>
     <p className="trace">{ JSON.stringify(handle) }</p>
   </div>
