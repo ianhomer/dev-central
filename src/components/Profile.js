@@ -5,7 +5,6 @@ const Profile = ({ handle, onChangeProperty, onRemove }) => {
   let url
 
   var onChangeUrl = function(e) {
-    console.log(e)
     e.preventDefault()
     if (!url.value.trim()) {
       return
@@ -34,7 +33,7 @@ const Profile = ({ handle, onChangeProperty, onRemove }) => {
       <div className="row">
         <div className="col-sm-6">URL</div>
         <div className="col-sm-6">
-          <input type="text" value={handle.url}
+          <input type="text" defaultValue={handle.url}
             ref={node => url = node}
             onChange={onChangeUrl}/>
         </div>
