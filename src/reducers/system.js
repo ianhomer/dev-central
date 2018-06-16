@@ -5,11 +5,10 @@ import {
 const system = (state = [], action) => {
   switch (action.type) {
     case MOCK_BACKEND:
-      return [
-        ...state, {
+      return Object.assign({}, state,
+        {
           mock: action.enable
-        }
-      ]
+        })
     default:
       return state
   }

@@ -3,14 +3,15 @@ import { connect } from 'react-redux'
 import Nav from '../components/Nav'
 import { mockBackend } from '../actions'
 
-const ActiveNav = ({ onMock }) => {
+const ActiveNav = ({ system, onMock }) => {
   return (
-    <Nav onMock={onMock} />
+    <Nav system={system} onMock={onMock} />
   )
 }
 
 
 const mapStateToProps = (state) => ({
+  system: state.system
 })
 
 const mapDispatchToProps = dispatch => ({

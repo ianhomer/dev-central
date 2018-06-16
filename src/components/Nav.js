@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from "react-router-dom"
 
-const Nav = ({ onMock }) => {
+const Nav = ({ system, onMock }) => {
   var onMockDisable = function(e) {
     e.preventDefault()
     onMock(false)
@@ -18,14 +18,15 @@ const Nav = ({ onMock }) => {
     <Link className="navbar-brand" to="/">Dev Central</Link>
     <form className="form-inline">
       <button className="btn btn-outline-success" type="button"
-        onClick={onMockDisable}>Live</button>
-      <button className="btn btn-outline-success" type="button"
-        onClick={onMockEnable}>Mock</button>
+        onClick={system.mock ? onMockDisable : onMockEnable}>
+          { system.mock ? "Mock" : "Live" }
+      </button>
   </form>
   </header>
 )}
 
 Nav.propTypes = {
+  system: PropTypes.object.isRequired,
   onMock: PropTypes.func.isRequired
 }
 
