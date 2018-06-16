@@ -1,8 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 import {
-  JIRA_WORK_LOG_FETCH_SUCCEEDED,
-  JIRA_WORK_LOG_FETCH_FAILED,
-  JIRA_WORK_LOG_REQUESTED
+  JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED,
+  JIRA_WORK_LOG_UPDATED_FETCH_FAILED,
+  JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED
 } from '../services/jira/actions'
 
 function fetchWorkLogApi() {
@@ -20,15 +20,16 @@ function fetchWorkLogApi() {
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 // /rest/api/2/worklog/updated
-function* fetchWorkLog(action) {
+function* fetchWorkLogUpdated(action) {
    try {
       const workLog = yield call(fetchWorkLogApi);
-      yield put({type: JIRA_WORK_LOG_FETCH_SUCCEEDED, workLog: workLog});
+      yield put(
+        {type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, workLog: workLog});
    } catch (e) {
-      yield put({type: JIRA_WORK_LOG_FETCH_FAILED, message: e.message});
+      yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_FAILED, message: e.message});
    }
 }
 
 export function* saga() {
-  yield takeEvery(JIRA_WORK_LOG_REQUESTED, fetchWorkLog);
+  yield takeEvery(JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED, fetchWorkLogUpdated);
 }
