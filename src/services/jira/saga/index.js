@@ -9,7 +9,7 @@ import {
   JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED,
 } from '../actions'
 
-const workLogIdsRequiringFetch = []
+const workLogIdsRequiringFetch = {}
 
 function fetchWorkLogUpdatedApi(handle) {
   return fetch(handle.url + '/rest/api/2/worklog/updated', {
@@ -31,8 +31,7 @@ function fetchWorkLogUpdatedApi(handle) {
 }
 
 function fetchWorkLogListApi(handle) {
-  let requiredIds = workLogIdsRequiringFetch
-    .filter(it => it.required).map(it => it.id)
+  let requiredIds = Object.keys(workLogIdsRequiringFetch)
   console.log("Fetching " + requiredIds)
   return fetch(handle.url + '/rest/api/2/worklog/list', {
       method: 'POST',
@@ -53,7 +52,7 @@ function* fetchWorkLogUpdated(action) {
       yield put(
         {type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, workLog: workLog})
       workLog.values.forEach(it =>
-        workLogIdsRequiringFetch.push({ id: it.worklogId, required: true }))
+        workLogIdsRequiringFetch[it.worklogId] = true)
       yield put(
         {type: JIRA_WORK_LOG_LIST_FETCH_REQUESTED, handle: action.handle})
    } catch (e) {
