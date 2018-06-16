@@ -45,8 +45,3 @@ render(
 );
 registerServiceWorker();
 
-
-//store.dispatch(addService('localhost'))
-//store.dispatch(receiveServiceInfo({version : '1.2.5'}))
-//const action = type => store.dispatch({type})
-
