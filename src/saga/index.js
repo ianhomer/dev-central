@@ -2,20 +2,32 @@ import { call, put, takeEvery } from 'redux-saga/effects'
 import {
   JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED,
   JIRA_WORK_LOG_UPDATED_FETCH_FAILED,
-  JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED
+  JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED,
 } from '../services/jira/actions'
+import {
+  SYSTEM_MOCK_BACKEND
+} from '../actions'
+
 import mockWorkLogUpdated from '../services/jira/mock/workLogUpdated'
-//import mock from '../services/jira/mock'
+import fetchMock from 'fetch-mock'
 
 function fetchWorkLogApi(handle) {
-  return mockWorkLogUpdated()
-  //fetch(handle.url + '/rest/api/2/worklog/updated', {
-  //    method: 'GET',
-  //    headers: {
-  //      'Content-Type': 'application/json'
-  //    }
-  //  })
-  //.then(response => response.json())
+  return fetch(handle.url + '/rest/api/2/worklog/updated', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  .then(response => {
+    const json = response.json()
+    json.then(it => {
+      if (!it.values) {
+        console.log(it)
+        throw "No JSON response"
+      }
+    })
+    return json
+  })
 }
 
 
@@ -31,6 +43,18 @@ function* fetchWorkLogUpdated(action) {
    }
 }
 
+// Enable or disable mock backend
+function* mockBackend(action) {
+  yield call(function(action) {
+    if (action.enable) {
+      fetchMock.get('*', mockWorkLogUpdated())
+    } else {
+      fetchMock.restore();
+    }
+  }, action)
+}
+
 export function* saga() {
   yield takeEvery(JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED, fetchWorkLogUpdated);
+  yield takeEvery(SYSTEM_MOCK_BACKEND, mockBackend)
 }
