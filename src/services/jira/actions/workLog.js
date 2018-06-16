@@ -1,0 +1,9 @@
+export const JIRA_WORK_LOG_FETCH_SUCCEEDED = 'JIRA_WORK_LOG_FETCH_SUCCEEDED'
+export const JIRA_WORK_LOG_FETCH_FAILED = 'JIRA_WORK_LOG_FETCH_FAILED'
+
+export const JIRA_WORK_LOG_REQUESTED = 'JIRA_WORK_LOG_REQUESTED'
+export function jiraWorkLogRequested() {
+  return {
+    type: JIRA_WORK_LOG_REQUESTED
+  }
+}
