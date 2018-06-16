@@ -48,8 +48,10 @@ function* mockBackend(action) {
   yield call(function(action) {
     if (action.enable) {
       fetchMock.get('*', mockWorkLogUpdated())
+      console.log("Backend is mocked")
     } else {
       fetchMock.restore();
+      console.log("Backend is NOT mocked")
     }
   }, action)
 }

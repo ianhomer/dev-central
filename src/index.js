@@ -13,11 +13,11 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { saga } from './saga'
-import { ensureHandlesValid } from './actions'
+import { ensureHandlesValid, mockBackend } from './actions'
 
 const persistConfig = {
   key: 'services',
-  whitelist: ['handles'],
+  whitelist: ['handles', 'system'],
   storage,
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -31,6 +31,8 @@ sagaMiddleware.run(saga)
 const persistor = persistStore(store, null, function() {
   // Ensure that store is not corrupted
   store.dispatch(ensureHandlesValid())
+  // Enable mocking if system configured to do so
+  store.dispatch(mockBackend(store.getState().system.mock))
 })
 
 render(
