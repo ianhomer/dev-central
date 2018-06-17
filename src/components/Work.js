@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import WorkLogItem from './WorkLogItem'
 
-const Work = ({ workLog, onFetchIssue, onRefresh }) => {
+const Work = ({ workLog, onRefresh }) => {
   return (
   <div>
     { workLog.records.map( (it) => (
         <WorkLogItem
           key={it.id} item={it}
-          onFetchIssue={onFetchIssue}
         />
       ))
     }
@@ -22,7 +21,6 @@ const Work = ({ workLog, onFetchIssue, onRefresh }) => {
 
 Work.propTypes = {
   workLog: PropTypes.object.isRequired,
-  onFetchIssue: PropTypes.func.isRequired,
   onRefresh: PropTypes.func.isRequired
 }
 

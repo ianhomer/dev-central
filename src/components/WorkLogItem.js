@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Trace from './Trace'
 import Issue from '../containers/Issue'
 
-const WorkLogItem = ({ onFetchIssue, item }) => {
+const WorkLogItem = ({ item }) => {
   let updated = new Date(item.updated)
   return (
     <div>
@@ -15,7 +15,6 @@ const WorkLogItem = ({ onFetchIssue, item }) => {
         <div className="col-sm-2">{ (item.timeSpentSeconds / 3600).toFixed(1) }h</div>
         <div className="col-sm-2">{ item.issueId }</div>
         <div className="col-sm-2"><Issue
-          onFetchIssue={onFetchIssue}
           date={ + new Date() }
           id={ parseInt(item.issueId, 10) }
         /></div>
@@ -25,8 +24,7 @@ const WorkLogItem = ({ onFetchIssue, item }) => {
 }
 
 WorkLogItem.propTypes = {
-  item: PropTypes.object.isRequired,
-  onFetchIssue: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired
 }
 
 export default WorkLogItem

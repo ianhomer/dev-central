@@ -5,7 +5,7 @@ import Profile from './Profile'
 import Work from './Work'
 
 const Service = ({ handle, workLog,
-    onAuthenticate, onChangeHandleProperty, onFetchIssue, onLogout, onRemove, onRefreshWork }) => {
+    onAuthenticate, onChangeHandleProperty, onLogout, onRemove, onRefreshWork }) => {
   return (
   <div>
     <h2>{handle.name}</h2>
@@ -25,7 +25,6 @@ const Service = ({ handle, workLog,
       <Route path="/service/:currentServiceName/work"
         render={props => (
           <Work {...props}
-            onFetchIssue={onFetchIssue}
             workLog={workLog}
             onRefresh={onRefreshWork}
           />)}/>
@@ -47,7 +46,6 @@ Service.propTypes = {
   workLog: PropTypes.object.isRequired,
   onAuthenticate: PropTypes.func.isRequired,
   onChangeHandleProperty: PropTypes.func.isRequired,
-  onFetchIssue: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
   onRefreshWork: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired
