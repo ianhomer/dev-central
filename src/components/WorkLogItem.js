@@ -8,13 +8,11 @@ const WorkLogItem = ({ item }) => {
     <div>
       <Trace o={item}/>
       <div className="row">
-        <div className="col-sm-2">{ item.id }</div>
-        <div className="col-sm-4">{
-          updated.toLocaleDateString()
-        }</div>
-        <div className="col-sm-4">{
-          updated.toLocaleTimeString()
-        }</div>
+        <div className="col-sm-1">{ item.id }</div>
+        <div className="col-sm-2">{ item.author && item.author.name }</div>
+        <div className="col-sm-2">{ updated.toLocaleDateString() }</div>
+        <div className="col-sm-2">{ (item.timeSpentSeconds / 3600).toFixed(1) }h</div>
+        <div className="col-sm-2">{ item.issueId }</div>
       </div>
     </div>
   )
