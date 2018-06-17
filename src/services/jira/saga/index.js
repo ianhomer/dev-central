@@ -17,6 +17,13 @@ import {
 
 const workLogIdsRequiringFetch = {}
 
+function createRequestHeaders(handle) {
+  return {
+    'Content-Type': 'application/json',
+    'Cookie': 'JSESSIONID=' + handle.sessionId
+  }
+}
+
 function authenticateApi(handle, password) {
   return fetch(handle.url + '/jira/rest/auth/1/session', {
       method: 'POST',
@@ -30,7 +37,7 @@ function fetchWorkLogUpdatedApi(handle) {
   // TODO : Add since and expand GET arguments
   return fetch(handle.url + '/rest/api/2/worklog/updated', {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      headers: createRequestHeaders(handle)
     })
   .then(response => response.json())
 }
@@ -40,7 +47,7 @@ function fetchWorkLogListApi(handle) {
   console.log("Fetching " + requiredIds)
   return fetch(handle.url + '/rest/api/2/worklog/list', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: createRequestHeaders(handle),
       body: { 'ids': requiredIds }
     })
   .then(response => response.json())
