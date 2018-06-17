@@ -11,11 +11,11 @@ import {
 const handles = (state = [], action) => {
   switch (action.type) {
     case AUTHENTICATION_SUCCEEDED:
-      var changedHandle = state.find(handle => handle.name === action.name)
-      changedHandle["sessionId"] = action.authentication.session.value
+      var changedSessionHandle = state.find(handle => handle.name === action.name)
+      changedSessionHandle["sessionId"] = action.authentication.session.value
       return [
         ...state.filter(handle => handle.name !== action.name),
-        changedHandle
+        changedSessionHandle
       ]
     case ADD_HANDLE:
       if (state.some(handle => handle.name === action.name)) {
