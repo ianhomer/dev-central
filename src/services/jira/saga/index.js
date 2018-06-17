@@ -13,6 +13,9 @@ import {
   JIRA_WORK_LOG_LIST_FETCH_REQUESTED,
   JIRA_WORK_LOG_LIST_FETCH_FAILED,
   JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED,
+  JIRA_ISSUE_FETCH_REQUESTED,
+  JIRA_ISSUE_FETCH_FAILED,
+  JIRA_ISSUE_FETCH_SUCCEEDED,
 } from '../actions'
 
 const workLogIdsRequiringFetch = {}
@@ -46,9 +49,18 @@ function fetchWorkLogUpdatedApi(handle) {
 
 function fetchWorkLogListApi(handle) {
   let requiredIds = Object.keys(workLogIdsRequiringFetch)
-  console.log("Fetching " + requiredIds)
   return fetch(handle.url + '/rest/api/2/worklog/list', {
       method: 'POST',
+      headers: createRequestHeaders(handle),
+      body: { 'ids': requiredIds }
+    })
+  .then(response => response.json())
+}
+
+function fetchIssueApi(handle, action, id) {
+  let requiredIds = Object.keys(workLogIdsRequiringFetch)
+  return fetch(handle.url + '/rest/api/2/issue/' + id, {
+      method: 'GET',
       headers: createRequestHeaders(handle),
       body: { 'ids': requiredIds }
     })
@@ -88,8 +100,18 @@ function* fetchWorkLogList(action) {
   }
 }
 
+function* fetchIssue(action) {
+  try {
+    const issue = yield call(fetchIssueApi, action.handle, action.id)
+    yield put({type: JIRA_ISSUE_FETCH_SUCCEEDED, issue})
+  } catch (e) {
+    yield put({type: JIRA_ISSUE_FETCH_FAILED, message: e.message})
+  }
+}
+
 export default function* jiraSaga() {
   yield takeEvery(JIRA_REQUEST_AUTHENTICATION, authenticate)
   yield takeEvery(JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED, fetchWorkLogUpdated)
   yield takeEvery(JIRA_WORK_LOG_LIST_FETCH_REQUESTED, fetchWorkLogList)
+  yield takeEvery(JIRA_ISSUE_FETCH_REQUESTED, fetchIssue)
 }

@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31e32c79-7f9e-4875-b24b-cef9ef21f6e2" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/services/jira/reducers/workLog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/jira/reducers/workLog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/jira/mock/mockIssue.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/jira/reducers/issues.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Issue.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Issue.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/jira/mock/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/jira/mock/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/jira/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/jira/reducers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/jira/saga/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/jira/saga/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,83 +29,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="issues.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/services/jira/actions/issues.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workLog.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/services/jira/reducers/workLog.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="34" selection-start-line="34" selection-end-line="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Issue.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/Issue.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="330">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
+      <file leaf-file-name="mockIssue.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/jira/mock/mockIssue.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+            <state relative-caret-position="15">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ActiveService.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/ActiveService.js">
+      <file leaf-file-name="issues.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/jira/reducers/issues.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+            <state relative-caret-position="135">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Service.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Service.js">
+      <file leaf-file-name="workLog.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/jira/reducers/workLog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="50" selection-start-line="50" selection-end-line="50" />
+            <state relative-caret-position="135">
+              <caret line="9" column="16" selection-end-line="53" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WorkLogItem.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/WorkLogItem.js">
+      <file leaf-file-name="mockUtils.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/jira/mock/mockUtils.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+            <state relative-caret-position="135">
+              <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/services/jira/reducers/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Work.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Work.js">
+      <file leaf-file-name="workLogList.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/services/jira/mock/workLogList.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="37" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="37" />
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -125,8 +104,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/containers/Services.js" />
-        <option value="$PROJECT_DIR$/src/reducers/services.js" />
         <option value="$PROJECT_DIR$/src/components/Services.js" />
         <option value="$PROJECT_DIR$/src/components/Handles.js" />
         <option value="$PROJECT_DIR$/src/components/Handle.js" />
@@ -142,7 +119,6 @@
         <option value="$PROJECT_DIR$/src/actions/index.js" />
         <option value="$PROJECT_DIR$/src/reducers/index.js" />
         <option value="$PROJECT_DIR$/src/services/jira/reducers/workLogs.js" />
-        <option value="$PROJECT_DIR$/src/services/jira/reducers/index.js" />
         <option value="$PROJECT_DIR$/src/components/HandleNavs.js" />
         <option value="$PROJECT_DIR$/src/containers/AllServices.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
@@ -156,26 +132,29 @@
         <option value="$PROJECT_DIR$/src/saga/index.js" />
         <option value="$PROJECT_DIR$/src/services/jira/actions/authentication.js" />
         <option value="$PROJECT_DIR$/src/saga/authentication.js" />
-        <option value="$PROJECT_DIR$/src/services/jira/mock/index.js" />
         <option value="$PROJECT_DIR$/src/services/jira/mock/authentication.js" />
         <option value="$PROJECT_DIR$/src/actions/handle.js" />
         <option value="$PROJECT_DIR$/src/reducers/handles.js" />
-        <option value="$PROJECT_DIR$/src/services/jira/saga/index.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/containers/AddService.js" />
         <option value="$PROJECT_DIR$/src/components/HandleNav.js" />
         <option value="$PROJECT_DIR$/src/components/Profile.js" />
         <option value="$PROJECT_DIR$/src/components/Trace.js" />
         <option value="$PROJECT_DIR$/src/index.css" />
-        <option value="$PROJECT_DIR$/src/services/jira/mock/workLogList.js" />
         <option value="$PROJECT_DIR$/src/services/jira/actions/index.js" />
         <option value="$PROJECT_DIR$/src/services/jira/actions/issues.js" />
         <option value="$PROJECT_DIR$/src/components/Work.js" />
         <option value="$PROJECT_DIR$/src/components/Service.js" />
         <option value="$PROJECT_DIR$/src/containers/ActiveService.js" />
         <option value="$PROJECT_DIR$/src/components/WorkLogItem.js" />
-        <option value="$PROJECT_DIR$/src/containers/Issue.js" />
         <option value="$PROJECT_DIR$/src/services/jira/reducers/workLog.js" />
+        <option value="$PROJECT_DIR$/src/services/jira/mock/index.js" />
+        <option value="$PROJECT_DIR$/src/services/jira/saga/index.js" />
+        <option value="$PROJECT_DIR$/src/services/jira/reducers/issues.js" />
+        <option value="$PROJECT_DIR$/src/services/jira/reducers/index.js" />
+        <option value="$PROJECT_DIR$/src/containers/Issue.js" />
+        <option value="$PROJECT_DIR$/src/services/jira/mock/mockIssue.js" />
+        <option value="$PROJECT_DIR$/src/services/jira/mock/workLogList.js" />
       </list>
     </option>
   </component>
@@ -718,16 +697,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/logo.svg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/registerServiceWorker.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -831,31 +800,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/jira/mock/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="44" lean-forward="true" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/saga/authentication.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/handles.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="34" column="55" lean-forward="true" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/jira/saga/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>
@@ -908,13 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/jira/mock/mockUtils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/services/jira/mock/authentication.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -926,13 +867,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/jira/mock/workLogList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="30" column="51" lean-forward="true" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -1020,20 +954,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/jira/actions/issues.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/jira/reducers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/WorkLogItem.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1041,17 +961,80 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/jira/actions/issues.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="6" lean-forward="true" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/jira/mock/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/handles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="64" selection-start-line="64" selection-end-line="67" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/jira/saga/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/jira/reducers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/Issue.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="330">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/jira/mock/mockIssue.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/jira/reducers/issues.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/services/jira/reducers/workLog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        <state relative-caret-position="135">
+          <caret line="9" column="16" selection-end-line="53" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/jira/mock/mockUtils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/jira/mock/workLogList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>

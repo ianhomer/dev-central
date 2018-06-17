@@ -2,7 +2,6 @@ import { findUpdatedTimeForId } from './mockUtils'
 
 export default function workLogList(opts) {
   //const now = +new Date();
-  console.log(opts)
   let base = 'http://www.example.com/'
   return opts.body.ids.map(id => {
     let updatedTime = findUpdatedTimeForId(id)
