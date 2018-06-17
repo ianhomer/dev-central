@@ -5,6 +5,7 @@ import {
   ENSURE_HANDLES_VALID,
   RECEIVE_HANDLE_INFO,
   REQUEST_HANDLE_INFO,
+  REQUEST_LOGOUT,
   REMOVE_HANDLE
 } from '../actions'
 
@@ -13,6 +14,7 @@ const handles = (state = [], action) => {
     case AUTHENTICATION_SUCCEEDED:
       var changedSessionHandle = state.find(handle => handle.name === action.name)
       changedSessionHandle["sessionId"] = action.authentication.session.value
+      changedSessionHandle.isAuthenticated = true
       return [
         ...state.filter(handle => handle.name !== action.name),
         changedSessionHandle
@@ -54,6 +56,14 @@ const handles = (state = [], action) => {
         ...state, {
           isFetching: true,
         }
+      ]
+    case REQUEST_LOGOUT:
+      var changedLogoutHandle = state.find(handle => handle.name === action.name)
+      changedLogoutHandle["sessionId"] = null
+      changedLogoutHandle.isAuthenticated = false
+      return [
+        ...state.filter(handle => handle.name !== action.name),
+        changedLogoutHandle
       ]
     case REMOVE_HANDLE:
       return state.filter(handle => handle.name !== action.name)

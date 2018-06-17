@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const Profile = ({ handle, onAuthenticate, onChangeProperty, onRemove }) => {
+const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove }) => {
   let password, username, url
 
   var onChangeUsername = function(e) {
@@ -71,6 +71,12 @@ const Profile = ({ handle, onAuthenticate, onChangeProperty, onRemove }) => {
         </form>
       </div>
     }
+    { handle.isAuthenticated &&
+      <div>
+        <button className="btn btn-primary btn-lg active" aria-pressed="true"
+          onClick={onLogout}>log out</button>
+      </div>
+    }
 
     <div>
       <a className="btn btn-primary btn-lg active" onClick={onRemove}>delete</a>
@@ -83,6 +89,7 @@ const Profile = ({ handle, onAuthenticate, onChangeProperty, onRemove }) => {
 Profile.propTypes = {
   handle: PropTypes.object.isRequired,
   onAuthenticate: PropTypes.func.isRequired,
+  onLogout: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired
 }
 

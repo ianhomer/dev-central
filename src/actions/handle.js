@@ -17,6 +17,14 @@ export function authenticate(handle, password) {
   }
 }
 
+export const REQUEST_LOGOUT = 'REQUEST_LOGOUT'
+export function logout(handle) {
+  return {
+    type: REQUEST_LOGOUT,
+    name: handle.name
+  }
+}
+
 export const CHANGE_PROPERTY_VALUE = 'CHANGE_PROPERTY_VALUE'
 export function changePropertyValue(name, propertyName, value) {
   return {
