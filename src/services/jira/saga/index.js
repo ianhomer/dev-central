@@ -33,7 +33,10 @@ function authenticateApi(handle, password) {
   // https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-basic-auth-and-cookie-based-auth/
   return fetch(handle.url + '/jira/rest/auth/1/session', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Origin': handle.url,
+        'Content-Type': 'application/json'
+      },
       body: { 'username': handle.username, 'password': password }
     })
   .then(response => response.json())

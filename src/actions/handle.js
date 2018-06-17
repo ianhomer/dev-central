@@ -26,10 +26,10 @@ export function logout(handle) {
 }
 
 export const CHANGE_PROPERTY_VALUE = 'CHANGE_PROPERTY_VALUE'
-export function changePropertyValue(name, propertyName, value) {
+export function changePropertyValue(handle, propertyName, value) {
   return {
     type: CHANGE_PROPERTY_VALUE,
-    name, propertyName, value
+    handle, propertyName, value
   }
 }
 

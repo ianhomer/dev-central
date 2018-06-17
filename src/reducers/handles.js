@@ -31,10 +31,11 @@ const handles = (state = [], action) => {
         }
       ]
     case CHANGE_PROPERTY_VALUE:
-      var changedHandle = Object.assign({}, state.find(handle => handle.name === action.name))
+      var changedHandle = Object.assign({}, state.find(
+        handle => handle.name === action.handle.name))
       changedHandle[action.propertyName] = action.value
       return [
-        ...state.filter(handle => handle.name !== action.name),
+        ...state.filter(handle => handle.name !== action.handle.name),
         changedHandle
       ]
     case ENSURE_HANDLES_VALID:

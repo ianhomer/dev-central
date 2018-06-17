@@ -3,14 +3,23 @@ import PropTypes from 'prop-types'
 import Trace from './Trace'
 
 const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove }) => {
-  let password, username, url
+  let password, sessionId, username, url
+
+  var onChangeSessionId = function(e) {
+    e.preventDefault()
+    if (!sessionId.value.trim()) {
+      return
+    }
+    onChangeProperty('sessionId', sessionId.value)
+    onChangeProperty('isAuthenticated', true)
+  }
 
   var onChangeUsername = function(e) {
     e.preventDefault()
     if (!username.value.trim()) {
       return
     }
-    onChangeProperty(handle.name, 'username', username.value)
+    onChangeProperty('username', username.value)
   }
 
   var onChangeUrl = function(e) {
@@ -18,7 +27,7 @@ const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove 
     if (!url.value.trim()) {
       return
     }
-    onChangeProperty(handle.name, 'url', url.value)
+    onChangeProperty('url', url.value)
   }
 
   var onAuthenticateSubmit = function(e) {
@@ -33,30 +42,37 @@ const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove 
   <div>
     <div className="container">
       <div className="row">
-        <div className="col-sm-6">Name</div>
-        <div className="col-sm-6">{ handle.name }</div>
+        <div className="col-sm-4">Name</div>
+        <div className="col-sm-8">{ handle.name }</div>
       </div>
       <div className="row">
-        <div className="col-sm-6">isAuthenticated</div>
-        <div className="col-sm-6">{ handle.isAuthenticated.toString() }</div>
+        <div className="col-sm-4">isAuthenticated</div>
+        <div className="col-sm-8">{ handle.isAuthenticated.toString() }</div>
       </div>
       <div className="row">
-        <div className="col-sm-6">session</div>
-        <div className="col-sm-6">{ handle.sessionId }</div>
+        <div className="col-sm-4">session</div>
+        <div className="col-sm-8">
+          <input key={handle.name} type="text" defaultValue={handle.sessionId}
+            ref={node => sessionId = node}
+            size={60}
+            onChange={onChangeSessionId}/>
+        </div>
       </div>
       <div className="row">
-        <div className="col-sm-6">Username</div>
-        <div className="col-sm-6">
-          <input type="text" defaultValue={handle.username}
+        <div className="col-sm-4">Username</div>
+        <div className="col-sm-8">
+          <input key={handle.name} type="text" defaultValue={handle.username}
             ref={node => username = node}
+            size={60}
             onChange={onChangeUsername}/>
         </div>
       </div>
       <div className="row">
-        <div className="col-sm-6">URL</div>
-        <div className="col-sm-6">
-          <input type="text" defaultValue={handle.url}
+        <div className="col-sm-4">URL</div>
+        <div className="col-sm-8">
+          <input key={handle.name} type="text" defaultValue={handle.url}
             ref={node => url = node}
+            size={60}
             onChange={onChangeUrl}/>
         </div>
       </div>

@@ -15,7 +15,8 @@ const ActiveService = ({ match, handle, workLog,
           handle={handle}
           workLog={workLog}
           onAuthenticate={(password) => onAuthenticate(handle, password)}
-          onChangeHandleProperty={onChangeHandleProperty}
+          onChangeHandleProperty={(propertyName, value) =>
+            onChangeHandleProperty(handle, propertyName, value)}
           onLogout={() => onLogout(handle)}
           onRemove={() => onRemove(handle.name)}
           onRefreshWork={() => onRefreshWork(handle, chain)}
