@@ -2,13 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 class Issue extends React.Component {
-  componentDidUpdate() {
-    // TODO : Read https://hackernoon.com/evil-things-you-do-with-redux-dispatch-in-updating-lifecycle-methods-ad116de882d4
-    if (!this.props.issue) {
-      this.props.onFetchIssue(this.props.id)
-    }
-  }
-
   render() {
     const { issue } = this.props
     return (

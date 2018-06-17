@@ -1,20 +1,19 @@
 import { findUpdatedTimeForId } from './mockUtils'
 
 export default function workLogList(opts) {
-  //const now = +new Date();
   let base = 'http://www.example.com/'
   return opts.body.ids.map(id => {
     let updatedTime = findUpdatedTimeForId(id)
     return {
       'self': base + '/jira/rest/api/2/issue/10010/worklog/' + id,
       'author': {
-        'self': base + '/jira/rest/api/2/user?username=fred',
+        'self': base + '/jira/rest/api/2/user?username=bob',
         'name': 'bob',
         'displayName': 'Bob McFace',
         'active': false
       },
       'updateAuthor': {
-        'self': base + '/jira/rest/api/2/user?username=fred',
+        'self': base + '/jira/rest/api/2/user?username=bob',
         'name': 'bob',
         'displayName': 'Bob McFace',
         'active': false

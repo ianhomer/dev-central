@@ -5,6 +5,7 @@ import { authenticate, changePropertyValue, logout, removeHandle } from '../acti
 import { jiraRequestIssue, jiraWorkRefresh } from '../services/jira/actions'
 
 const ActiveService = ({ match, handle, workLog,
+    chain,
     onAuthenticate, onChangeHandleProperty, onFetchIssue, onLogout, onRemove, onRenderIssue,
     onRefreshWork }) => {
   return (
@@ -18,7 +19,7 @@ const ActiveService = ({ match, handle, workLog,
           onFetchIssue={(id) => onFetchIssue(handle, id)}
           onLogout={() => onLogout(handle)}
           onRemove={() => onRemove(handle.name)}
-          onRefreshWork={() => onRefreshWork(handle)}
+          onRefreshWork={() => onRefreshWork(handle, chain)}
         />
       }
     </div>
@@ -30,7 +31,13 @@ const mapStateToProps = (state,route) => ({
   handle : state.handles.find(it =>
     it.name === route.match.params.currentServiceName
   ) || state.handles[0],
-  workLog : state.jira.workLog
+  workLog : state.jira.workLog,
+  chain : {
+    isIssueStale : (id) => {
+      return !state.jira.issues || !state.jira.issues.some(issue => issue.id === id)
+    }
+  }
+
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -40,7 +47,7 @@ const mapDispatchToProps = dispatch => ({
   onFetchIssue: (handle, id) => dispatch(jiraRequestIssue(handle, id)),
   onLogout: (handle) => dispatch(logout(handle)),
   onRemove: name => dispatch(removeHandle(name)),
-  onRefreshWork: (handle) => dispatch(jiraWorkRefresh(handle))
+  onRefreshWork: (handle, chain) => dispatch(jiraWorkRefresh(handle, chain))
 })
 
 export default connect(

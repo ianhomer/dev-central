@@ -13,6 +13,7 @@ import {
   JIRA_WORK_LOG_LIST_FETCH_REQUESTED,
   JIRA_WORK_LOG_LIST_FETCH_FAILED,
   JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED,
+  jiraRequestIssue,
   JIRA_ISSUE_FETCH_REQUESTED,
   JIRA_ISSUE_FETCH_FAILED,
   JIRA_ISSUE_FETCH_SUCCEEDED,
@@ -82,10 +83,11 @@ function* authenticate(action) {
 // /rest/api/2/worklog/updated
 function* fetchWorkLogUpdated(action) {
    try {
-      const workLog = yield call(fetchWorkLogUpdatedApi, action.handle)
-      yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, workLog: workLog})
+      const workLog = yield call(fetchWorkLogUpdatedApi, action.handle, action.chain)
+      yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, chain: action.chain, workLog})
       workLog.values.forEach(it => workLogIdsRequiringFetch[it.worklogId] = true)
-      yield put({type: JIRA_WORK_LOG_LIST_FETCH_REQUESTED, handle: action.handle})
+      yield put({type: JIRA_WORK_LOG_LIST_FETCH_REQUESTED, chain: action.chain, handle: action
+      .handle})
    } catch (e) {
       yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_FAILED, message: e.message})
    }
@@ -95,6 +97,13 @@ function* fetchWorkLogList(action) {
   try {
     const workLogList = yield call(fetchWorkLogListApi, action.handle)
     yield put({type: JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED, workLogList: workLogList})
+
+    for (var i in workLogList) {
+      var workLog = workLogList[i]
+      if (workLog.issueId && action.chain.isIssueStale(workLog.issueId)) {
+        yield put(jiraRequestIssue(action.handle, workLog.issueId))
+      }
+    }
   } catch (e) {
     yield put({type: JIRA_WORK_LOG_LIST_FETCH_FAILED, message: e.message})
   }

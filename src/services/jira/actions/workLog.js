@@ -11,18 +11,19 @@ export const JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED =
 
 // Refresh the work (log)
 export const JIRA_WORK_REFRESH_REQUESTED = 'JIRA_WORK_REFRESH_REQUESTED'
-export function jiraWorkRefresh(handle) {
+export function jiraWorkRefresh(handle, chain) {
   // for now we'll just get the work log updated, but we'll need to change
   // this to update all that is required to refresh to work log view
-  return jiraWorkLogUpdatedFetchRequested(handle)
+  return jiraWorkLogUpdatedFetchRequested(handle, chain)
 }
 
 // Fetch updated work logs
 export const JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED =
   'JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED'
-export function jiraWorkLogUpdatedFetchRequested(handle) {
+export function jiraWorkLogUpdatedFetchRequested(handle, chain) {
   return {
     type: JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED,
-    handle
+    handle,
+    chain
   }
 }
