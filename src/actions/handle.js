@@ -6,11 +6,13 @@ export function addHandle(name) {
   }
 }
 
+export const AUTHENTICATION_SUCCEEDED = 'AUTHENTICATION_SUCCEEDED'
+export const AUTHENTICATION_FAILED = 'AUTHENTICATION_FAILED'
 export const REQUEST_AUTHENTICATION = 'REQUEST_AUTHENTICATION'
-export function authenticate(handleName, password) {
+export function authenticate(handle, password) {
   return {
     type: REQUEST_AUTHENTICATION,
-    handleName,
+    handle,
     password
   }
 }

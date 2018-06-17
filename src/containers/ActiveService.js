@@ -12,7 +12,7 @@ const ActiveService = ({ match, handle, workLog,
         <Service
           handle={handle}
           workLog={workLog}
-          onAuthenticate={(password) => onAuthenticate(handle.name, password)}
+          onAuthenticate={(password) => onAuthenticate(handle, password)}
           onChangeHandleProperty={onChangeHandleProperty}
           onRemove={() => onRemove(handle.name)}
           onRefreshWork={() => onRefreshWork(handle)}
@@ -31,7 +31,7 @@ const mapStateToProps = (state,route) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onAuthenticate: (handleName, password) => dispatch(authenticate(handleName, password)),
+  onAuthenticate: (handle, password) => dispatch(authenticate(handle, password)),
   onChangeHandleProperty: (handleName, propertyName, value) =>
     dispatch(changePropertyValue(handleName, propertyName, value)),
   onRemove: name => dispatch(removeHandle(name)),

@@ -12,7 +12,7 @@ import {
 function* triggerAuthentication(action) {
   // TODO : conditionally trigger appropriate service authenticatipm
   yield put({type: JIRA_REQUEST_AUTHENTICATION,
-    handleName: action.handleName, password: action.password})
+    handle: action.handle, password: action.password})
 }
 
 export default function* mockSaga() {
