@@ -1,4 +1,5 @@
 import {
+  JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED,
   JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED
 } from '../actions'
 
@@ -25,6 +26,22 @@ const workLog = (state = {
             ...newWorkLogs
           ]
         }
+    case JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED:
+      var newState = Object.assign({}, state,
+        {
+          records: [
+            ...state.records
+          ]
+        })
+      action.workLogList.forEach(item => {
+        var newItem = Object.assign({}, item)
+        newItem.id = parseInt(item.id)
+        var record = newState.records.find(it => it.id === newItem.id)
+        if (record) {
+          Object.assign(record, newItem)
+        }
+      })
+      return newState
     default:
       return state
   }
