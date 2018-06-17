@@ -16,7 +16,8 @@ const WorkLogItem = ({ onFetchIssue, item }) => {
         <div className="col-sm-2">{ item.issueId }</div>
         <div className="col-sm-2"><Issue
           onFetchIssue={onFetchIssue}
-          id={item.issueId}
+          date={ + new Date() }
+          id={ parseInt(item.issueId, 10) }
         /></div>
       </div>
     </div>

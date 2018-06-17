@@ -2,10 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 class Issue extends React.Component {
-  componentDidMount() {
+  componentDidUpdate() {
     this.props.onFetchIssue(this.props.id)
-    console.log("DID MOUNT ")
-    console.log(this.props)
   }
 
   render() {
@@ -23,15 +21,15 @@ function fetchItem(state, id) {
     console.log("FETCH ITEM : " + id)
     return null
   }
-  return state.jira.issues.find(it => it.id === id);
+  return ;
 }
 
 const mapStateToProps = (state, ownProps) => {
   console.log("OWN PROPS")
   console.log(ownProps)
   return {
-    id : ownProps.id,
-    issue : ownProps && fetchItem(state, ownProps.id)
+    id : parseInt(ownProps.id, 10),
+    issue : state.jira.issues && state.jira.issues.find(it => it.id === ownProps.id)
   }
 }
 

@@ -32,20 +32,26 @@ const workLog = (state = {
     // Commit work log details from list request
     //
     case JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED:
-      const newListWorkLogsIds = action.workLogList.map(workLog => parseInt(workLog.id, 10))
-      const newListWorkLogs = action.workLogList.map(item => {
-        var newItem = Object.assign({}, item)
-        newItem.id = parseInt(item.id, 10)
-        var record = state.records.find(it => it.id === newItem.id)
-        return Object.assign({}, record, newItem)
-      })
       return Object.assign({},
-        state, {
-          records: [
-            ...state.records.filter(workLog => !newListWorkLogsIds.includes(workLog.id)),
-            ...newListWorkLogs
-          ]
-        })
+        state,
+        {
+          records: action.workLogList
+        }
+      )
+      //const newListWorkLogsIds = action.workLogList.map(workLog => parseInt(workLog.id, 10))
+      //const newListWorkLogs = action.workLogList.map(item => {
+      //  var newItem = Object.assign({}, item)
+      //  newItem.id = parseInt(item.id, 10)
+      //  var record = state.records.find(it => it.id === newItem.id)
+      //  return Object.assign({}, record, newItem)
+      //})
+      //return Object.assign({},
+      //  state, {
+      //    records: [
+      //      ...state.records.filter(workLog => !newListWorkLogsIds.includes(workLog.id)),
+      //      ...newListWorkLogs
+      //    ]
+      //  })
     default:
       return state
   }
