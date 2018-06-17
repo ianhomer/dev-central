@@ -3,10 +3,17 @@ import {
   JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED
 } from '../actions'
 
-const workLog = (state = {
-    lastUpdated : 0,
-    records : []
-  }, action) => {
+
+import {
+  SYSTEM_FLUSH_DATA
+} from '../../../actions'
+
+const DEFAULT = {
+  lastUpdated : 0,
+  records : []
+}
+
+const workLog = (state = DEFAULT, action) => {
   switch (action.type) {
     //
     // Commit updated work log entries.
@@ -46,6 +53,8 @@ const workLog = (state = {
             ...newListWorkLogs
           ]
         })
+    case SYSTEM_FLUSH_DATA:
+      return DEFAULT
     default:
       return state
   }

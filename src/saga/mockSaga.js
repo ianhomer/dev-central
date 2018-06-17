@@ -1,6 +1,7 @@
-import { call, takeEvery } from 'redux-saga/effects'
+import { call, put, takeEvery } from 'redux-saga/effects'
 
 import {
+  flushData,
   SYSTEM_MOCK_BACKEND
 } from '../actions'
 
@@ -15,6 +16,9 @@ function* mockBackend(action) {
       unMockAll()
     }
   }, action)
+  if (action.flush) {
+    yield put(flushData())
+  }
 }
 
 export default function* mockSaga() {

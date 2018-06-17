@@ -15,7 +15,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onMock: enable => dispatch(mockBackend(enable))
+  onMock: enable => dispatch(mockBackend(true, enable))
 })
 
 export default connect(
