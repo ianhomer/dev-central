@@ -31,7 +31,7 @@ const handles = (state = [], action) => {
         }
       ]
     case CHANGE_PROPERTY_VALUE:
-      var changedHandle = state.find(handle => handle.name === action.name)
+      var changedHandle = Object.assign({}, state.find(handle => handle.name === action.name))
       changedHandle[action.propertyName] = action.value
       return [
         ...state.filter(handle => handle.name !== action.name),
