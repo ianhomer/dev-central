@@ -40,6 +40,10 @@ const Profile = ({ handle, onAuthenticate, onChangeProperty, onRemove }) => {
         <div className="col-sm-6">{ handle.isAuthenticated.toString() }</div>
       </div>
       <div className="row">
+        <div className="col-sm-6">session</div>
+        <div className="col-sm-6">{ handle.sessionId }</div>
+      </div>
+      <div className="row">
         <div className="col-sm-6">Username</div>
         <div className="col-sm-6">
           <input type="text" defaultValue={handle.username}

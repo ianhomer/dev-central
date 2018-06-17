@@ -1,4 +1,5 @@
 import {
+  AUTHENTICATION_SUCCEEDED,
   ADD_HANDLE,
   CHANGE_PROPERTY_VALUE,
   ENSURE_HANDLES_VALID,
@@ -9,6 +10,13 @@ import {
 
 const handles = (state = [], action) => {
   switch (action.type) {
+    case AUTHENTICATION_SUCCEEDED:
+      var changedHandle = state.find(handle => handle.name === action.name)
+      changedHandle["sessionId"] = action.authentication.session.value
+      return [
+        ...state.filter(handle => handle.name !== action.name),
+        changedHandle
+      ]
     case ADD_HANDLE:
       if (state.some(handle => handle.name === action.name)) {
         return state

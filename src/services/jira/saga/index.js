@@ -49,7 +49,9 @@ function fetchWorkLogListApi(handle) {
 function* authenticate(action) {
   try {
     const authentication = yield call(authenticateApi, action.handle, action.password)
-    yield put({type: AUTHENTICATION_SUCCEEDED, authentication})
+    yield put({type: AUTHENTICATION_SUCCEEDED,
+      name: action.handle.name,
+      authentication})
   } catch (e) {
     yield put({type: AUTHENTICATION_FAILED, message: e.message})
   }
