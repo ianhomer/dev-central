@@ -1,17 +1,15 @@
-const workLogSeparation = 60000
-// zero is the time that IDs start for the mock data
-const zero = 1529173500000
+import { findWorkLogIdForNow, findUpdatedTimeForId } from './mockUtils'
 
 export default function workLogUpdated() {
   const now = +new Date();
   const since = now - 8640000
-  const idStart = Math.floor((now - zero) / workLogSeparation)
+  const idStart = findWorkLogIdForNow()
 
   var values = []
-  for (var i = 0; i < 5; i++) {
+  for (var id = idStart ; id > idStart - 5; id--) {
     values.push({
-      'worklogId': idStart + i,
-      'updatedTime': now - i * workLogSeparation,
+      'worklogId': id,
+      'updatedTime': findUpdatedTimeForId(id),
       'properties': []
     })
   }

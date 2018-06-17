@@ -1,30 +1,36 @@
-export default function workLogList() {
-  return [
-    {
-      'self': 'http://www.example.com/jira/rest/api/2/issue/10010/worklog/10000',
+import { findUpdatedTimeForId } from './mockUtils'
+
+export default function workLogList(opts) {
+  //const now = +new Date();
+  console.log()
+  let base = 'http://www.example.com/'
+  return opts.body.ids.map(id => {
+    let updatedTime = findUpdatedTimeForId(id)
+    return {
+      'self': base + '/jira/rest/api/2/issue/10010/worklog/' + id,
       'author': {
-        'self': 'http://www.example.com/jira/rest/api/2/user?username=fred',
-        'name': 'fred',
-        'displayName': 'Fred F. User',
+        'self': base + '/jira/rest/api/2/user?username=fred',
+        'name': 'bob',
+        'displayName': 'Bob McFace',
         'active': false
       },
       'updateAuthor': {
-        'self': 'http://www.example.com/jira/rest/api/2/user?username=fred',
-        'name': 'fred',
-        'displayName': 'Fred F. User',
+        'self': base + '/jira/rest/api/2/user?username=fred',
+        'name': 'bob',
+        'displayName': 'Bob McFace',
         'active': false
       },
-      'comment': 'I did some work here.',
-      'updated': '2018-06-07T05:42:08.018+0000',
+      'comment': 'Completed task.',
+      'updated': new Date(updatedTime).toISOString(),
       'visibility': {
         'type': 'group',
         'value': 'jira-developers'
       },
-      'started': '2018-06-07T05:42:08.018+0000',
-      'timeSpent': '3h 20m',
-      'timeSpentSeconds': 12000,
-      'id': '100028',
+      'started': new Date(updatedTime - 60000).toISOString(),
+      'timeSpent': '1h',
+      'timeSpentSeconds': 3600,
+      'id': id,
       'issueId': '10002'
     }
-  ]
+  })
 }

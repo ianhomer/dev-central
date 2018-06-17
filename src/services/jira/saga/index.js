@@ -37,9 +37,8 @@ function fetchWorkLogListApi(handle) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
-      }
-    },{
-      'ids': requiredIds
+      },
+      body: { 'ids': requiredIds }
     })
   .then(response => response.json())
 }

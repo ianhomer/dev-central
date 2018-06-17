@@ -7,6 +7,6 @@ export default function mockJira(fetchMock) {
     return mockWorkLogUpdated()
   })
   fetchMock.post('glob:*/rest/api/2/worklog/list', function(url,opts) {
-    return mockWorkLogList()
+    return mockWorkLogList(opts)
   })
 }
