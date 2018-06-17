@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const Profile = ({ handle, onChangeProperty, onRemove }) => {
-  let url
+const Profile = ({ handle, onAuthenticate, onChangeProperty, onRemove }) => {
+  let password, username, url
+
+  var onChangeUsername = function(e) {
+    e.preventDefault()
+    if (!username.value.trim()) {
+      return
+    }
+    onChangeProperty(handle.name, 'username', username.value)
+  }
 
   var onChangeUrl = function(e) {
     e.preventDefault()
@@ -12,15 +20,16 @@ const Profile = ({ handle, onChangeProperty, onRemove }) => {
     onChangeProperty(handle.name, 'url', url.value)
   }
 
+  var onAuthenticateSubmit = function(e) {
+    e.preventDefault()
+    if (!password.value.trim()) {
+      return
+    }
+    onAuthenticate(password.value)
+  }
+
   return (
   <div>
-    <div>
-      { !handle.isAuthenticated &&
-        <a className="btn btn-primary btn-lg active"
-          role="button" aria-pressed="true">authenticate</a>
-      }
-      <a className="btn btn-primary btn-lg active" onClick={onRemove}>delete</a>
-    </div>
     <div className="container">
       <div className="row">
         <div className="col-sm-6">Name</div>
@@ -31,6 +40,14 @@ const Profile = ({ handle, onChangeProperty, onRemove }) => {
         <div className="col-sm-6">{ handle.isAuthenticated.toString() }</div>
       </div>
       <div className="row">
+        <div className="col-sm-6">Username</div>
+        <div className="col-sm-6">
+          <input type="text" defaultValue={handle.username}
+            ref={node => username = node}
+            onChange={onChangeUsername}/>
+        </div>
+      </div>
+      <div className="row">
         <div className="col-sm-6">URL</div>
         <div className="col-sm-6">
           <input type="text" defaultValue={handle.url}
@@ -39,6 +56,21 @@ const Profile = ({ handle, onChangeProperty, onRemove }) => {
         </div>
       </div>
 
+    { !handle.isAuthenticated &&
+      <div>
+        <form>
+          <input type="text" name="username" autoComplete="username" value={handle.username}
+            readOnly="true"/>
+          <input type="password" ref={node => password = node} autoComplete="new-password"/>
+          <button className="btn btn-primary btn-lg active" aria-pressed="true"
+            onClick={onAuthenticateSubmit}>authenticate</button>
+        </form>
+      </div>
+    }
+
+    <div>
+      <a className="btn btn-primary btn-lg active" onClick={onRemove}>delete</a>
+    </div>
     </div>
     <p className="trace">{ JSON.stringify(handle) }</p>
   </div>
@@ -46,6 +78,7 @@ const Profile = ({ handle, onChangeProperty, onRemove }) => {
 
 Profile.propTypes = {
   handle: PropTypes.object.isRequired,
+  onAuthenticate: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired
 }
 

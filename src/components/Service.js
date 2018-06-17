@@ -4,8 +4,8 @@ import { Route, Link } from "react-router-dom";
 import Profile from './Profile'
 import Work from './Work'
 
-const Service = ({ handle, workLog, onChangeHandleProperty, onRemove,
-    onRefreshWork }) => {
+const Service = ({ handle, workLog,
+    onAuthenticate, onChangeHandleProperty, onRemove, onRefreshWork }) => {
   return (
   <div>
     <h2>{handle.name}</h2>
@@ -27,6 +27,7 @@ const Service = ({ handle, workLog, onChangeHandleProperty, onRemove,
         render={props => (
           <Profile {...props}
             handle={handle}
+            onAuthenticate={onAuthenticate}
             onChangeProperty={onChangeHandleProperty}
             onRemove={onRemove}
           />)}/>
@@ -37,6 +38,7 @@ const Service = ({ handle, workLog, onChangeHandleProperty, onRemove,
 Service.propTypes = {
   handle: PropTypes.object.isRequired,
   workLog: PropTypes.object.isRequired,
+  onAuthenticate: PropTypes.func.isRequired,
   onChangeHandleProperty: PropTypes.func.isRequired,
   onRefreshWork: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired

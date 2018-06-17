@@ -6,11 +6,12 @@ export function addHandle(name) {
   }
 }
 
-export const AUTHENTICATE = 'AUTHENTICATE'
-export function authenticate(username) {
+export const REQUEST_AUTHENTICATION = 'REQUEST_AUTHENTICATION'
+export function authenticate(handleName, password) {
   return {
-    type: AUTHENTICATE,
-    username
+    type: REQUEST_AUTHENTICATION,
+    handleName,
+    password
   }
 }
 
