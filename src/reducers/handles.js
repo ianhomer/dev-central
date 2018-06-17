@@ -12,7 +12,8 @@ import {
 const handles = (state = [], action) => {
   switch (action.type) {
     case AUTHENTICATION_SUCCEEDED:
-      var changedSessionHandle = state.find(handle => handle.name === action.name)
+      var changedSessionHandle = Object.assign({},
+        state.find(handle => handle.name === action.name))
       changedSessionHandle["sessionId"] = action.authentication.session.value
       changedSessionHandle.isAuthenticated = true
       return [
@@ -58,7 +59,7 @@ const handles = (state = [], action) => {
         }
       ]
     case REQUEST_LOGOUT:
-      var changedLogoutHandle = state.find(handle => handle.name === action.name)
+      var changedLogoutHandle = Object.assign({}, state.find(handle => handle.name === action.name))
       changedLogoutHandle["sessionId"] = null
       changedLogoutHandle.isAuthenticated = false
       return [
