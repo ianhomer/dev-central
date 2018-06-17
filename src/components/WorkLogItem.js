@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import Trace from './Trace'
+import Issue from '../containers/Issue'
 
-const WorkLogItem = ({ item }) => {
+const WorkLogItem = ({ onFetchIssue, item }) => {
   let updated = new Date(item.updated)
   return (
     <div>
@@ -13,6 +14,10 @@ const WorkLogItem = ({ item }) => {
         <div className="col-sm-2">{ updated.toLocaleDateString() }</div>
         <div className="col-sm-2">{ (item.timeSpentSeconds / 3600).toFixed(1) }h</div>
         <div className="col-sm-2">{ item.issueId }</div>
+        <div className="col-sm-2"><Issue
+          onFetchIssue={onFetchIssue}
+          id={item.issueId}
+        /></div>
       </div>
     </div>
   )
@@ -20,6 +25,7 @@ const WorkLogItem = ({ item }) => {
 
 WorkLogItem.propTypes = {
   item: PropTypes.object.isRequired,
+  onFetchIssue: PropTypes.func.isRequired,
 }
 
 export default WorkLogItem
