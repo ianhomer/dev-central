@@ -12,22 +12,14 @@ import {
 const workLogIdsRequiringFetch = {}
 
 function fetchWorkLogUpdatedApi(handle) {
+  // TODO : Add since and expand GET arguments
   return fetch(handle.url + '/rest/api/2/worklog/updated', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
     })
-  .then(response => {
-    const json = response.json()
-    json.then(it => {
-      if (!it.values) {
-        console.log(it)
-        throw "No JSON response"
-      }
-    })
-    return json
-  })
+  .then(response => response.json())
 }
 
 function fetchWorkLogListApi(handle) {
@@ -48,12 +40,9 @@ function fetchWorkLogListApi(handle) {
 function* fetchWorkLogUpdated(action) {
    try {
       const workLog = yield call(fetchWorkLogUpdatedApi, action.handle)
-      yield put(
-        {type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, workLog: workLog})
-      workLog.values.forEach(it =>
-        workLogIdsRequiringFetch[it.worklogId] = true)
-      yield put(
-        {type: JIRA_WORK_LOG_LIST_FETCH_REQUESTED, handle: action.handle})
+      yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, workLog: workLog})
+      workLog.values.forEach(it => workLogIdsRequiringFetch[it.worklogId] = true)
+      yield put({type: JIRA_WORK_LOG_LIST_FETCH_REQUESTED, handle: action.handle})
    } catch (e) {
       yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_FAILED, message: e.message})
    }
@@ -62,8 +51,7 @@ function* fetchWorkLogUpdated(action) {
 function* fetchWorkLogList(action) {
   try {
     const workLogList = yield call(fetchWorkLogListApi, action.handle)
-    yield put(
-      {type: JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED, workLogList: workLogList})
+    yield put({type: JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED, workLogList: workLogList})
   } catch (e) {
     yield put({type: JIRA_WORK_LOG_LIST_FETCH_FAILED, message: e.message})
   }
