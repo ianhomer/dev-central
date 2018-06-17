@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const HandleNav = ({ name, isAuthenticated }) => {
   return (
   <div className="bd-toc-item">
-    <Link to={'/service/' + name }>{ name }</Link>
+    <Link to={'/service/' + name + '/profile'}>{ name }</Link>
   </div>
 )}
 

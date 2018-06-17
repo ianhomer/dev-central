@@ -15,11 +15,11 @@ class App extends Component {
           <ActiveNav/>
           <div className="container-fluid">
             <div className="row flex-xl-nowrap">
-              <div className="col-12 col-md-3 col-xl-2 bd-sidebar">
+              <div className="col-md-1 col-xl-2 bd-sidebar">
                 <AllServices/>
                 <AddService/>
               </div>
-              <div>
+              <div className="col-md-11">
                 <Route exact path="/" component={Home} />
                 <Route path="/service/:currentServiceName"
                    component={ActiveService} />

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
+import Trace from './Trace'
 
 const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove }) => {
   let password, username, url
@@ -69,6 +70,9 @@ const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove 
           <button className="btn btn-primary btn-lg active" aria-pressed="true"
             onClick={onAuthenticateSubmit}>authenticate</button>
         </form>
+        <div>
+          <a className="btn btn-primary btn-lg active" onClick={onRemove}>delete</a>
+        </div>
       </div>
     }
     { handle.isAuthenticated &&
@@ -77,12 +81,8 @@ const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove 
           onClick={onLogout}>log out</button>
       </div>
     }
-
-    <div>
-      <a className="btn btn-primary btn-lg active" onClick={onRemove}>delete</a>
     </div>
-    </div>
-    <p className="trace">{ JSON.stringify(handle) }</p>
+    <Trace o={handle}/>
   </div>
 )}
 

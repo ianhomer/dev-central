@@ -25,6 +25,8 @@ function createRequestHeaders(handle) {
 }
 
 function authenticateApi(handle, password) {
+  // TODO : Note that cookie based authentication will be deprecated soon
+  // https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-basic-auth-and-cookie-based-auth/
   return fetch(handle.url + '/jira/rest/auth/1/session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

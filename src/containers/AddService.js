@@ -23,7 +23,7 @@ const AddService = ({ dispatch }) => {
         onSubmit={onAddHandle}
       >
         <div className="form-group row">
-          <input className="col-sm-5 form-control"
+          <input className="form-control"
             ref={node => input = node}
             onChange={onAddHandle}/>
         </div>
