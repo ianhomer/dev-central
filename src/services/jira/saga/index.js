@@ -7,6 +7,9 @@ import {
 
 import {
   JIRA_REQUEST_AUTHENTICATION,
+  JIRA_INFO_FETCH_REQUESTED,
+  JIRA_INFO_FETCH_SUCCEEDED,
+  JIRA_INFO_FETCH_FAILED,
   JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED,
   JIRA_WORK_LOG_UPDATED_FETCH_FAILED,
   JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED,
@@ -71,6 +74,14 @@ function fetchIssueApi(handle, action, id) {
   .then(response => response.json())
 }
 
+function fetchInfoApi(handle, action) {
+  return fetch(handle.url + '/rest/api/2/serverInfo', {
+      method: 'GET',
+      headers: createRequestHeaders(handle)
+    })
+  .then(response => response.json())
+}
+
 function* authenticate(action) {
   try {
     const authentication = yield call(authenticateApi, action.handle, action.password)
@@ -121,9 +132,19 @@ function* fetchIssue(action) {
   }
 }
 
+function* fetchInfo(action) {
+  try {
+    const info = yield call(fetchInfoApi, action.handle)
+    yield put({type: JIRA_INFO_FETCH_SUCCEEDED, info})
+  } catch (e) {
+    yield put({type: JIRA_INFO_FETCH_FAILED, message: e.message})
+  }
+}
+
 export default function* jiraSaga() {
   yield takeEvery(JIRA_REQUEST_AUTHENTICATION, authenticate)
   yield takeEvery(JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED, fetchWorkLogUpdated)
   yield takeEvery(JIRA_WORK_LOG_LIST_FETCH_REQUESTED, fetchWorkLogList)
   yield takeEvery(JIRA_ISSUE_FETCH_REQUESTED, fetchIssue)
+  yield takeEvery(JIRA_INFO_FETCH_REQUESTED, fetchInfo)
 }

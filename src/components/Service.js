@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 import { Route, Link } from "react-router-dom";
 import Profile from './Profile'
 import Work from './Work'
+import ServiceInfo from './ServiceInfo'
 
-const Service = ({ handle, workLog,
-    onAuthenticate, onChangeHandleProperty, onLogout, onRemove, onRefreshWork }) => {
+const Service = ({ handle, workLog, serviceInfo,
+    onAuthenticate, onChangeHandleProperty, onLogout, onRemove,
+    onRefreshServiceInfo, onRefreshWork }) => {
   return (
   <div>
     <h2>{handle.name}</h2>
@@ -13,6 +15,10 @@ const Service = ({ handle, workLog,
       <li className="nav-item active">
         <Link className="nav-link" role="tab" aria-selected="true"
           to={"/service/" + handle.name + "/profile"}>Profile</Link>
+      </li>
+      <li className="nav-item active">
+        <Link className="nav-link" role="tab" aria-selected="true"
+          to={"/service/" + handle.name + "/info"}>Info</Link>
       </li>
       { handle.isAuthenticated &&
         <li className="nav-item">
@@ -37,17 +43,26 @@ const Service = ({ handle, workLog,
             onLogout={onLogout}
             onRemove={onRemove}
           />)}/>
+      <Route path="/service/:currentServiceName/info"
+        render={props => (
+          <ServiceInfo
+            serviceInfo={serviceInfo}
+            onRefresh={onRefreshServiceInfo}
+            />
+        )}/>
     </div>
   </div>
 )}
 
 Service.propTypes = {
   handle: PropTypes.object.isRequired,
+  serviceInfo: PropTypes.object.isRequired,
   workLog: PropTypes.object.isRequired,
   onAuthenticate: PropTypes.func.isRequired,
   onChangeHandleProperty: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
   onRefreshWork: PropTypes.func.isRequired,
+  onRefreshServiceInfo: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired
 }
 

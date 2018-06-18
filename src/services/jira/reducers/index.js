@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
-import workLog from './workLog'
+import info from './info'
 import issues from './issues'
+import workLog from './workLog'
 
 export default combineReducers({
-  issues, workLog
+  info, issues, workLog
 })

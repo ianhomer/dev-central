@@ -1,7 +1,8 @@
 import mockAuthentication from './authentication'
+import mockInfo from './mockInfo'
+import mockIssue from './mockIssue'
 import mockWorkLogList from './workLogList'
 import mockWorkLogUpdated from './workLogUpdated'
-import mockIssue from './mockIssue'
 
 export default function mockJira(fetchMock) {
   fetchMock.post('glob:*/jira/rest/auth/1/session', function(url,opts) {
@@ -16,5 +17,8 @@ export default function mockJira(fetchMock) {
   })
   fetchMock.get('glob:*/rest/api/2/issue/*', function(url,opts) {
     return mockIssue(url)
+  })
+  fetchMock.get('glob:*/rest/api/2/serverInfo', function(url,opts) {
+    return mockInfo()
   })
 }
