@@ -14,7 +14,7 @@ const handles = (state = [], action) => {
     case AUTHENTICATION_SUCCEEDED:
       var changedSessionHandle = Object.assign({},
         state.find(handle => handle.name === action.name))
-      changedSessionHandle["sessionId"] = action.authentication.session.value
+      changedSessionHandle.session = action.authentication.session
       changedSessionHandle.isAuthenticated = true
       return [
         ...state.filter(handle => handle.name !== action.name),

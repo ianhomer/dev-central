@@ -3,16 +3,7 @@ import PropTypes from 'prop-types'
 import Trace from './Trace'
 
 const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove }) => {
-  let password, sessionId, username, url
-
-  var onChangeSessionId = function(e) {
-    e.preventDefault()
-    if (!sessionId.value.trim()) {
-      return
-    }
-    onChangeProperty('sessionId', sessionId.value)
-    onChangeProperty('isAuthenticated', true)
-  }
+  let password, username, url
 
   var onChangeUsername = function(e) {
     e.preventDefault()
@@ -50,13 +41,12 @@ const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove 
         <div className="col-sm-8">{ handle.isAuthenticated.toString() }</div>
       </div>
       <div className="row">
-        <div className="col-sm-4">session</div>
-        <div className="col-sm-8">
-          <input key={handle.name} type="text" defaultValue={handle.sessionId}
-            ref={node => sessionId = node}
-            size={60}
-            onChange={onChangeSessionId}/>
-        </div>
+        <div className="col-sm-4">session name</div>
+        <div className="col-sm-8">{ handle.session.name }</div>
+      </div>
+      <div className="row">
+        <div className="col-sm-4">session value</div>
+        <div className="col-sm-8">{ handle.session.value }</div>
       </div>
       <div className="row">
         <div className="col-sm-4">Username</div>

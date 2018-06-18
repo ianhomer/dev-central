@@ -27,20 +27,25 @@ const workLogIdsRequiringFetch = {}
 function createRequestHeaders(handle) {
   return {
     'Content-Type': 'application/json',
-    'Cookie': 'JSESSIONID=' + handle.sessionId
+    'Cookie': handle.session.name + '=' + handle.session.value,
+    'Access-Control-Request-Method': 'GET',
+    'User-Agent': 'curl/7.54.0'
   }
 }
 
 function authenticateApi(handle, password) {
   // TODO : Note that cookie based authentication will be deprecated soon
   // https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-basic-auth-and-cookie-based-auth/
-  return fetch(handle.url + '/jira/rest/auth/1/session', {
+  return fetch(handle.url + '/rest/auth/1/session', {
       method: 'POST',
       headers: {
-        'Origin': handle.url,
-        'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'User-Agent': 'curl/7.54.0'
+        //'Authorization': 'Basic ' + btoa(handle.username + ":" + password)
       },
-      body: { 'username': handle.username, 'password': password }
+      referrer: 'no-referrer',
+      body: JSON.stringify({ 'username': handle.username, 'password': password })
     })
   .then(response => response.json())
 }

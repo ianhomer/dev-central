@@ -1,4 +1,5 @@
 export default function authentication(opts) {
+  console.log(JSON.stringify(opts))
   return {
       'loginInfo' : {
         'lastFailedLoginTime' : new Date(+new Date() - 86400000).toISOString(),

@@ -5,7 +5,7 @@ import mockWorkLogList from './workLogList'
 import mockWorkLogUpdated from './workLogUpdated'
 
 export default function mockJira(fetchMock) {
-  fetchMock.post('glob:*/jira/rest/auth/1/session', function(url,opts) {
+  fetchMock.post('glob:*/rest/auth/1/session', function(url,opts) {
     return mockAuthentication(opts)
   })
   //.*/rest/api/2/worklog/updated
