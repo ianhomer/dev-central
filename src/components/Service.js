@@ -20,12 +20,10 @@ const Service = ({ handle, workLog, serviceInfo,
         <Link className="nav-link" role="tab" aria-selected="true"
           to={"/service/" + handle.name + "/info"}>Info</Link>
       </li>
-      { handle.isAuthenticated &&
-        <li className="nav-item">
-          <Link className="nav-link" role="tab"
-            to={"/service/" + handle.name + "/work"}>Work</Link>
-        </li>
-      }
+      <li className="nav-item">
+        <Link className="nav-link" role="tab"
+          to={"/service/" + handle.name + "/work"}>Work</Link>
+      </li>
     </ul>
     <div className="tab-content" id="myTabContent">
       <Route path="/service/:currentServiceName/work"

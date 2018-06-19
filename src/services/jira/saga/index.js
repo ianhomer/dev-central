@@ -1,11 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 
 import {
-  AUTHENTICATION_FAILED,
-  AUTHENTICATION_SUCCEEDED,
-} from '../../../actions'
-
-import {
   JIRA_REQUEST_AUTHENTICATION,
   JIRA_INFO_FETCH_REQUESTED,
   JIRA_INFO_FETCH_SUCCEEDED,
@@ -25,29 +20,12 @@ import {
 const workLogIdsRequiringFetch = {}
 
 function createRequestHeaders(handle) {
-  return {
+  var headers = {
     'Content-Type': 'application/json',
-    'Cookie': handle.session.name + '=' + handle.session.value,
-    'Access-Control-Request-Method': 'GET',
-    'User-Agent': 'curl/7.54.0'
+    'User-Agent': 'curl/7.54.0',
+    'Authorization': 'Basic ' + btoa(handle.username + ":" + handle.apiKey)
   }
-}
-
-function authenticateApi(handle, password) {
-  // TODO : Note that cookie based authentication will be deprecated soon
-  // https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-basic-auth-and-cookie-based-auth/
-  return fetch(handle.url + '/rest/auth/1/session', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'User-Agent': 'curl/7.54.0'
-        //'Authorization': 'Basic ' + btoa(handle.username + ":" + password)
-      },
-      referrer: 'no-referrer',
-      body: JSON.stringify({ 'username': handle.username, 'password': password })
-    })
-  .then(response => response.json())
+  return headers
 }
 
 function fetchWorkLogUpdatedApi(handle) {
@@ -64,7 +42,7 @@ function fetchWorkLogListApi(handle) {
   return fetch(handle.url + '/rest/api/2/worklog/list', {
       method: 'POST',
       headers: createRequestHeaders(handle),
-      body: { 'ids': requiredIds }
+      body: JSON.stringify({ 'ids': requiredIds })
     })
   .then(response => response.json())
 }
@@ -74,7 +52,7 @@ function fetchIssueApi(handle, action, id) {
   return fetch(handle.url + '/rest/api/2/issue/' + id, {
       method: 'GET',
       headers: createRequestHeaders(handle),
-      body: { 'ids': requiredIds }
+      body: JSON.stringify({ 'ids': requiredIds })
     })
   .then(response => response.json())
 }
@@ -85,17 +63,6 @@ function fetchInfoApi(handle, action) {
       headers: createRequestHeaders(handle)
     })
   .then(response => response.json())
-}
-
-function* authenticate(action) {
-  try {
-    const authentication = yield call(authenticateApi, action.handle, action.password)
-    yield put({type: AUTHENTICATION_SUCCEEDED,
-      name: action.handle.name,
-      authentication})
-  } catch (e) {
-    yield put({type: AUTHENTICATION_FAILED, message: e.message})
-  }
 }
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
@@ -147,7 +114,6 @@ function* fetchInfo(action) {
 }
 
 export default function* jiraSaga() {
-  yield takeEvery(JIRA_REQUEST_AUTHENTICATION, authenticate)
   yield takeEvery(JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED, fetchWorkLogUpdated)
   yield takeEvery(JIRA_WORK_LOG_LIST_FETCH_REQUESTED, fetchWorkLogList)
   yield takeEvery(JIRA_ISSUE_FETCH_REQUESTED, fetchIssue)

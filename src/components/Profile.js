@@ -2,8 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import Trace from './Trace'
 
-const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove }) => {
-  let password, username, url
+const Profile = ({ handle, onChangeProperty, onLogout, onRemove }) => {
+  let apiKey, username, url
+
+  var onChangeApiKey = function(e) {
+    e.preventDefault()
+    if (!apiKey.value.trim()) {
+      return
+    }
+    onChangeProperty('apiKey', apiKey.value)
+  }
 
   var onChangeUsername = function(e) {
     e.preventDefault()
@@ -21,32 +29,12 @@ const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove 
     onChangeProperty('url', url.value)
   }
 
-  var onAuthenticateSubmit = function(e) {
-    e.preventDefault()
-    if (!password.value.trim()) {
-      return
-    }
-    onAuthenticate(password.value)
-  }
-
   return (
   <div>
     <div className="container">
       <div className="row">
         <div className="col-sm-4">Name</div>
         <div className="col-sm-8">{ handle.name }</div>
-      </div>
-      <div className="row">
-        <div className="col-sm-4">isAuthenticated</div>
-        <div className="col-sm-8">{ handle.isAuthenticated.toString() }</div>
-      </div>
-      <div className="row">
-        <div className="col-sm-4">session name</div>
-        <div className="col-sm-8">{ handle.session.name }</div>
-      </div>
-      <div className="row">
-        <div className="col-sm-4">session value</div>
-        <div className="col-sm-8">{ handle.session.value }</div>
       </div>
       <div className="row">
         <div className="col-sm-4">Username</div>
@@ -58,6 +46,15 @@ const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove 
         </div>
       </div>
       <div className="row">
+        <div className="col-sm-4">API Key</div>
+        <div className="col-sm-8">
+          <input key={handle.apiKey} type="text" defaultValue={handle.apiKey}
+            ref={node => apiKey = node}
+            size={60}
+            onChange={onChangeApiKey}/>
+        </div>
+      </div>
+      <div className="row">
         <div className="col-sm-4">URL</div>
         <div className="col-sm-8">
           <input key={handle.name} type="text" defaultValue={handle.url}
@@ -66,27 +63,6 @@ const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove 
             onChange={onChangeUrl}/>
         </div>
       </div>
-
-    { !handle.isAuthenticated &&
-      <div>
-        <form>
-          <input type="text" name="username" autoComplete="username" value={handle.username}
-            readOnly="true"/>
-          <input type="password" ref={node => password = node} autoComplete="new-password"/>
-          <button className="btn btn-primary btn-lg active" aria-pressed="true"
-            onClick={onAuthenticateSubmit}>authenticate</button>
-        </form>
-        <div>
-          <a className="btn btn-primary btn-lg active" onClick={onRemove}>delete</a>
-        </div>
-      </div>
-    }
-    { handle.isAuthenticated &&
-      <div>
-        <button className="btn btn-primary btn-lg active" aria-pressed="true"
-          onClick={onLogout}>log out</button>
-      </div>
-    }
     </div>
     <Trace o={handle}/>
   </div>
@@ -94,7 +70,6 @@ const Profile = ({ handle, onAuthenticate, onChangeProperty, onLogout, onRemove 
 
 Profile.propTypes = {
   handle: PropTypes.object.isRequired,
-  onAuthenticate: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired
 }

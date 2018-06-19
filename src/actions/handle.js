@@ -6,25 +6,6 @@ export function addHandle(name) {
   }
 }
 
-export const AUTHENTICATION_SUCCEEDED = 'AUTHENTICATION_SUCCEEDED'
-export const AUTHENTICATION_FAILED = 'AUTHENTICATION_FAILED'
-export const REQUEST_AUTHENTICATION = 'REQUEST_AUTHENTICATION'
-export function authenticate(handle, password) {
-  return {
-    type: REQUEST_AUTHENTICATION,
-    handle,
-    password
-  }
-}
-
-export const REQUEST_LOGOUT = 'REQUEST_LOGOUT'
-export function logout(handle) {
-  return {
-    type: REQUEST_LOGOUT,
-    name: handle.name
-  }
-}
-
 export const CHANGE_PROPERTY_VALUE = 'CHANGE_PROPERTY_VALUE'
 export function changePropertyValue(handle, propertyName, value) {
   return {

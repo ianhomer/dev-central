@@ -1,25 +1,14 @@
 import {
-  AUTHENTICATION_SUCCEEDED,
   ADD_HANDLE,
   CHANGE_PROPERTY_VALUE,
   ENSURE_HANDLES_VALID,
   RECEIVE_HANDLE_INFO,
   REQUEST_HANDLE_INFO,
-  REQUEST_LOGOUT,
   REMOVE_HANDLE
 } from '../actions'
 
 const handles = (state = [], action) => {
   switch (action.type) {
-    case AUTHENTICATION_SUCCEEDED:
-      var changedSessionHandle = Object.assign({},
-        state.find(handle => handle.name === action.name))
-      changedSessionHandle.session = action.authentication.session
-      changedSessionHandle.isAuthenticated = true
-      return [
-        ...state.filter(handle => handle.name !== action.name),
-        changedSessionHandle
-      ]
     case ADD_HANDLE:
       if (state.some(handle => handle.name === action.name)) {
         return state
@@ -58,14 +47,6 @@ const handles = (state = [], action) => {
         ...state, {
           isFetching: true,
         }
-      ]
-    case REQUEST_LOGOUT:
-      var changedLogoutHandle = Object.assign({}, state.find(handle => handle.name === action.name))
-      changedLogoutHandle["sessionId"] = null
-      changedLogoutHandle.isAuthenticated = false
-      return [
-        ...state.filter(handle => handle.name !== action.name),
-        changedLogoutHandle
       ]
     case REMOVE_HANDLE:
       return state.filter(handle => handle.name !== action.name)
