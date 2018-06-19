@@ -1,4 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
+import moment from 'moment'
 
 import {
   JIRA_INFO_FETCH_REQUESTED,
@@ -29,7 +30,8 @@ function createRequestHeaders(handle) {
 
 function fetchWorkLogUpdatedApi(handle) {
   // TODO : Add since and expand GET arguments
-  return fetch(handle.url + '/rest/api/2/worklog/updated', {
+  const since = +moment() - 7*86400000
+  return fetch(handle.url + '/rest/api/2/worklog/updated?since=' + since, {
       method: 'GET',
       headers: createRequestHeaders(handle)
     })

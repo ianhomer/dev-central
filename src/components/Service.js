@@ -29,7 +29,9 @@ const Service = ({ handle, workLog, serviceInfo,
       <Route path="/service/:serviceName/work"
         render={props => (
           <Work {...props}
+            handle={handle}
             workLog={workLog}
+            onChangeProperty={onChangeHandleProperty}
             onRefresh={onRefreshWork}
           />)}/>
       <Route path="/service/:serviceName/profile"

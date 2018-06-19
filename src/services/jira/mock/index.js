@@ -9,7 +9,7 @@ export default function mockJira(fetchMock) {
     return mockAuthentication(opts)
   })
   //.*/rest/api/2/worklog/updated
-  fetchMock.get('glob:*/rest/api/2/worklog/updated', function(url,opts) {
+  fetchMock.get('glob:*/rest/api/2/worklog/updated?*', function(url,opts) {
     return mockWorkLogUpdated()
   })
   fetchMock.post('glob:*/rest/api/2/worklog/list', function(url,opts) {

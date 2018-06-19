@@ -2,28 +2,43 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import WorkLogItem from './WorkLogItem'
 
-const Work = ({ workLog, onRefresh }) => {
+const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
   let dayTotal = 0, groupAuthorDisplayName, groupDay, renderTotal = false
+  let filter
+
+  var onChangeFilter = function(e) {
+    e.preventDefault()
+    if (!filter.value.trim()) {
+      return
+    }
+    onChangeProperty('filter', filter.value)
+    return
+  }
 
   return (
-  <div>
+    <div>
+      <input key="filter" type="text" defaultValue={handle.filter}
+        ref={node => filter = node}
+        size={60}
+        onChange={onChangeFilter}/>
     { workLog.records
+          .filter(it =>
+            handle.filter == null ||
+            (it.author && it.author.displayName && it.author.displayName.toLowerCase()
+              .includes(handle.filter.toLowerCase())))
           .sort( (a,b) =>
-              (a.author && b.author && a.author.displayName.localeCompare(b.author.displayName))
+              (a && b && a.author && b.author && a.author.displayName.localeCompare(b.author
+              .displayName))
               || b.updated - a.updated)
           .map( (it) => {
           if (it.author && groupAuthorDisplayName !== it.author.displayName) {
             if (groupAuthorDisplayName) {
               renderTotal = true
-            } else {
-              groupAuthorDisplayName = it.author.displayName
             }
           }
           if (it.startedDay && groupDay !== it.startedDay) {
             if (groupDay) {
               renderTotal = true
-            } else {
-              groupDay = it.startedDay
             }
           }
           const row = (
@@ -34,10 +49,15 @@ const Work = ({ workLog, onRefresh }) => {
                   <span className="value">{ (dayTotal /  3600).toFixed(1) }h</span>
                 </div>
               }
-              <WorkLogItem item={it}
-              />
+              <WorkLogItem item={it} groupAuthorDisplayName={groupAuthorDisplayName}/>
             </div>
           )
+          if (!groupAuthorDisplayName) {
+            groupAuthorDisplayName = it.author.displayName
+          }
+          if (!groupDay) {
+            groupDay = it.startedDay
+          }
           if (renderTotal) {
             dayTotal = 0
             renderTotal = false
@@ -62,7 +82,9 @@ const Work = ({ workLog, onRefresh }) => {
 )}
 
 Work.propTypes = {
+  handle: PropTypes.object.isRequired,
   workLog: PropTypes.object.isRequired,
+  onChangeProperty: PropTypes.func.isRequired,
   onRefresh: PropTypes.func.isRequired
 }
 
