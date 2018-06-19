@@ -56,9 +56,7 @@ Service.propTypes = {
   handle: PropTypes.object.isRequired,
   serviceInfo: PropTypes.object.isRequired,
   workLog: PropTypes.object.isRequired,
-  onAuthenticate: PropTypes.func.isRequired,
   onChangeHandleProperty: PropTypes.func.isRequired,
-  onLogout: PropTypes.func.isRequired,
   onRefreshWork: PropTypes.func.isRequired,
   onRefreshServiceInfo: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired

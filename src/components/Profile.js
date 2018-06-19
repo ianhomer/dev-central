@@ -70,7 +70,6 @@ const Profile = ({ handle, onChangeProperty, onLogout, onRemove }) => {
 
 Profile.propTypes = {
   handle: PropTypes.object.isRequired,
-  onLogout: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired
 }
 

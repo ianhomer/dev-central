@@ -1,7 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 
 import {
-  JIRA_REQUEST_AUTHENTICATION,
   JIRA_INFO_FETCH_REQUESTED,
   JIRA_INFO_FETCH_SUCCEEDED,
   JIRA_INFO_FETCH_FAILED,
@@ -22,7 +21,7 @@ const workLogIdsRequiringFetch = {}
 function createRequestHeaders(handle) {
   var headers = {
     'Content-Type': 'application/json',
-    'User-Agent': 'curl/7.54.0',
+    'User-Agent': 'react/16.4.0',
     'Authorization': 'Basic ' + btoa(handle.username + ":" + handle.apiKey)
   }
   return headers
@@ -47,12 +46,10 @@ function fetchWorkLogListApi(handle) {
   .then(response => response.json())
 }
 
-function fetchIssueApi(handle, action, id) {
-  let requiredIds = Object.keys(workLogIdsRequiringFetch)
+function fetchIssueApi(handle, id) {
   return fetch(handle.url + '/rest/api/2/issue/' + id, {
       method: 'GET',
       headers: createRequestHeaders(handle),
-      body: JSON.stringify({ 'ids': requiredIds })
     })
   .then(response => response.json())
 }
@@ -68,15 +65,16 @@ function fetchInfoApi(handle, action) {
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 // /rest/api/2/worklog/updated
 function* fetchWorkLogUpdated(action) {
-   try {
-      const workLog = yield call(fetchWorkLogUpdatedApi, action.handle, action.chain)
-      yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, chain: action.chain, workLog})
-      workLog.values.forEach(it => workLogIdsRequiringFetch[it.worklogId] = true)
-      yield put({type: JIRA_WORK_LOG_LIST_FETCH_REQUESTED, chain: action.chain, handle: action
-      .handle})
-   } catch (e) {
-      yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_FAILED, message: e.message})
-   }
+  try {
+    const workLog = yield call(fetchWorkLogUpdatedApi, action.handle, action.chain)
+    yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, chain: action.chain, workLog})
+    workLog.values.forEach(it => workLogIdsRequiringFetch[it.worklogId] = true)
+    yield put({type: JIRA_WORK_LOG_LIST_FETCH_REQUESTED, chain: action.chain,
+      handle: action.handle})
+  } catch (e) {
+    console.log(e)
+    yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_FAILED, message: e.message})
+  }
 }
 
 function* fetchWorkLogList(action) {
@@ -91,6 +89,7 @@ function* fetchWorkLogList(action) {
       }
     }
   } catch (e) {
+    console.log(e)
     yield put({type: JIRA_WORK_LOG_LIST_FETCH_FAILED, message: e.message})
   }
 }
@@ -100,6 +99,7 @@ function* fetchIssue(action) {
     const issue = yield call(fetchIssueApi, action.handle, action.id)
     yield put({type: JIRA_ISSUE_FETCH_SUCCEEDED, issue})
   } catch (e) {
+    console.log(e)
     yield put({type: JIRA_ISSUE_FETCH_FAILED, message: e.message})
   }
 }
@@ -109,6 +109,7 @@ function* fetchInfo(action) {
     const info = yield call(fetchInfoApi, action.handle)
     yield put({type: JIRA_INFO_FETCH_SUCCEEDED, info})
   } catch (e) {
+    console.log(e)
     yield put({type: JIRA_INFO_FETCH_FAILED, message: e.message})
   }
 }
