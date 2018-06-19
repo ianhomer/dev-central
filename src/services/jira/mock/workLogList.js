@@ -10,7 +10,7 @@ export default function workLogList(opts) {
       'author': {
         'self': base + '/jira/rest/api/2/user?username=bob',
         'name': 'bob',
-        'displayName': 'Bob McFace',
+        'displayName': 'Bob McFace ' + Math.floor(Math.random() * Math.floor(5)),
         'active': false
       },
       'updateAuthor': {

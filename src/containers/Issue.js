@@ -7,11 +7,18 @@ class Issue extends React.Component {
   render() {
     const { issue, handle } = this.props
     return (
-      <span>
+      <div className="container">
         { issue &&
-          <a href={handle.url + '/browse/' + issue.key } target="_blank">{ issue.key }</a>
+          <div className="row">
+            <div className="col-sm-3">
+              <a href={handle.url + '/browse/' + issue.key } target="_blank">{ issue.key }</a>
+            </div>
+            <div className="col-sm-9">
+              { issue.fields.summary }
+            </div>
+          </div>
         }
-      </span>
+      </div>
     )
   }
 }

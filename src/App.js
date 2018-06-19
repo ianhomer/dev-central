@@ -15,7 +15,7 @@ class App extends Component {
           <ActiveNav/>
           <div className="container-fluid">
             <div className="row flex-xl-nowrap">
-              <div className="col-md-1 col-xl-2 bd-sidebar">
+              <div className="col-md-1 bd-sidebar">
                 <AllServices/>
                 <AddService/>
               </div>
