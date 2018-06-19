@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import Issue from '../containers/Issue'
 
-const WorkLogItem = ({ groupAuthorDisplayName, item }) => {
-  let started = new Date(item.started)
+const WorkLogItem = ({ groupAuthorDisplayName, groupDay, item }) => {
   return (
     <div>
       <div className="row">
@@ -12,9 +11,13 @@ const WorkLogItem = ({ groupAuthorDisplayName, item }) => {
             item.author.displayName
           }
         </div>
-        <div className="col-sm-2">{ started.toLocaleDateString() }</div>
+        <div className="col-sm-1">
+          { item.startedDay && item.startedDay !== groupDay &&
+            item.startedDay
+          }
+        </div>
         <div className="col-sm-1">{ (item.timeSpentSeconds / 3600).toFixed(1) }h</div>
-        <div className="col-sm-7"><Issue
+        <div className="col-sm-8"><Issue
           date={ + new Date() }
           id={ parseInt(item.issueId, 10) }
         /></div>
@@ -25,7 +28,8 @@ const WorkLogItem = ({ groupAuthorDisplayName, item }) => {
 
 WorkLogItem.propTypes = {
   item: PropTypes.object.isRequired,
-  groupAuthorDisplayName: PropTypes.string
+  groupAuthorDisplayName: PropTypes.string,
+  groupDay: PropTypes.string
 }
 
 export default WorkLogItem

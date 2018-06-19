@@ -16,7 +16,7 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
   }
 
   return (
-    <div>
+    <div className="work">
       <input key="filter" type="text" defaultValue={handle.filter}
         ref={node => filter = node}
         size={60}
@@ -49,7 +49,10 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
                   <span className="value">{ (dayTotal /  3600).toFixed(1) }h</span>
                 </div>
               }
-              <WorkLogItem item={it} groupAuthorDisplayName={groupAuthorDisplayName}/>
+              <WorkLogItem item={it}
+                groupAuthorDisplayName={groupAuthorDisplayName}
+                groupDay={groupDay}
+              />
             </div>
           )
           if (!groupAuthorDisplayName) {

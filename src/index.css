@@ -27,3 +27,11 @@
 .total .value {
   weight: bold;
 }
+
+.work {
+  font-size: 0.8em;
+}
+
+.col-sm-1,.col-sm-2 {
+  padding-right: 0px;
+}

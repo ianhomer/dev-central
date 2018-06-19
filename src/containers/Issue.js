@@ -10,7 +10,7 @@ class Issue extends React.Component {
       <div className="container">
         { issue &&
           <div className="row">
-            <div className="col-sm-3">
+            <div className="col-sm-2">
               <a href={handle.url + '/browse/' + issue.key } target="_blank">{ issue.key }</a>
             </div>
             <div className="col-sm-9">
