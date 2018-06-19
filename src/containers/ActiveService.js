@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Service from '../components/Service'
 import { changePropertyValue, removeHandle } from '../actions'
 import { jiraInfoFetchRequested, jiraWorkRefresh } from '../services/jira/actions'
+import { findActiveHandle } from '../utils/handles'
 
 const ActiveService = ({ match, handle, workLog, serviceInfo,
     chain,
@@ -27,10 +28,8 @@ const ActiveService = ({ match, handle, workLog, serviceInfo,
 }
 
 
-const mapStateToProps = (state,route) => ({
-  handle : state.handles.find(it =>
-    it.name === route.match.params.currentServiceName
-  ) || state.handles[0],
+const mapStateToProps = (state, route) => ({
+  handle : findActiveHandle(state, route) || state.handles[0],
   workLog : state.jira.workLog,
   serviceInfo : state.jira.info,
   chain : {

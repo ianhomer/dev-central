@@ -26,13 +26,13 @@ const Service = ({ handle, workLog, serviceInfo,
       </li>
     </ul>
     <div className="tab-content" id="myTabContent">
-      <Route path="/service/:currentServiceName/work"
+      <Route path="/service/:serviceName/work"
         render={props => (
           <Work {...props}
             workLog={workLog}
             onRefresh={onRefreshWork}
           />)}/>
-      <Route path="/service/:currentServiceName/profile"
+      <Route path="/service/:serviceName/profile"
         render={props => (
           <Profile {...props}
             handle={handle}
@@ -41,7 +41,7 @@ const Service = ({ handle, workLog, serviceInfo,
             onLogout={onLogout}
             onRemove={onRemove}
           />)}/>
-      <Route path="/service/:currentServiceName/info"
+      <Route path="/service/:serviceName/info"
         render={props => (
           <ServiceInfo
             serviceInfo={serviceInfo}

@@ -21,7 +21,7 @@ class App extends Component {
               </div>
               <div className="col-md-11">
                 <Route exact path="/" component={Home} />
-                <Route path="/service/:currentServiceName"
+                <Route path="/service/:serviceName"
                    component={ActiveService} />
               </div>
             </div>
