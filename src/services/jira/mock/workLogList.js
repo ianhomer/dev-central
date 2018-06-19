@@ -1,8 +1,9 @@
+import moment from 'moment'
 import { findUpdatedTimeForId } from './mockUtils'
 
 export default function workLogList(opts) {
   let base = 'http://www.example.com/'
-  return opts.body.ids.map(id => {
+  return JSON.parse(opts.body).ids.map(id => {
     let updatedTime = findUpdatedTimeForId(id)
     return {
       'self': base + '/jira/rest/api/2/issue/10010/worklog/' + id,
@@ -19,12 +20,13 @@ export default function workLogList(opts) {
         'active': false
       },
       'comment': 'Completed task.',
-      'updated': new Date(updatedTime).toISOString(),
+      // JIRA returns local ISO string, not UTC
+      'updated': moment(updatedTime).toISOString(true),
       'visibility': {
         'type': 'group',
         'value': 'jira-developers'
       },
-      'started': new Date(updatedTime - 60000).toISOString(),
+      'started': moment(updatedTime - 60000).toISOString(true),
       'timeSpent': '1h',
       'timeSpentSeconds': 3600 - Math.floor(Math.random() * Math.floor(1000)),
       'id': id,

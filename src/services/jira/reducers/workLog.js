@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 import {
   JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED,
   JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED
@@ -43,6 +45,7 @@ const workLog = (state = DEFAULT, action) => {
       const newListWorkLogs = action.workLogList.map(item => {
         var newItem = Object.assign({}, item)
         newItem.id = parseInt(item.id, 10)
+        newItem.updated = +moment(item.updated)
         var record = state.records.find(it => it.id === newItem.id)
         return Object.assign({}, record, newItem)
       })
