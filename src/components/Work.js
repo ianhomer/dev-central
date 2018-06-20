@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import WorkLogItem from './WorkLogItem'
 
 const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
-  let dayTotal = 0, groupAuthorDisplayName, groupDay, renderTotal = false
+  let dayTotal = 0, groupAuthorDisplayName, groupDate, renderTotal = false
   let filter
 
   var onChangeFilter = function(e) {
@@ -29,7 +29,7 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
           .sort( (a,b) =>
               (a && b && a.author && b.author &&
                 a.author.displayName.localeCompare(b.author.displayName))
-              || b.started - a.started
+              || b.startedDay - a.startedDay
               || a.issueId - b.issueId)
           .map( (it) => {
           if (it.author && groupAuthorDisplayName !== it.author.displayName) {
@@ -37,8 +37,8 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
               renderTotal = true
             }
           }
-          if (it.startedDay && groupDay !== it.startedDay) {
-            if (groupDay) {
+          if (it.startedDate && groupDate !== it.startedDate) {
+            if (groupDate) {
               renderTotal = true
             }
           }
@@ -46,26 +46,26 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
             <div key={it.id}>
               { renderTotal &&
                 <div className="total">
-                  <span className="group">{ groupAuthorDisplayName} @ { groupDay }</span>
-                  <span className="value">{ (dayTotal /  3600).toFixed(1) }h</span>
+                  <span className="group">{ groupAuthorDisplayName} @ { it.startedDate }</span>
+                  <span className="value">{ (dayTotal / 3600).toFixed(1) }h</span>
                 </div>
               }
               <WorkLogItem item={it}
                 groupAuthorDisplayName={groupAuthorDisplayName}
-                groupDay={groupDay}
+                groupDate={groupDate}
               />
             </div>
           )
           if (!groupAuthorDisplayName) {
             groupAuthorDisplayName = it.author && it.author.displayName
           }
-          if (!groupDay) {
-            groupDay = it.startedDay
+          if (!groupDate) {
+            groupDate = it.startedDate
           }
           if (renderTotal) {
             dayTotal = 0
             renderTotal = false
-            groupDay = it.startedDay
+            groupDate = it.startedDate
             groupAuthorDisplayName = it.author.displayName
           }
           dayTotal += it.timeSpentSeconds
@@ -74,7 +74,7 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
       )
     }
     <div className="total">
-      <span className="group">{ groupAuthorDisplayName} @ { groupDay }</span>
+      <span className="group">{ groupAuthorDisplayName} @ { groupDate }</span>
       <span className="value">{ (dayTotal /  3600).toFixed(1) }h</span>
     </div>
     last updated : { workLog.lastUpdated }
