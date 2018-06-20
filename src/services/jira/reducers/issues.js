@@ -14,9 +14,30 @@ const issues = (state = DEFAULT, action) => {
     // Commit updated work log entries.
     //
     case JIRA_ISSUE_FETCH_SUCCEEDED:
+      var issue = action.issue
+      var fields = issue.fields
       return [
-        ...state.filter(issue => issue.id !== action.issue.id),
-        action.issue
+        ...state.filter(it => it.id !== issue.id),
+        {
+          id : issue.id,
+          key : issue.key,
+          fields : {
+            issuetype : {
+              name : fields.issuetype.name,
+              subtask : fields.issuetype.subtask
+            },
+            timespent : fields.timespent,
+            aggregatetimespent : fields.aggregatetimespent,
+            workratio : fields.workratio,
+            timeoriginalestimate : fields.timeoriginalestimate,
+            timetracking : fields.timetracking,
+            aggregatetimeestimate : fields.aggregatetimeestimate,
+            summary : fields.summary,
+            subtasks : fields.subtasks,
+            aggregateprogress : fields.aggregateprogress,
+            progress : fields.progress
+          }
+        }
       ]
     case SYSTEM_FLUSH_DATA:
       return DEFAULT

@@ -1,9 +1,14 @@
 <component name="ProjectDictionaryState">
   <dictionary name="ian">
     <words>
+      <w>aggregatetimespent</w>
       <w>btoa</w>
+      <w>issuetype</w>
       <w>jira</w>
+      <w>subtask</w>
+      <w>timespent</w>
       <w>worklog</w>
+      <w>workratio</w>
     </words>
   </dictionary>
 </component>
