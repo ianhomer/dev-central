@@ -21,13 +21,14 @@ const WorkLogItem = ({ groupAuthorDisplayName, groupDate, groupIssueId, item }) 
       <div className="row">
         <div className="col-sm-1">&nbsp;</div>
         <div className="col-sm-1">{ (item.timeSpentSeconds / 3600).toFixed(1) }h</div>
-        <div className="col-sm-8">
+        <div className="col-sm-6">
           { groupByIssueId && <Issue
               date={ + new Date() }
               id={ parseInt(item.issueId, 10) }
             />
           }
         </div>
+        <div className="col-sm-4">{ item.comment }</div>
       </div>
     </div>
   )

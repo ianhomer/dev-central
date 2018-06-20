@@ -49,6 +49,7 @@ const workLog = (state = DEFAULT, action) => {
             displayName : item.author.displayName
           },
           id : parseInt(item.id, 10),
+          comment : item.comment,
           issueId : item.issueId,
           updated : +moment(item.updated),
           started : +started,
