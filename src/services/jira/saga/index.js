@@ -63,7 +63,8 @@ function fetchInfoApi(handle, action) {
 // /rest/api/2/worklog/updated
 function* fetchWorkLogUpdated(action) {
   try {
-    const workLog = yield call(fetchWorkLogUpdatedApi, action.handle, action.since)
+    const workLog = yield call(fetchWorkLogUpdatedApi, action.handle,
+      action.chain.findWorkRefreshSince())
     yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, chain: action.chain, workLog})
 
     const workLogIds = action.chain.findWorkLogIdsRequired(workLog.values)

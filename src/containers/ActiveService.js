@@ -46,6 +46,10 @@ const mapStateToProps = (state, route) => ({
             existingWorkLogItem.updatedTime < it.updated
         }
       ).map(it => it.worklogId)
+    },
+
+    findWorkRefreshSince : () => {
+      return state.jira.workLog.lastUpdated || +moment() - 7*86400000
     }
   }
 
@@ -55,7 +59,7 @@ const mapDispatchToProps = dispatch => ({
   onChangeHandleProperty: (handleName, propertyName, value) =>
     dispatch(changePropertyValue(handleName, propertyName, value)),
   onRemove: name => dispatch(removeHandle(name)),
-  onRefreshWork: (handle, chain) => dispatch(jiraWorkRefresh(handle, chain, +moment() - 7*86400000)),
+  onRefreshWork: (handle, chain) => dispatch(jiraWorkRefresh(handle, chain)),
   onRefreshServiceInfo: (handle) => dispatch(jiraInfoFetchRequested(handle))
 })
 
