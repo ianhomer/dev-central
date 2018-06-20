@@ -43,7 +43,7 @@ const workLog = (state = DEFAULT, action) => {
     case JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED:
       const newListWorkLogsIds = action.workLogList.map(workLog => parseInt(workLog.id, 10))
       const newListWorkLogs = action.workLogList.map(item => {
-        var started = +moment(item.started)
+        var started = moment(item.started)
         var newItem = {
           author : {
             displayName : item.author.displayName
@@ -51,9 +51,9 @@ const workLog = (state = DEFAULT, action) => {
           id : parseInt(item.id, 10),
           issueId : item.issueId,
           updated : +moment(item.updated),
-          started : started,
-          startedDay : Math.round(started / 86400000),
-          startedDate : moment(started).format('YYYY-MM-DD'),
+          started : +started,
+          startedDay : parseInt(started.format('YYYYMMDD'),10),
+          startedDate : started.format('YYYY-MM-DD'),
           timeSpentSeconds : item.timeSpentSeconds
 
         }
