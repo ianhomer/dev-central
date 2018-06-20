@@ -35,6 +35,9 @@ const mapStateToProps = (state, route) => ({
   chain : {
     isIssueStale : (id) => {
       return !state.jira.issues || !state.jira.issues.some(issue => issue.id === id)
+    },
+    findWorkLogIdsRequired : (workLogValues) => {
+      return workLogValues.map(it => it.worklogId)
     }
   }
 

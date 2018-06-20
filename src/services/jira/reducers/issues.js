@@ -23,8 +23,8 @@ const issues = (state = DEFAULT, action) => {
           key : issue.key,
           fields : {
             issuetype : {
-              name : fields.issuetype.name,
-              subtask : fields.issuetype.subtask
+              name : fields.issuetype && fields.issuetype.name,
+              subtask : fields.issuetype && fields.issuetype.subtask
             },
             timespent : fields.timespent,
             aggregatetimespent : fields.aggregatetimespent,
