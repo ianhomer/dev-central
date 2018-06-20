@@ -68,12 +68,13 @@ function* fetchWorkLogUpdated(action) {
     const workLog = yield call(fetchWorkLogUpdatedApi, action.handle, action.chain)
     yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, chain: action.chain, workLog})
 
-    //var workLogIds = {}
-    //workLog.values.map(it => workLogIds[it.worklogId] = true)
-
-    yield put({type: JIRA_WORK_LOG_LIST_FETCH_REQUESTED, chain: action.chain,
-      handle: action.handle,
-      workLogIds: action.chain.findWorkLogIdsRequired(workLog.values)})
+    const workLogIds = action.chain.findWorkLogIdsRequired(workLog.values)
+    if (workLogIds.length > 0) {
+      // If we need some work logs, go get them
+      yield put({type: JIRA_WORK_LOG_LIST_FETCH_REQUESTED, chain: action.chain,
+        handle: action.handle,
+        workLogIds})
+    }
   } catch (e) {
     console.log(e)
     yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_FAILED, message: e.message})

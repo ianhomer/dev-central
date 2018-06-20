@@ -22,10 +22,10 @@ const workLog = (state = DEFAULT, action) => {
     //
     case JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED:
       const newWorkLogs = action.workLog.values.map(workLog => {
-        return {
+        return Object.assign({}, {
           id: workLog.worklogId,
           updated: workLog.updatedTime
-        }
+        }, state.records.find(it => it.id === workLog.worklogId))
       })
       const newWorkLogsIds = newWorkLogs.map(workLog => workLog.id)
       return {

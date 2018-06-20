@@ -36,8 +36,15 @@ const mapStateToProps = (state, route) => ({
     isIssueStale : (id) => {
       return !state.jira.issues || !state.jira.issues.some(issue => issue.id === id)
     },
+    // Find work log IDs that are required, based on incoming updated work log values
     findWorkLogIdsRequired : (workLogValues) => {
-      return workLogValues.map(it => it.worklogId)
+      return workLogValues.filter(it => {
+          var existingWorkLogItem = state.jira.workLog.records.find(
+            workLog => workLog.id === it.worklogId)
+          return !existingWorkLogItem || !existingWorkLogItem.issueId ||
+            existingWorkLogItem.updatedTime < it.updated
+        }
+      ).map(it => it.worklogId)
     }
   }
 
