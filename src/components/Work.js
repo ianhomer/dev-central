@@ -56,7 +56,7 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
             </div>
           )
           if (!groupAuthorDisplayName) {
-            groupAuthorDisplayName = it.author.displayName
+            groupAuthorDisplayName = it.author && it.author.displayName
           }
           if (!groupDay) {
             groupDay = it.startedDay

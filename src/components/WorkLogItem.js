@@ -3,19 +3,22 @@ import PropTypes from 'prop-types'
 import Issue from '../containers/Issue'
 
 const WorkLogItem = ({ groupAuthorDisplayName, groupDay, item }) => {
+  const groupByAuthor = item.author && item.author.displayName !== groupAuthorDisplayName
+  const groupByDay = item.startedDay && item.startedDay !== groupDay
   return (
     <div>
+      { (groupByAuthor || groupByDay) &&
+        <div className="row group">
+          <div className="col-sm-2">
+            { groupByAuthor && item.author.displayName }
+          </div>
+          <div className="col-sm-1">
+            { groupByDay && item.startedDay }
+          </div>
+        </div>
+      }
       <div className="row">
-        <div className="col-sm-2">
-          { item.author && item.author.displayName !== groupAuthorDisplayName &&
-            item.author.displayName
-          }
-        </div>
-        <div className="col-sm-1">
-          { item.startedDay && item.startedDay !== groupDay &&
-            item.startedDay
-          }
-        </div>
+        <div className="col-sm-1">&nbsp;</div>
         <div className="col-sm-1">{ (item.timeSpentSeconds / 3600).toFixed(1) }h</div>
         <div className="col-sm-8"><Issue
           date={ + new Date() }
