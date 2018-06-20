@@ -27,9 +27,9 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
             (it.author && it.author.displayName && it.author.displayName.toLowerCase()
               .includes(handle.filter.toLowerCase())))
           .sort( (a,b) =>
-              (a && b && a.author && b.author && a.author.displayName.localeCompare(b.author
-              .displayName))
-              || b.updated - a.updated)
+              (a && b && a.author && b.author &&
+                a.author.displayName.localeCompare(b.author.displayName))
+              || b.started - a.started)
           .map( (it) => {
           if (it.author && groupAuthorDisplayName !== it.author.displayName) {
             if (groupAuthorDisplayName) {
