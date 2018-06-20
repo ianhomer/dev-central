@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import moment from 'moment'
 import Service from '../components/Service'
 import { changePropertyValue, removeHandle } from '../actions'
 import { jiraInfoFetchRequested, jiraWorkRefresh } from '../services/jira/actions'
@@ -54,7 +55,7 @@ const mapDispatchToProps = dispatch => ({
   onChangeHandleProperty: (handleName, propertyName, value) =>
     dispatch(changePropertyValue(handleName, propertyName, value)),
   onRemove: name => dispatch(removeHandle(name)),
-  onRefreshWork: (handle, chain) => dispatch(jiraWorkRefresh(handle, chain)),
+  onRefreshWork: (handle, chain) => dispatch(jiraWorkRefresh(handle, chain, +moment() - 7*86400000)),
   onRefreshServiceInfo: (handle) => dispatch(jiraInfoFetchRequested(handle))
 })
 

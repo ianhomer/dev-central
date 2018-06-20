@@ -74,11 +74,9 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
         }
       )
     }
-    <div className="total">
-      <span className="group">{ groupAuthorDisplayName} @ { groupDate }</span>
-      <span className="value">{ (dayTotal /  3600).toFixed(1) }h</span>
+    <div className="row total">
+      <div className="col-sm-12">{ (dayTotal / 3600).toFixed(1) }h</div>
     </div>
-    last updated : { workLog.lastUpdated }
     <div>
       <a className="btn btn-primary btn-lg active"
         onClick={onRefresh}>Refresh</a>
