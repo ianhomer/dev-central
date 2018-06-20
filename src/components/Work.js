@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import WorkLogItem from './WorkLogItem'
 
 const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
-  let dayTotal = 0, groupAuthorDisplayName, groupDate, renderTotal = false
+  let dayTotal = 0, groupAuthorDisplayName, groupDate, groupIssueId, renderTotal = false
   let filter
 
   var onChangeFilter = function(e) {
@@ -33,26 +33,25 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
               || a.issueId - b.issueId)
           .map( (it) => {
           if (it.author && groupAuthorDisplayName !== it.author.displayName) {
-            if (groupAuthorDisplayName) {
-              renderTotal = true
-            }
+            if (groupAuthorDisplayName) renderTotal = true
           }
           if (it.startedDate && groupDate !== it.startedDate) {
-            if (groupDate) {
-              renderTotal = true
-            }
+            if (groupDate) renderTotal = true
+          }
+          var totalCell
+          if (renderTotal) {
+            totalCell = (<div className="row total">
+                <div className="col-sm-12">{ (dayTotal / 3600).toFixed(1) }h</div>
+              </div>
+            )
           }
           const row = (
             <div key={it.id}>
-              { renderTotal &&
-                <div className="total">
-                  <span className="group">{ groupAuthorDisplayName} @ { it.startedDate }</span>
-                  <span className="value">{ (dayTotal / 3600).toFixed(1) }h</span>
-                </div>
-              }
+              { renderTotal && totalCell }
               <WorkLogItem item={it}
                 groupAuthorDisplayName={groupAuthorDisplayName}
                 groupDate={groupDate}
+                groupIssueId={groupIssueId}
               />
             </div>
           )
@@ -62,11 +61,13 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
           if (!groupDate) {
             groupDate = it.startedDate
           }
+          groupIssueId = it.issueId
           if (renderTotal) {
             dayTotal = 0
             renderTotal = false
             groupDate = it.startedDate
             groupAuthorDisplayName = it.author.displayName
+            groupIssueId = it.issueId
           }
           dayTotal += it.timeSpentSeconds
           return row

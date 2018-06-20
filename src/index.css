@@ -13,19 +13,16 @@
   float: right;
 }
 
-.group {
-  border-bottom: 1px dashed;
-}
-
 .total {
-  border-top: 1px dashed;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid;
   text-align: right
 }
 
-.total .group {
+.total {
   color: #555;
   padding-right: 5em;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 .total .value {

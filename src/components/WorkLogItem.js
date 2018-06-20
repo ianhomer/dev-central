@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import Issue from '../containers/Issue'
 
-const WorkLogItem = ({ groupAuthorDisplayName, groupDate, item }) => {
+const WorkLogItem = ({ groupAuthorDisplayName, groupDate, groupIssueId, item }) => {
   const groupByAuthor = item.author && item.author.displayName !== groupAuthorDisplayName
   const groupByDate = item.startedDate && item.startedDate !== groupDate
+  const groupByIssueId = item.issueId && item.issueId !== groupIssueId
   return (
     <div>
       { (groupByAuthor || groupByDate) &&
@@ -20,10 +21,13 @@ const WorkLogItem = ({ groupAuthorDisplayName, groupDate, item }) => {
       <div className="row">
         <div className="col-sm-1">&nbsp;</div>
         <div className="col-sm-1">{ (item.timeSpentSeconds / 3600).toFixed(1) }h</div>
-        <div className="col-sm-8"><Issue
-          date={ + new Date() }
-          id={ parseInt(item.issueId, 10) }
-        /></div>
+        <div className="col-sm-8">
+          { groupByIssueId && <Issue
+              date={ + new Date() }
+              id={ parseInt(item.issueId, 10) }
+            />
+          }
+        </div>
       </div>
     </div>
   )
@@ -32,7 +36,8 @@ const WorkLogItem = ({ groupAuthorDisplayName, groupDate, item }) => {
 WorkLogItem.propTypes = {
   item: PropTypes.object.isRequired,
   groupAuthorDisplayName: PropTypes.string,
-  groupDate: PropTypes.string
+  groupDate: PropTypes.string,
+  groupIssueId: PropTypes.string
 }
 
 export default WorkLogItem
