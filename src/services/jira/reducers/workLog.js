@@ -46,8 +46,11 @@ const workLog = (state = DEFAULT, action) => {
         var newItem = Object.assign({}, item)
         newItem.id = parseInt(item.id, 10)
         newItem.updated = +moment(item.updated)
-        newItem.started = +moment(item.started)
-        newItem.startedDay = moment(newItem.started).format('YYYY-MM-DD')
+        const startedMillis = +moment(item.started)
+        // Store started as day count, from point of view of time sheets no value in any more
+        // granular than day
+        newItem.started = Math.round(startedMillis / 86400000, 10)
+        newItem.startedDay = moment(startedMillis).format('YYYY-MM-DD')
         var record = state.records.find(it => it.id === newItem.id)
         return Object.assign({}, record, newItem)
       })
