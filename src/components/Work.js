@@ -8,15 +8,16 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
 
   var onChangeFilter = function(e) {
     e.preventDefault()
-    if (!filter.value.trim()) {
-      return
-    }
     onChangeProperty('filter', filter.value)
     return
   }
 
   return (
     <div className="work">
+      <div>
+        <a className="btn btn-primary btn-lg active"
+          onClick={onRefresh}>Refresh</a>
+      </div>
       <input key="filter" type="text" defaultValue={handle.filter}
         ref={node => filter = node}
         size={60}
@@ -76,10 +77,6 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
     }
     <div className="row total">
       <div className="col-sm-12">{ (dayTotal / 3600).toFixed(1) }h</div>
-    </div>
-    <div>
-      <a className="btn btn-primary btn-lg active"
-        onClick={onRefresh}>Refresh</a>
     </div>
   </div>
 )}

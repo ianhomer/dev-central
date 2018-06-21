@@ -9,11 +9,18 @@ class Issue extends React.Component {
     return (
       <div className="container">
         { issue &&
-          <div className="row">
+          <div className="row issue">
+            <div className="col-sm-2">
+              { issue.subtask &&
+                <a href={handle.url + '/browse/' + issue.root.key } target="_blank" class="parent">
+                  { issue.root.key }
+                </a>
+              }
+            </div>
             <div className="col-sm-2">
               <a href={handle.url + '/browse/' + issue.key } target="_blank">{ issue.key }</a>
             </div>
-            <div className="col-sm-9">
+            <div className="col-sm-8">
               { issue.fields.summary }
             </div>
           </div>

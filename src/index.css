@@ -36,3 +36,11 @@
 .col-sm-1,.col-sm-2 {
   padding-right: 0px;
 }
+
+.time {
+  text-align: right;
+}
+
+.issue .parent {
+  font-size: 70%;
+}

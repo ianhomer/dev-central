@@ -21,21 +21,25 @@ const issues = (state = DEFAULT, action) => {
         {
           id : issue.id,
           key : issue.key,
+          root : {
+            key : fields.parent ? fields.parent.key : issue.key,
+          },
+          parent : {
+            key : fields.parent && fields.parent.key
+          },
+          subtask : fields.issuetype && fields.issuetype.subtask,
+          type : fields.issuetype && fields.issuetype.name,
           fields : {
-            issuetype : {
-              name : fields.issuetype && fields.issuetype.name,
-              subtask : fields.issuetype && fields.issuetype.subtask
-            },
-            timespent : fields.timespent,
-            aggregatetimespent : fields.aggregatetimespent,
-            workratio : fields.workratio,
-            timeoriginalestimate : fields.timeoriginalestimate,
-            timetracking : fields.timetracking,
-            aggregatetimeestimate : fields.aggregatetimeestimate,
-            summary : fields.summary,
-            subtasks : fields.subtasks,
             aggregateprogress : fields.aggregateprogress,
-            progress : fields.progress
+            aggregatetimespent : fields.aggregatetimespent,
+            aggregatetimeestimate : fields.aggregatetimeestimate,
+            progress : fields.progress,
+            subtasks : fields.subtasks,
+            summary : fields.summary,
+            timeoriginalestimate : fields.timeoriginalestimate,
+            timespent : fields.timespent,
+            timetracking : fields.timetracking,
+            workratio : fields.workratio
           }
         }
       ]
