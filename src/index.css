@@ -19,14 +19,14 @@
 }
 
 .total {
-  color: #555;
+  color: #444;
   padding-right: 5em;
   padding-bottom: 1em;
   margin-bottom: 1em;
 }
 
 .total .value {
-  weight: bold;
+  font-weight: bold;
 }
 
 .work {
@@ -43,4 +43,22 @@
 
 .issue .parent {
   font-size: 70%;
+}
+
+.comment, .summary {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:    ellipsis;
+}
+
+.summary {
+  color: #888;
+}
+
+.time .unit {
+  color: #999;
+}
+
+.group {
+  font-weight: bold;
 }

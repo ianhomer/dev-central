@@ -5,6 +5,7 @@ import WorkLogItem from './WorkLogItem'
 const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
   let dayTotal = 0, groupAuthorDisplayName, groupDate, groupIssueId, renderTotal = false
   let filter
+  let runningTotal = 0
 
   var onChangeFilter = function(e) {
     e.preventDefault()
@@ -14,14 +15,12 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
 
   return (
     <div className="work">
-      <div>
-        <a className="btn btn-primary btn-lg active"
-          onClick={onRefresh}>Refresh</a>
-      </div>
       <input key="filter" type="text" defaultValue={handle.filter}
         ref={node => filter = node}
         size={60}
         onChange={onChangeFilter}/>
+      <a className="btn btn-primary btn-lg active"
+        onClick={onRefresh}>Refresh</a>
     { workLog.records
           .filter(it =>
             handle.filter == null ||
@@ -42,7 +41,9 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
           var totalCell
           if (renderTotal) {
             totalCell = (<div className="row total">
-                <div className="col-sm-12">{ (dayTotal / 3600).toFixed(1) }h</div>
+                <div className="col-sm-6">&nbsp;</div>
+                <div className="col-sm-1 value">{ (dayTotal / 3600).toFixed(1) }h</div>
+                <div className="col-sm-5">&nbsp;</div>
               </div>
             )
           }
@@ -64,6 +65,7 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
           }
           groupIssueId = it.issueId
           if (renderTotal) {
+            runningTotal += dayTotal
             dayTotal = 0
             renderTotal = false
             groupDate = it.startedDate
@@ -76,7 +78,14 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
       )
     }
     <div className="row total">
-      <div className="col-sm-12">{ (dayTotal / 3600).toFixed(1) }h</div>
+      <div className="col-sm-6">&nbsp;</div>
+      <div className="col-sm-1 value">{ (dayTotal / 3600).toFixed(1) }h</div>
+      <div className="col-sm-5">&nbsp;</div>
+    </div>
+    <div className="row total">
+      <div className="col-sm-5">&nbsp;</div>
+      <div className="col-sm-1 value">{ (runningTotal / 3600).toFixed(1) }h</div>
+      <div className="col-sm-6">&nbsp;</div>
     </div>
   </div>
 )}

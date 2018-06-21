@@ -6,6 +6,8 @@
       <w>btoa</w>
       <w>issuetype</w>
       <w>jira</w>
+      <w>lodash</w>
+      <w>nock</w>
       <w>subtask</w>
       <w>subtasks</w>
       <w>timeoriginalestimate</w>
