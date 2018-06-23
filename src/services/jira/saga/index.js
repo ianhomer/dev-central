@@ -18,44 +18,46 @@ import {
 
 function createRequestHeaders(handle) {
   var headers = {
+    'Authorization': 'Basic ' + btoa(handle.username + ":" + handle.apiKey),
     'Content-Type': 'application/json',
-    'User-Agent': 'react/16.4.0',
-    'Authorization': 'Basic ' + btoa(handle.username + ":" + handle.apiKey)
+    'User-Agent': 'react/16.4.0'
   }
   return headers
 }
 
+function createFetchOptions(handle, options) {
+  return Object.assign({
+     method: 'GET',
+     headers: createRequestHeaders(handle)
+   }, options)
+}
+
 function fetchWorkLogUpdatedApi(handle, since) {
   // TODO : Add since and expand GET arguments
-  return fetch(handle.url + '/rest/api/2/worklog/updated?since=' + since, {
-      method: 'GET',
-      headers: createRequestHeaders(handle)
-    })
+  return fetch(
+    handle.url + '/rest/api/2/worklog/updated?since=' + since,
+    createFetchOptions(handle, {method : 'GET'})
+  )
   .then(response => response.json())
 }
 
 function fetchWorkLogListApi(handle, workLogIds) {
-  return fetch(handle.url + '/rest/api/2/worklog/list', {
+  return fetch(handle.url + '/rest/api/2/worklog/list',
+    createFetchOptions(handle, {
       method: 'POST',
-      headers: createRequestHeaders(handle),
       body: JSON.stringify({ 'ids': workLogIds })
     })
+  )
   .then(response => response.json())
 }
 
 function fetchIssueApi(handle, id) {
-  return fetch(handle.url + '/rest/api/2/issue/' + id, {
-      method: 'GET',
-      headers: createRequestHeaders(handle),
-    })
+  return fetch(handle.url + '/rest/api/2/issue/' + id, createFetchOptions(handle))
   .then(response => response.json())
 }
 
 function fetchInfoApi(handle, action) {
-  return fetch(handle.url + '/rest/api/2/serverInfo', {
-      method: 'GET',
-      headers: createRequestHeaders(handle)
-    })
+  return fetch(handle.url + '/rest/api/2/serverInfo', createFetchOptions(handle))
   .then(response => response.json())
 }
 

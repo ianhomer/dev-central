@@ -6,6 +6,10 @@ import { findActiveHandle } from '../utils/handles'
 class Issue extends React.Component {
   render() {
     const { issue, handle } = this.props
+    if (!handle) {
+      return (<span>no handle</span>)
+    }
+
     return (
       <div className="container">
         { issue &&
