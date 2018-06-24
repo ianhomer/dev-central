@@ -41,8 +41,12 @@
   text-align: right;
 }
 
-.issue .parent {
+.parent {
   font-size: 70%;
+}
+
+.parent .summary {
+  margin-left : -1em;
 }
 
 .comment, .summary {
@@ -61,4 +65,16 @@
 
 .group {
   font-weight: bold;
+}
+
+.issue .time td {
+  color: #bbb;
+  border: 1px solid #bbb;
+  width: 2em;
+  font-size : 50%;
+  text-align: center;
+}
+
+.issue .time .aggregate {
+  color: #333;
 }

@@ -25,7 +25,8 @@ const issues = (state = DEFAULT, action) => {
             key : fields.parent ? fields.parent.key : issue.key,
           },
           parent : {
-            key : fields.parent && fields.parent.key
+            key : fields.parent && fields.parent.key,
+            summary : fields.parent && fields.parent.fields.summary
           },
           subtask : fields.issuetype && fields.issuetype.subtask,
           type : fields.issuetype && fields.issuetype.name,
