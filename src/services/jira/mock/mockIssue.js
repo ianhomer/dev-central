@@ -1,5 +1,5 @@
 function isSubtask(id) {
-  return id % 2
+  return (id % 2) == 0
 }
 
 export default function mockIssue(url) {
@@ -8,11 +8,16 @@ export default function mockIssue(url) {
   const issueId=id.toString()
   const key='EX-' + (id - 10000).toString()
 
-  return Object.assign({}, {
+  return {
     'id': issueId,
     'self': 'http://www.example.com/jira/rest/api/2/issue/' + issueId,
     'key': key,
-    'fields': {
+    'fields': Object.assign({},
+      isSubtask(id) ? {} : { parent : {
+          key : 'EX-' + (id - 9999),
+          fields : { summary : 'Parent' }
+        } },
+      {
       'aggregatetimeestimate': Math.floor(Math.random() * 8 * 3600),
       'timespent': Math.floor(Math.random() * 5 * 3600),
       'timeoriginalestimate': Math.floor(Math.random() * 8 * 3600),
@@ -205,11 +210,6 @@ export default function mockIssue(url) {
         'remainingEstimateSeconds': 200,
         'timeSpentSeconds': 400
       }
-    }
-  },
-  isSubtask(id) ? {} : { fields : { parent : {
-      key : 'EX-' + (id - 9999),
-      fields : { summary : 'Parent' }
-    } } }
-  )
+    })
+  }
 }
