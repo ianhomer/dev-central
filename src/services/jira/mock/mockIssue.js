@@ -1,9 +1,9 @@
 function isSubtask(id) {
-  return (id % 2) == 0
+  return (id % 2) === 0
 }
 
 function oneIn(x) {
-  return 1 == Math.floor(Math.random() * x)
+  return 1 === Math.floor(Math.random() * x)
 }
 
 export default function mockIssue(url) {
@@ -17,9 +17,11 @@ export default function mockIssue(url) {
     'self': 'http://www.example.com/jira/rest/api/2/issue/' + issueId,
     'key': key,
     'fields': Object.assign({},
-      isSubtask(id) ? {} : { parent : {
+      !isSubtask(id) ? {} : { parent : {
+          id : (10001 + Math.floor(Math.random() * 1000)).toString(),
           key : 'EX-' + (id - 9999),
-          fields : { summary : 'Parent' }
+          fields :
+            { summary : 'Parent' }
         } },
       {
       'aggregatetimeestimate': oneIn(3) ? 0 : Math.floor(Math.random() * 8 * 3600),
