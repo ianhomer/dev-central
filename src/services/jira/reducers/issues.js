@@ -16,16 +16,17 @@ const issues = (state = DEFAULT, action) => {
     case JIRA_ISSUE_FETCH_SUCCEEDED:
       var issue = action.issue
       var fields = issue.fields
+      const newIssueId = parseInt(issue.id, 10)
       return [
-        ...state.filter(it => it.id !== issue.id),
+        ...state.filter(it => it.id !== newIssueId),
         {
-          id : issue.id,
+          id : newIssueId,
           key : issue.key,
           root : {
             key : fields.parent ? fields.parent.key : issue.key,
           },
           parent : {
-            id : fields.parent && fields.parent.id,
+            id : fields.parent && parseInt(fields.parent.id, 10),
             key : fields.parent && fields.parent.key,
             summary : fields.parent && fields.parent.fields.summary
           },

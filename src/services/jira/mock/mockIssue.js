@@ -9,6 +9,9 @@ function oneIn(x) {
 export default function mockIssue(url) {
   const match=url.match(/^[^/]*(\/.*)\/([^/]*)$/)
   const id=Number.parseInt(match[2], 10)
+  if (isNaN(id)) {
+    throw new Error(match[2] + ' is not a number from url ' + url)
+  }
   const issueId=id.toString()
   const key='EX-' + (id - 10000).toString()
 

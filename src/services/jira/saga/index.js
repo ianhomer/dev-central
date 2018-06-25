@@ -90,7 +90,7 @@ function* fetchWorkLogList(action) {
     for (var i in workLogList) {
       var workLog = workLogList[i]
       if (workLog.issueId && action.chain.isIssueStale(workLog.issueId)) {
-        yield put(jiraRequestIssue(action.handle, workLog.issueId))
+        yield put(jiraRequestIssue(action.handle, action.chain, workLog.issueId))
       }
     }
   } catch (e) {
@@ -102,6 +102,11 @@ function* fetchWorkLogList(action) {
 function* fetchIssue(action) {
   try {
     const issue = yield call(fetchIssueApi, action.handle, action.id)
+    // Get parent ID if stale
+    if (issue.fields.parent && action.chain && action.chain.isIssueStale(issue.fields.parent.id)) {
+      // Although for recursion safety reason, we don't chain into subsequent issue request,
+      yield put(jiraRequestIssue(action.handle, null, issue.fields.parent.id))
+    }
     yield put({type: JIRA_ISSUE_FETCH_SUCCEEDED, issue})
   } catch (e) {
     console.log(e)

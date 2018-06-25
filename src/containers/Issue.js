@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+
+import IssueTime from '../components/IssueTime'
+import IssueTimeByRef from './IssueTimeByRef'
 import { findActiveHandle } from '../utils/handles'
-import { toHoursAsString } from '../utils/time'
 
 class Issue extends React.Component {
   render() {
@@ -16,8 +18,13 @@ class Issue extends React.Component {
         { issue && issue.subtask &&
           <div className="row issue parent">
             <div className="col-sm-4">&nbsp;</div>
-            <div className="col-sm-8 summary">
+            <div className="col-sm-7 summary">
               { issue.parent.summary }
+            </div>
+            <div className="col-sm-1 time">
+              { issue.parent.id &&
+                <IssueTimeByRef id={issue.parent.id}/>
+              }
             </div>
           </div>
         }
@@ -38,21 +45,7 @@ class Issue extends React.Component {
               { issue.fields.summary }
             </div>
             <div className="col-sm-1 time">
-              <table>
-                <tbody>
-                  <tr>
-                    <td>
-                      { issue.fields.aggregatetimeestimate > 0 &&
-                         <span className="aggregate">{ toHoursAsString(issue.fields
-                          .aggregatetimeestimate) }</span>
-                      }
-                      { !issue.fields.aggregatetimeestimate &&
-                          toHoursAsString(issue.fields.timeoriginalestimate) }
-                    </td>
-                    <td>{ toHoursAsString(issue.fields.timespent) }</td>
-                  </tr>
-                </tbody>
-              </table>
+              <IssueTime issue={issue}/>
             </div>
           </div>
         }
