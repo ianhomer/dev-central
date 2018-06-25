@@ -42,9 +42,12 @@ class Issue extends React.Component {
                 <tbody>
                   <tr>
                     <td>
-                      <span className="aggregate">{ toHoursAsString(issue.fields
-                      .aggregatetimeestimate) }</span>
-                      { toHoursAsString(issue.fields.timeoriginalestimate) }
+                      { issue.fields.aggregatetimeestimate > 0 &&
+                         <span className="aggregate">{ toHoursAsString(issue.fields
+                          .aggregatetimeestimate) }</span>
+                      }
+                      { !issue.fields.aggregatetimeestimate &&
+                          toHoursAsString(issue.fields.timeoriginalestimate) }
                     </td>
                     <td>{ toHoursAsString(issue.fields.timespent) }</td>
                   </tr>

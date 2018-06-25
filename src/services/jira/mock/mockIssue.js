@@ -2,6 +2,10 @@ function isSubtask(id) {
   return (id % 2) == 0
 }
 
+function oneIn(x) {
+  return 1 == Math.floor(Math.random() * x)
+}
+
 export default function mockIssue(url) {
   const match=url.match(/^[^/]*(\/.*)\/([^/]*)$/)
   const id=Number.parseInt(match[2], 10)
@@ -18,9 +22,9 @@ export default function mockIssue(url) {
           fields : { summary : 'Parent' }
         } },
       {
-      'aggregatetimeestimate': Math.floor(Math.random() * 8 * 3600),
-      'timespent': Math.floor(Math.random() * 5 * 3600),
-      'timeoriginalestimate': Math.floor(Math.random() * 8 * 3600),
+      'aggregatetimeestimate': oneIn(3) ? 0 : Math.floor(Math.random() * 8 * 3600),
+      'timespent': oneIn(4) ? 0 : Math.floor(Math.random() * 5 * 3600),
+      'timeoriginalestimate': oneIn(5) ? 0 : Math.floor(Math.random() * 8 * 3600),
       'issuetype': {
         'subtask': isSubtask(id),
       },
