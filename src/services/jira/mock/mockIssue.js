@@ -1,3 +1,7 @@
+function isSubtask(id) {
+  return id % 2
+}
+
 export default function mockIssue(url) {
   const match=url.match(/^[^/]*(\/.*)\/([^/]*)$/)
   const id=Number.parseInt(match[2], 10)
@@ -12,6 +16,9 @@ export default function mockIssue(url) {
       'aggregatetimeestimate': Math.floor(Math.random() * 8 * 3600),
       'timespent': Math.floor(Math.random() * 5 * 3600),
       'timeoriginalestimate': Math.floor(Math.random() * 8 * 3600),
+      'issuetype': {
+        'subtask': isSubtask(id),
+      },
       'watcher': {
         'self': 'http://www.example.com/jira/rest/api/2/issue/' + key + '/watchers',
         'isWatching': false,
@@ -200,7 +207,7 @@ export default function mockIssue(url) {
       }
     }
   },
-  id % 2 ? {} : { fields : { parent : {
+  isSubtask(id) ? {} : { fields : { parent : {
       key : 'EX-' + (id - 9999),
       fields : { summary : 'Parent' }
     } } }
