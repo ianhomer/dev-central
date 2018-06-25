@@ -15,7 +15,13 @@ const IssueTime = ({issue}) => {
             { !issue.fields.aggregatetimeestimate &&
                 toHoursAsString(issue.fields.timeoriginalestimate) }
           </td>
-          <td>{ toHoursAsString(issue.fields.timespent) }</td>
+          <td>
+            { issue.fields.aggregatetimespent > 0 &&
+               <span className="aggregate">{ toHoursAsString(issue.fields
+                .aggregatetimespent) }</span>
+            }
+            { !issue.fields.aggregatetimespent &&
+              toHoursAsString(issue.fields.timespent) }</td>
         </tr>
       </tbody>
     </table>

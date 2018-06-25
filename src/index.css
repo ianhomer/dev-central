@@ -70,10 +70,15 @@
 
 .issue .time td {
   color: #bbb;
-  border: 1px solid #bbb;
   width: 2em;
   font-size : 50%;
   text-align: center;
+  border: 1px solid #bbb;
+  background-color: #fff;
+}
+
+.parent .time td {
+  background-color: #eee;
 }
 
 .issue .time .aggregate {
