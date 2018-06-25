@@ -28,9 +28,9 @@ export default function workLogList(opts) {
       },
       'started': moment(updatedTime - 60000).toISOString(true),
       'timeSpent': '1h',
-      'timeSpentSeconds': 3600 - Math.floor(Math.random() * Math.floor(1000)),
+      'timeSpentSeconds': 3600 - Math.floor(Math.random() * 1000),
       'id': id,
-      'issueId': '10002'
+      'issueId': (10001 + Math.floor(Math.random() * 1000)).toString()
     }
   })
 }

@@ -1,11 +1,19 @@
 export default function mockIssue(url) {
-  return {
-    'id': '10002',
-    'self': 'http://www.example.com/jira/rest/api/2/issue/10002',
-    'key': 'EX-1',
+  const match=url.match(/^[^/]*(\/.*)\/([^/]*)$/)
+  const id=Number.parseInt(match[2], 10)
+  const issueId=id.toString()
+  const key='EX-' + (id - 10000).toString()
+
+  return Object.assign({}, {
+    'id': issueId,
+    'self': 'http://www.example.com/jira/rest/api/2/issue/' + issueId,
+    'key': key,
     'fields': {
+      'aggregatetimeestimate': Math.floor(Math.random() * 8 * 3600),
+      'timespent': Math.floor(Math.random() * 5 * 3600),
+      'timeoriginalestimate': Math.floor(Math.random() * 8 * 3600),
       'watcher': {
-        'self': 'http://www.example.com/jira/rest/api/2/issue/EX-1/watchers',
+        'self': 'http://www.example.com/jira/rest/api/2/issue/' + key + '/watchers',
         'isWatching': false,
         'watchCount': 1,
         'watchers': [
@@ -87,7 +95,7 @@ export default function mockIssue(url) {
       },
       'comment': [
         {
-          'self': 'http://www.example.com/jira/rest/api/2/issue/10010/comment/10000',
+          'self': 'http://www.example.com/jira/rest/api/2/issue/' + issueId + '/comment/10000',
           'id': '10000',
           'author': {
             'self': 'http://www.example.com/jira/rest/api/2/user?username=fred',
@@ -191,5 +199,10 @@ export default function mockIssue(url) {
         'timeSpentSeconds': 400
       }
     }
-  }
+  },
+  id % 2 ? {} : { fields : { parent : {
+      key : 'EX-' + (id - 9999),
+      fields : { summary : 'Parent' }
+    } } }
+  )
 }
