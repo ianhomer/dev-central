@@ -1,5 +1,21 @@
 function isSubtask(id) {
-  return (id % 2) === 0
+  return (id % 1) === 0
+}
+
+// Simple way to reuse parent ID for alternate mock issues, so that we test issues with the
+// same parents.
+var lastParentId
+function findParentIdForId(id) {
+  var newParentId
+  if (lastParentId) {
+    newParentId = lastParentId
+    lastParentId = 0
+  } else {
+    newParentId = id - 1000 - (id % 4)
+    lastParentId = newParentId
+  }
+  console.log(id + ":" + lastParentId + ":" + newParentId)
+  return newParentId
 }
 
 function oneIn(x) {
@@ -22,7 +38,7 @@ export default function mockIssue(url) {
     'fields': Object.assign({},
       !isSubtask(id) ? {} : { parent : {
           id : (10001 + Math.floor(Math.random() * 1000)).toString(),
-          key : 'EX-' + (id - 9999),
+          key : 'EX-' + findParentIdForId(id),
           fields :
             { summary : 'Parent' }
         } },

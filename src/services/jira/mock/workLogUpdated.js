@@ -6,7 +6,7 @@ export default function workLogUpdated() {
   const idStart = findWorkLogIdForNow()
 
   var values = []
-  for (var id = idStart ; id > idStart - 5; id--) {
+  for (var id = idStart ; id > idStart - 20; id--) {
     values.push({
       'worklogId': id,
       'updatedTime': findUpdatedTimeForId(id),
