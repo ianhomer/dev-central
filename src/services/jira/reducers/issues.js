@@ -24,6 +24,7 @@ const issues = (state = DEFAULT, action) => {
           key : issue.key,
           root : {
             key : fields.parent ? fields.parent.key : issue.key,
+            id : fields.parent ? parseInt(fields.parent.id, 10) : newIssueId
           },
           parent : {
             id : fields.parent && parseInt(fields.parent.id, 10),

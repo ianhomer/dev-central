@@ -51,9 +51,9 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
             <div key={it.id}>
               { renderTotal && totalCell }
               <WorkLogItem item={it}
-                groupAuthorDisplayName={groupAuthorDisplayName}
-                groupDate={groupDate}
-                groupIssueId={groupIssueId}
+                lastAuthorDisplayName={groupAuthorDisplayName}
+                lastDate={groupDate}
+                lastIssueId={groupIssueId}
               />
             </div>
           )

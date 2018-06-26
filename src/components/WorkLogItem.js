@@ -4,10 +4,10 @@ import Issue from '../containers/Issue'
 import trimStart from 'lodash/trimStart'
 import moment from 'moment'
 
-const WorkLogItem = ({ groupAuthorDisplayName, groupDate, groupIssueId, item }) => {
-  const groupByAuthor = item.author && item.author.displayName !== groupAuthorDisplayName
-  const groupByDate = item.startedDate && item.startedDate !== groupDate
-  const groupByIssueId = item.issueId && item.issueId !== groupIssueId
+const WorkLogItem = ({ lastAuthorDisplayName, lastDate, lastIssueId, item }) => {
+  const groupByAuthor = item.author && item.author.displayName !== lastAuthorDisplayName
+  const groupByDate = item.startedDate && item.startedDate !== lastDate
+  const groupByIssueId = item.issueId && item.issueId !== lastIssueId
   return (
     <div>
       { (groupByAuthor || groupByDate) &&
@@ -39,9 +39,9 @@ const WorkLogItem = ({ groupAuthorDisplayName, groupDate, groupIssueId, item }) 
 
 WorkLogItem.propTypes = {
   item: PropTypes.object.isRequired,
-  groupAuthorDisplayName: PropTypes.string,
-  groupDate: PropTypes.string,
-  groupIssueId: PropTypes.string
+  lastAuthorDisplayName: PropTypes.string,
+  lastDate: PropTypes.string,
+  lastIssueId: PropTypes.string
 }
 
 export default WorkLogItem
