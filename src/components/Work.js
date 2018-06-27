@@ -30,7 +30,7 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
               (a && b && a.author && b.author &&
                 a.author.displayName.localeCompare(b.author.displayName))
               || b.startedDay - a.startedDay
-              || a.issueId && a.issueId.localeCompare(b.issueId))
+              || a.issueId ? a.issueId.localeCompare(b.issueId) : 0)
           .map( (it) => {
           if (it.author && groupAuthorDisplayName !== it.author.displayName) {
             if (groupAuthorDisplayName) renderTotal = true

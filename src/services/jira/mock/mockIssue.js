@@ -31,6 +31,7 @@ export default function mockIssue(url) {
   }
   const key='EX-' + (idAsNumber - 10000).toString()
 
+
   return {
     'id': id,
     'self': 'http://www.example.com/jira/rest/api/2/issue/' + id,
@@ -40,7 +41,7 @@ export default function mockIssue(url) {
           id : (10001 + Math.floor(Math.random() * 1000)).toString(),
           key : 'EX-' + findParentIdForId(id),
           fields :
-            { summary : 'Parent' }
+            { summary : 'Parent - ' + findParentIdForId(id) }
         } },
       {
       'aggregatetimeestimate': oneIn(3) ? 0 : Math.floor(Math.random() * 8 * 3600),

@@ -1,4 +1,5 @@
 import mockAuthentication from './authentication'
+import mockFields from './mockFields'
 import mockInfo from './mockInfo'
 import mockIssue from './mockIssue'
 import mockWorkLogList from './workLogList'
@@ -20,5 +21,8 @@ export default function mockJira(fetchMock) {
   })
   fetchMock.get('glob:*/rest/api/2/serverInfo', function(url,opts) {
     return mockInfo()
+  })
+  fetchMock.get('glob:*/rest/api/2/field', function(url,opts) {
+    return mockFields()
   })
 }

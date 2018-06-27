@@ -14,6 +14,9 @@ import {
   JIRA_ISSUE_FETCH_REQUESTED,
   JIRA_ISSUE_FETCH_FAILED,
   JIRA_ISSUE_FETCH_SUCCEEDED,
+  JIRA_FIELDS_FETCH_REQUESTED,
+  JIRA_FIELDS_FETCH_FAILED,
+  JIRA_FIELDS_FETCH_SUCCEEDED
 } from '../actions'
 
 function createRequestHeaders(handle) {
@@ -61,6 +64,11 @@ function fetchInfoApi(handle, action) {
   .then(response => response.json())
 }
 
+function fetchFieldsApi(handle) {
+  return fetch(handle.url + '/rest/api/2/field', createFetchOptions(handle))
+  .then(response => response.json())
+}
+
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 // /rest/api/2/worklog/updated
 function* fetchWorkLogUpdated(action) {
@@ -71,10 +79,11 @@ function* fetchWorkLogUpdated(action) {
 
     const workLogIds = action.chain.findWorkLogIdsRequired(workLog.values)
     if (workLogIds.length > 0) {
-      // If we need some work logs, go get them
+      // If we need some work logs, go get them.  We sort the worklog IDs purely for dev
+      // purposes, where it handy to have them in a predictable order
       yield put({type: JIRA_WORK_LOG_LIST_FETCH_REQUESTED, chain: action.chain,
         handle: action.handle,
-        workLogIds})
+        workLogIds: workLogIds.sort((a,b) => a - b)})
     }
   } catch (e) {
     console.log(e)
@@ -124,9 +133,21 @@ function* fetchInfo(action) {
   }
 }
 
+function* fetchFields(action) {
+  try {
+    const fields = yield call(fetchFieldsApi, action.handle)
+    yield put({type: JIRA_FIELDS_FETCH_SUCCEEDED, fields})
+  } catch (e) {
+    console.log(e)
+    yield put({type: JIRA_FIELDS_FETCH_FAILED, message: e.message})
+  }
+}
+
+
 export default function* jiraSaga() {
   yield takeEvery(JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED, fetchWorkLogUpdated)
   yield takeEvery(JIRA_WORK_LOG_LIST_FETCH_REQUESTED, fetchWorkLogList)
   yield takeEvery(JIRA_ISSUE_FETCH_REQUESTED, fetchIssue)
   yield takeEvery(JIRA_INFO_FETCH_REQUESTED, fetchInfo)
+  yield takeEvery(JIRA_FIELDS_FETCH_REQUESTED, fetchFields)
 }
