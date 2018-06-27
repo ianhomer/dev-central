@@ -22,10 +22,11 @@ const workLog = (state = DEFAULT, action) => {
     //
     case JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED:
       const newWorkLogs = action.workLog.values.map(workLog => {
+        var workLogIdAsString = workLog.worklogId.toString()
         return Object.assign({}, {
-          id: workLog.worklogId,
+          id: workLogIdAsString,
           updated: workLog.updatedTime
-        }, state.records.find(it => it.id === workLog.worklogId))
+        }, state.records.find(it => it.id === workLogIdAsString))
       })
       const newWorkLogsIds = newWorkLogs.map(workLog => workLog.id)
       return {
@@ -41,16 +42,17 @@ const workLog = (state = DEFAULT, action) => {
     // Commit work log details from list request
     //
     case JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED:
-      const newListWorkLogsIds = action.workLogList.map(workLog => parseInt(workLog.id, 10))
+      const newListWorkLogsIds = action.workLogList.map(workLog => workLog.id.toString())
       const newListWorkLogs = action.workLogList.map(item => {
         var started = moment(item.started)
         var newItem = {
           author : {
             displayName : item.author.displayName
           },
-          id : parseInt(item.id, 10),
+          id : item.id.toString(),
           comment : item.comment,
           issueId : item.issueId,
+          rootIssueId : item.issueId,
           updated : +moment(item.updated),
           started : +started,
           startedDay : parseInt(started.format('YYYYMMDD'),10),

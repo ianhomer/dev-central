@@ -24,7 +24,7 @@ const WorkLogItem = ({ lastAuthorDisplayName, lastDate, lastIssueId, item }) => 
         <div className="col-sm-6">
           { groupByIssueId && <Issue
               date={ + new Date() }
-              id={ parseInt(item.issueId, 10) }
+              id={ item.issueId }
             />
           }
         </div>

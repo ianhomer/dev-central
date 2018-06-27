@@ -57,8 +57,8 @@ class Issue extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     handle : findActiveHandle(state, ownProps),
-    id : parseInt(ownProps.id, 10),
-    issue : state.jira.issues && state.jira.issues.find(it => parseInt(it.id, 10) === ownProps.id)
+    id : ownProps.id,
+    issue : state.jira.issues && state.jira.issues.find(it => it.id === ownProps.id)
   }
 }
 

@@ -10,7 +10,7 @@ export default function workLogList(opts) {
       'author': {
         'self': base + '/jira/rest/api/2/user?username=bob',
         'name': 'bob',
-        'displayName': 'Bob McFace ' + Math.floor(Math.random() * Math.floor(5)),
+        'displayName': 'Bob McFace ' + Math.floor(Math.random() * Math.floor(2)),
         'active': false
       },
       'updateAuthor': {
@@ -30,7 +30,7 @@ export default function workLogList(opts) {
       'timeSpent': '1h',
       'timeSpentSeconds': 3600 - Math.floor(Math.random() * 1000),
       'id': id,
-      'issueId': (10001 + Math.floor(Math.random() * 1000)).toString()
+      'issueId': (10001 + parseInt(id, 10)).toString()
     }
   })
 }

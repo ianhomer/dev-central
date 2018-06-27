@@ -24,19 +24,19 @@ function oneIn(x) {
 
 export default function mockIssue(url) {
   const match=url.match(/^[^/]*(\/.*)\/([^/]*)$/)
-  const id=Number.parseInt(match[2], 10)
-  if (isNaN(id)) {
+  const id=match[2]
+  const idAsNumber=Number.parseInt(id, 10)
+  if (isNaN(idAsNumber)) {
     throw new Error(match[2] + ' is not a number from url ' + url)
   }
-  const issueId=id.toString()
-  const key='EX-' + (id - 10000).toString()
+  const key='EX-' + (idAsNumber - 10000).toString()
 
   return {
-    'id': issueId,
-    'self': 'http://www.example.com/jira/rest/api/2/issue/' + issueId,
+    'id': id,
+    'self': 'http://www.example.com/jira/rest/api/2/issue/' + id,
     'key': key,
     'fields': Object.assign({},
-      !isSubtask(id) ? {} : { parent : {
+      !isSubtask(idAsNumber) ? {} : { parent : {
           id : (10001 + Math.floor(Math.random() * 1000)).toString(),
           key : 'EX-' + findParentIdForId(id),
           fields :
@@ -47,7 +47,7 @@ export default function mockIssue(url) {
       'timespent': oneIn(4) ? 0 : Math.floor(Math.random() * 5 * 3600),
       'timeoriginalestimate': oneIn(5) ? 0 : Math.floor(Math.random() * 8 * 3600),
       'issuetype': {
-        'subtask': isSubtask(id),
+        'subtask': isSubtask(idAsNumber),
       },
       'watcher': {
         'self': 'http://www.example.com/jira/rest/api/2/issue/' + key + '/watchers',
@@ -132,7 +132,7 @@ export default function mockIssue(url) {
       },
       'comment': [
         {
-          'self': 'http://www.example.com/jira/rest/api/2/issue/' + issueId + '/comment/10000',
+          'self': 'http://www.example.com/jira/rest/api/2/issue/' + id + '/comment/10000',
           'id': '10000',
           'author': {
             'self': 'http://www.example.com/jira/rest/api/2/user?username=fred',
