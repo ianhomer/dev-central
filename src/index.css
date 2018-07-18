@@ -84,3 +84,9 @@
 .issue .time .aggregate {
   color: #333;
 }
+
+.tip {
+  border: 2px dotted red;
+  padding: 1em;
+  margin: 1em;
+}

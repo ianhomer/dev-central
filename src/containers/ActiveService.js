@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import Service from '../components/Service'
+import Welcome from '../components/Welcome'
 import { changePropertyValue, removeHandle } from '../actions'
 import { jiraInfoFetchRequested, jiraWorkRefresh } from '../services/jira/actions'
 import { findActiveHandle } from '../utils/handles'
@@ -24,6 +25,9 @@ const ActiveService = ({ match, handle, workLog, serviceInfo,
           onRefreshServiceInfo={() => onRefreshServiceInfo(handle)}
         />
       }
+      {!handle &&
+              <Welcome/>
+            }
     </div>
   )
 }
