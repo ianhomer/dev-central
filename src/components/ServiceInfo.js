@@ -15,7 +15,7 @@ const ServiceInfo = ({serviceInfo, onRefresh}) => {
     </div>
     <Trace o={serviceInfo}/>
     <div>
-      <a className="btn btn-primary btn-lg active"
+      <a href="#refresh" className="btn btn-primary btn-lg active"
         onClick={onRefresh}>Refresh</a>
     </div>
   </div>

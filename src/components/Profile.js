@@ -82,7 +82,7 @@ const Profile = ({ handle, onChangeProperty, onLogout, onRemove }) => {
           and no need for authentication with a service.
         </p>
       </div>
-      <div><a className="btn btn-primary btn-lg active" onClick={onRemove}>Remove</a></div>
+      <div><a href="#remove" className="btn btn-primary btn-lg active" onClick={onRemove}>Remove</a></div>
     </div>
   </div>
 )}

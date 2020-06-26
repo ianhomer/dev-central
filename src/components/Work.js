@@ -19,7 +19,7 @@ const Work = ({ handle, workLog, onChangeProperty, onRefresh }) => {
         ref={node => filter = node}
         size={60}
         onChange={onChangeFilter}/>
-      <a className="btn btn-primary btn-lg active"
+      <a href="#refresh" className="btn btn-primary btn-lg active"
         onClick={onRefresh}>Refresh</a>
     { workLog.records
           .filter(it =>

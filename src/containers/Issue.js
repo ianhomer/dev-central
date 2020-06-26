@@ -32,14 +32,14 @@ class Issue extends React.Component {
           <div className="row issue">
             <div className="col-sm-2">
               { issue.subtask &&
-                <a href={handle.url + '/browse/' + issue.root.key } target="_blank"
+                <a href={handle.url + '/browse/' + issue.root.key }
                     className="parent">
                   { issue.root.key }
                 </a>
               }
             </div>
             <div className="col-sm-2">
-              <a href={handle.url + '/browse/' + issue.key } target="_blank">{ issue.key }</a>
+              <a href={handle.url + '/browse/' + issue.key }>{ issue.key }</a>
             </div>
             <div className="col-sm-7 summary">
               { issue.fields.summary }
