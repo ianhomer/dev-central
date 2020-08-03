@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "fetch-mock": "^9.10.5",
+    "fetch-mock": "^9.10.6",
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
-    "nock": "^13.0.2",
+    "nock": "^13.0.3",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
