@@ -1,17 +1,14 @@
-import {
-  SYSTEM_MOCK_BACKEND
-} from '../actions'
+import { SYSTEM_MOCK_BACKEND } from "../actions";
 
 const system = (state = {}, action) => {
   switch (action.type) {
     case SYSTEM_MOCK_BACKEND:
-      return Object.assign({}, state,
-        {
-          mock: action.enable
-        })
+      return Object.assign({}, state, {
+        mock: action.enable,
+      });
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default system
+export default system;

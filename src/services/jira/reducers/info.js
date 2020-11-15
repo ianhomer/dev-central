@@ -1,22 +1,18 @@
-import {
-  JIRA_INFO_FETCH_SUCCEEDED,
-} from '../actions'
+import { JIRA_INFO_FETCH_SUCCEEDED } from "../actions";
 
-import {
-  SYSTEM_FLUSH_DATA
-} from '../../../actions'
+import { SYSTEM_FLUSH_DATA } from "../../../actions";
 
-const DEFAULT = {}
+const DEFAULT = {};
 
 const info = (state = {}, action) => {
   switch (action.type) {
     case JIRA_INFO_FETCH_SUCCEEDED:
-      return action.info
+      return action.info;
     case SYSTEM_FLUSH_DATA:
-      return DEFAULT
+      return DEFAULT;
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default info
+export default info;

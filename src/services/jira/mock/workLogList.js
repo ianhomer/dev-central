@@ -1,36 +1,36 @@
-import moment from 'moment'
-import { findUpdatedTimeForId } from './mockUtils'
+import moment from "moment";
+import { findUpdatedTimeForId } from "./mockUtils";
 
 export default function workLogList(opts) {
-  let base = 'http://www.example.com/'
-  return JSON.parse(opts.body).ids.map(id => {
-    let updatedTime = findUpdatedTimeForId(id)
+  let base = "http://www.example.com/";
+  return JSON.parse(opts.body).ids.map((id) => {
+    let updatedTime = findUpdatedTimeForId(id);
     return {
-      'self': base + '/jira/rest/api/2/issue/10010/worklog/' + id,
-      'author': {
-        'self': base + '/jira/rest/api/2/user?username=bob',
-        'name': 'bob',
-        'displayName': 'Bob McFace ' + Math.floor(Math.random() * Math.floor(2)),
-        'active': false
+      self: base + "/jira/rest/api/2/issue/10010/worklog/" + id,
+      author: {
+        self: base + "/jira/rest/api/2/user?username=bob",
+        name: "bob",
+        displayName: "Bob McFace " + Math.floor(Math.random() * Math.floor(2)),
+        active: false,
       },
-      'updateAuthor': {
-        'self': base + '/jira/rest/api/2/user?username=bob',
-        'name': 'bob',
-        'displayName': 'Bob McFace',
-        'active': false
+      updateAuthor: {
+        self: base + "/jira/rest/api/2/user?username=bob",
+        name: "bob",
+        displayName: "Bob McFace",
+        active: false,
       },
-      'comment': 'Completed task.',
+      comment: "Completed task.",
       // JIRA returns local ISO string, not UTC
-      'updated': moment(updatedTime).toISOString(true),
-      'visibility': {
-        'type': 'group',
-        'value': 'jira-developers'
+      updated: moment(updatedTime).toISOString(true),
+      visibility: {
+        type: "group",
+        value: "jira-developers",
       },
-      'started': moment(updatedTime - 60000).toISOString(true),
-      'timeSpent': '1h',
-      'timeSpentSeconds': 3600 - Math.floor(Math.random() * 1000),
-      'id': id,
-      'issueId': (10001 + parseInt(id, 10)).toString()
-    }
-  })
+      started: moment(updatedTime - 60000).toISOString(true),
+      timeSpent: "1h",
+      timeSpentSeconds: 3600 - Math.floor(Math.random() * 1000),
+      id: id,
+      issueId: (10001 + parseInt(id, 10)).toString(),
+    };
+  });
 }

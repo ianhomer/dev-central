@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects'
+import { call, put, takeEvery } from "redux-saga/effects";
 
 import {
   JIRA_INFO_FETCH_REQUESTED,
@@ -16,138 +16,168 @@ import {
   JIRA_ISSUE_FETCH_SUCCEEDED,
   JIRA_FIELDS_FETCH_REQUESTED,
   JIRA_FIELDS_FETCH_FAILED,
-  JIRA_FIELDS_FETCH_SUCCEEDED
-} from '../actions'
+  JIRA_FIELDS_FETCH_SUCCEEDED,
+} from "../actions";
 
 function createRequestHeaders(handle) {
   var headers = {
-    'Authorization': 'Basic ' + btoa(handle.username + ":" + handle.apiKey),
-    'Content-Type': 'application/json',
-    'User-Agent': 'react/16.4.0'
-  }
-  return headers
+    Authorization: "Basic " + btoa(handle.username + ":" + handle.apiKey),
+    "Content-Type": "application/json",
+    "User-Agent": "react/16.4.0",
+  };
+  return headers;
 }
 
 function createFetchOptions(handle, options) {
-  return Object.assign({
-     method: 'GET',
-     headers: createRequestHeaders(handle)
-   }, options)
+  return Object.assign(
+    {
+      method: "GET",
+      headers: createRequestHeaders(handle),
+    },
+    options
+  );
 }
 
 function fetchWorkLogUpdatedApi(handle, since) {
   // TODO : Add since and expand GET arguments
   return fetch(
-    handle.url + '/rest/api/2/worklog/updated?since=' + since,
-    createFetchOptions(handle, {method : 'GET'})
-  )
-  .then(response => response.json())
+    handle.url + "/rest/api/2/worklog/updated?since=" + since,
+    createFetchOptions(handle, { method: "GET" })
+  ).then((response) => response.json());
 }
 
 function fetchWorkLogListApi(handle, workLogIds) {
-  return fetch(handle.url + '/rest/api/2/worklog/list',
+  return fetch(
+    handle.url + "/rest/api/2/worklog/list",
     createFetchOptions(handle, {
-      method: 'POST',
-      body: JSON.stringify({ 'ids': workLogIds })
+      method: "POST",
+      body: JSON.stringify({ ids: workLogIds }),
     })
-  )
-  .then(response => response.json())
+  ).then((response) => response.json());
 }
 
 function fetchIssueApi(handle, id) {
-  return fetch(handle.url + '/rest/api/2/issue/' + id, createFetchOptions(handle))
-  .then(response => response.json())
+  return fetch(
+    handle.url + "/rest/api/2/issue/" + id,
+    createFetchOptions(handle)
+  ).then((response) => response.json());
 }
 
 function fetchInfoApi(handle, action) {
-  return fetch(handle.url + '/rest/api/2/serverInfo', createFetchOptions(handle))
-  .then(response => response.json())
+  return fetch(
+    handle.url + "/rest/api/2/serverInfo",
+    createFetchOptions(handle)
+  ).then((response) => response.json());
 }
 
 function fetchFieldsApi(handle) {
-  return fetch(handle.url + '/rest/api/2/field', createFetchOptions(handle))
-  .then(response => response.json())
+  return fetch(
+    handle.url + "/rest/api/2/field",
+    createFetchOptions(handle)
+  ).then((response) => response.json());
 }
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 // /rest/api/2/worklog/updated
 function* fetchWorkLogUpdated(action) {
   try {
-    const workLog = yield call(fetchWorkLogUpdatedApi, action.handle,
-      action.chain.findWorkRefreshSince())
-    yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED, chain: action.chain, workLog})
+    const workLog = yield call(
+      fetchWorkLogUpdatedApi,
+      action.handle,
+      action.chain.findWorkRefreshSince()
+    );
+    yield put({
+      type: JIRA_WORK_LOG_UPDATED_FETCH_SUCCEEDED,
+      chain: action.chain,
+      workLog,
+    });
 
-    const workLogIds = action.chain.findWorkLogIdsRequired(workLog.values)
+    const workLogIds = action.chain.findWorkLogIdsRequired(workLog.values);
     if (workLogIds.length > 0) {
       // If we need some work logs, go get them.  We sort the worklog IDs purely for dev
       // purposes, where it handy to have them in a predictable order
-      yield put({type: JIRA_WORK_LOG_LIST_FETCH_REQUESTED, chain: action.chain,
+      yield put({
+        type: JIRA_WORK_LOG_LIST_FETCH_REQUESTED,
+        chain: action.chain,
         handle: action.handle,
-        workLogIds: workLogIds.sort((a,b) => a - b)})
+        workLogIds: workLogIds.sort((a, b) => a - b),
+      });
     }
   } catch (e) {
-    console.log(e)
-    yield put({type: JIRA_WORK_LOG_UPDATED_FETCH_FAILED, message: e.message})
+    console.log(e);
+    yield put({ type: JIRA_WORK_LOG_UPDATED_FETCH_FAILED, message: e.message });
   }
 }
 
 function* fetchWorkLogList(action) {
   try {
-    const workLogList = yield call(fetchWorkLogListApi, action.handle, action.workLogIds)
-    yield put({type: JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED, workLogList: workLogList})
+    const workLogList = yield call(
+      fetchWorkLogListApi,
+      action.handle,
+      action.workLogIds
+    );
+    yield put({
+      type: JIRA_WORK_LOG_LIST_FETCH_SUCCEEDED,
+      workLogList: workLogList,
+    });
 
     for (var i in workLogList) {
-      var workLog = workLogList[i]
+      var workLog = workLogList[i];
       if (workLog.issueId && action.chain.isIssueStale(workLog.issueId)) {
-        yield put(jiraRequestIssue(action.handle, action.chain, workLog.issueId))
+        yield put(
+          jiraRequestIssue(action.handle, action.chain, workLog.issueId)
+        );
       }
     }
   } catch (e) {
-    console.log(e)
-    yield put({type: JIRA_WORK_LOG_LIST_FETCH_FAILED, message: e.message})
+    console.log(e);
+    yield put({ type: JIRA_WORK_LOG_LIST_FETCH_FAILED, message: e.message });
   }
 }
 
 function* fetchIssue(action) {
   try {
-    const issue = yield call(fetchIssueApi, action.handle, action.id)
+    const issue = yield call(fetchIssueApi, action.handle, action.id);
     // Get parent ID if stale
-    if (issue.fields.parent && action.chain && action.chain.isIssueStale(issue.fields.parent.id)) {
+    if (
+      issue.fields.parent &&
+      action.chain &&
+      action.chain.isIssueStale(issue.fields.parent.id)
+    ) {
       // Although for recursion safety reason, we don't chain into subsequent issue request,
-      yield put(jiraRequestIssue(action.handle, null, issue.fields.parent.id))
+      yield put(jiraRequestIssue(action.handle, null, issue.fields.parent.id));
     }
-    yield put({type: JIRA_ISSUE_FETCH_SUCCEEDED, issue})
+    yield put({ type: JIRA_ISSUE_FETCH_SUCCEEDED, issue });
   } catch (e) {
-    console.log(e)
-    yield put({type: JIRA_ISSUE_FETCH_FAILED, message: e.message})
+    console.log(e);
+    yield put({ type: JIRA_ISSUE_FETCH_FAILED, message: e.message });
   }
 }
 
 function* fetchInfo(action) {
   try {
-    const info = yield call(fetchInfoApi, action.handle)
-    yield put({type: JIRA_INFO_FETCH_SUCCEEDED, info})
+    const info = yield call(fetchInfoApi, action.handle);
+    yield put({ type: JIRA_INFO_FETCH_SUCCEEDED, info });
   } catch (e) {
-    console.log(e)
-    yield put({type: JIRA_INFO_FETCH_FAILED, message: e.message})
+    console.log(e);
+    yield put({ type: JIRA_INFO_FETCH_FAILED, message: e.message });
   }
 }
 
 function* fetchFields(action) {
   try {
-    const fields = yield call(fetchFieldsApi, action.handle)
-    yield put({type: JIRA_FIELDS_FETCH_SUCCEEDED, fields})
+    const fields = yield call(fetchFieldsApi, action.handle);
+    yield put({ type: JIRA_FIELDS_FETCH_SUCCEEDED, fields });
   } catch (e) {
-    console.log(e)
-    yield put({type: JIRA_FIELDS_FETCH_FAILED, message: e.message})
+    console.log(e);
+    yield put({ type: JIRA_FIELDS_FETCH_FAILED, message: e.message });
   }
 }
 
-
 export default function* jiraSaga() {
-  yield takeEvery(JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED, fetchWorkLogUpdated)
-  yield takeEvery(JIRA_WORK_LOG_LIST_FETCH_REQUESTED, fetchWorkLogList)
-  yield takeEvery(JIRA_ISSUE_FETCH_REQUESTED, fetchIssue)
-  yield takeEvery(JIRA_INFO_FETCH_REQUESTED, fetchInfo)
-  yield takeEvery(JIRA_FIELDS_FETCH_REQUESTED, fetchFields)
+  yield takeEvery(JIRA_WORK_LOG_UPDATED_FETCH_REQUESTED, fetchWorkLogUpdated);
+  yield takeEvery(JIRA_WORK_LOG_LIST_FETCH_REQUESTED, fetchWorkLogList);
+  yield takeEvery(JIRA_ISSUE_FETCH_REQUESTED, fetchIssue);
+  yield takeEvery(JIRA_INFO_FETCH_REQUESTED, fetchInfo);
+  yield takeEvery(JIRA_FIELDS_FETCH_REQUESTED, fetchFields);
 }

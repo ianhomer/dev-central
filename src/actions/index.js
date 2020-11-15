@@ -1,2 +1,2 @@
-export * from './handle'
-export * from './system'
+export * from "./handle";
+export * from "./system";

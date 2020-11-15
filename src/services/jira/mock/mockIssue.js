@@ -1,241 +1,267 @@
 function isSubtask(id) {
-  return (id % 1) === 0
+  return id % 1 === 0;
 }
 
 // Simple way to reuse parent ID for alternate mock issues, so that we test issues with the
 // same parents.
-var lastParentId
+var lastParentId;
 function findParentIdForId(id) {
-  var newParentId
+  var newParentId;
   if (lastParentId) {
-    newParentId = lastParentId
-    lastParentId = 0
+    newParentId = lastParentId;
+    lastParentId = 0;
   } else {
-    newParentId = id - 1000 - (id % 4)
-    lastParentId = newParentId
+    newParentId = id - 1000 - (id % 4);
+    lastParentId = newParentId;
   }
-  console.log(id + ":" + lastParentId + ":" + newParentId)
-  return newParentId
+  console.log(id + ":" + lastParentId + ":" + newParentId);
+  return newParentId;
 }
 
 function oneIn(x) {
-  return 1 === Math.floor(Math.random() * x)
+  return 1 === Math.floor(Math.random() * x);
 }
 
 export default function mockIssue(url) {
-  const match=url.match(/^[^/]*(\/.*)\/([^/]*)$/)
-  const id=match[2]
-  const idAsNumber=Number.parseInt(id, 10)
+  const match = url.match(/^[^/]*(\/.*)\/([^/]*)$/);
+  const id = match[2];
+  const idAsNumber = Number.parseInt(id, 10);
   if (isNaN(idAsNumber)) {
-    throw new Error(match[2] + ' is not a number from url ' + url)
+    throw new Error(match[2] + " is not a number from url " + url);
   }
-  const key='EX-' + (idAsNumber - 10000).toString()
-
+  const key = "EX-" + (idAsNumber - 10000).toString();
 
   return {
-    'id': id,
-    'self': 'http://www.example.com/jira/rest/api/2/issue/' + id,
-    'key': key,
-    'fields': Object.assign({},
-      !isSubtask(idAsNumber) ? {} : { parent : {
-          id : (10001 + Math.floor(Math.random() * 1000)).toString(),
-          key : 'EX-' + findParentIdForId(id),
-          fields :
-            { summary : 'Parent - ' + findParentIdForId(id) }
-        } },
-      {
-      'aggregatetimeestimate': oneIn(3) ? 0 : Math.floor(Math.random() * 8 * 3600),
-      'timespent': oneIn(4) ? 0 : Math.floor(Math.random() * 5 * 3600),
-      'timeoriginalestimate': oneIn(5) ? 0 : Math.floor(Math.random() * 8 * 3600),
-      'issuetype': {
-        'subtask': isSubtask(idAsNumber),
-      },
-      'watcher': {
-        'self': 'http://www.example.com/jira/rest/api/2/issue/' + key + '/watchers',
-        'isWatching': false,
-        'watchCount': 1,
-        'watchers': [
-          {
-            'self': 'http://www.example.com/jira/rest/api/2/user?username=fred',
-            'name': 'fred',
-            'displayName': 'Fred F. User',
-            'active': false
-          }
-        ]
-      },
-      'attachment': [
-        {
-          'id': 10001,
-          'self': 'http://www.example.com/jira/rest/api/2.0/attachments/10000',
-          'filename': 'picture.jpg',
-          'author': {
-            'self': 'http://www.example.com/jira/rest/api/2/user?username=fred',
-            'key': 'fred',
-            'accountId': '99:27935d01-92a7-4687-8272-a9b8d3b2ae2e',
-            'name': 'fred',
-            'avatarUrls': {
-              '48x48': 'http://www.example.com/jira/secure/useravatar?size=large&ownerId=fred',
-              '24x24': 'http://www.example.com/jira/secure/useravatar?size=small&ownerId=fred',
-              '16x16': 'http://www.example.com/jira/secure/useravatar?size=xsmall&ownerId=fred',
-              '32x32': 'http://www.example.com/jira/secure/useravatar?size=medium&ownerId=fred'
+    id: id,
+    self: "http://www.example.com/jira/rest/api/2/issue/" + id,
+    key: key,
+    fields: Object.assign(
+      {},
+      !isSubtask(idAsNumber)
+        ? {}
+        : {
+            parent: {
+              id: (10001 + Math.floor(Math.random() * 1000)).toString(),
+              key: "EX-" + findParentIdForId(id),
+              fields: { summary: "Parent - " + findParentIdForId(id) },
             },
-            'displayName': 'Fred F. User',
-            'active': false
           },
-          'created': '2018-06-07T05:42:08.014+0000',
-          'size': 23123,
-          'mimeType': 'image/jpeg',
-          'content': 'http://www.example.com/jira/attachments/10000',
-          'thumbnail': 'http://www.example.com/jira/secure/thumbnail/10000'
-        }
-      ],
-      'sub-tasks': [
-        {
-          'id': '10000',
-          'type': {
-            'id': '10000',
-            'name': '',
-            'inward': 'Parent',
-            'outward': 'Sub-task'
-          },
-          'outwardIssue': {
-            'id': '10003',
-            'key': 'EX-2',
-            'self': 'http://www.example.com/jira/rest/api/2/issue/EX-2',
-            'fields': {
-              'status': {
-                'iconUrl': 'http://www.example.com/jira//images/icons/statuses/open.png',
-                'name': 'Open'
-              }
-            }
-          }
-        }
-      ],
-      'description': 'example bug report',
-      'project': {
-        'self': 'http://www.example.com/jira/rest/api/2/project/EX',
-        'id': '10000',
-        'key': 'EX',
-        'name': 'Example',
-        'avatarUrls': {
-          '48x48': 'http://www.example.com/jira/secure/projectavatar?size=large&pid=10000',
-          '24x24': 'http://www.example.com/jira/secure/projectavatar?size=small&pid=10000',
-          '16x16': 'http://www.example.com/jira/secure/projectavatar?size=xsmall&pid=10000',
-          '32x32': 'http://www.example.com/jira/secure/projectavatar?size=medium&pid=10000'
+      {
+        aggregatetimeestimate: oneIn(3)
+          ? 0
+          : Math.floor(Math.random() * 8 * 3600),
+        timespent: oneIn(4) ? 0 : Math.floor(Math.random() * 5 * 3600),
+        timeoriginalestimate: oneIn(5)
+          ? 0
+          : Math.floor(Math.random() * 8 * 3600),
+        issuetype: {
+          subtask: isSubtask(idAsNumber),
         },
-        'projectCategory': {
-          'self': 'http://www.example.com/jira/rest/api/2/projectCategory/10000',
-          'id': '10000',
-          'name': 'FIRST',
-          'description': 'First Project Category'
+        watcher: {
+          self:
+            "http://www.example.com/jira/rest/api/2/issue/" + key + "/watchers",
+          isWatching: false,
+          watchCount: 1,
+          watchers: [
+            {
+              self: "http://www.example.com/jira/rest/api/2/user?username=fred",
+              name: "fred",
+              displayName: "Fred F. User",
+              active: false,
+            },
+          ],
         },
-        'simplified': false
-      },
-      'comment': [
-        {
-          'self': 'http://www.example.com/jira/rest/api/2/issue/' + id + '/comment/10000',
-          'id': '10000',
-          'author': {
-            'self': 'http://www.example.com/jira/rest/api/2/user?username=fred',
-            'name': 'fred',
-            'displayName': 'Fred F. User',
-            'active': false
+        attachment: [
+          {
+            id: 10001,
+            self: "http://www.example.com/jira/rest/api/2.0/attachments/10000",
+            filename: "picture.jpg",
+            author: {
+              self: "http://www.example.com/jira/rest/api/2/user?username=fred",
+              key: "fred",
+              accountId: "99:27935d01-92a7-4687-8272-a9b8d3b2ae2e",
+              name: "fred",
+              avatarUrls: {
+                "48x48":
+                  "http://www.example.com/jira/secure/useravatar?size=large&ownerId=fred",
+                "24x24":
+                  "http://www.example.com/jira/secure/useravatar?size=small&ownerId=fred",
+                "16x16":
+                  "http://www.example.com/jira/secure/useravatar?size=xsmall&ownerId=fred",
+                "32x32":
+                  "http://www.example.com/jira/secure/useravatar?size=medium&ownerId=fred",
+              },
+              displayName: "Fred F. User",
+              active: false,
+            },
+            created: "2018-06-07T05:42:08.014+0000",
+            size: 23123,
+            mimeType: "image/jpeg",
+            content: "http://www.example.com/jira/attachments/10000",
+            thumbnail: "http://www.example.com/jira/secure/thumbnail/10000",
           },
-          'body': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget venenatis elit. Duis eu justo eget augue iaculis fermentum. Sed semper quam laoreet nisi egestas at posuere augue semper.',
-          'updateAuthor': {
-            'self': 'http://www.example.com/jira/rest/api/2/user?username=fred',
-            'name': 'fred',
-            'displayName': 'Fred F. User',
-            'active': false
+        ],
+        "sub-tasks": [
+          {
+            id: "10000",
+            type: {
+              id: "10000",
+              name: "",
+              inward: "Parent",
+              outward: "Sub-task",
+            },
+            outwardIssue: {
+              id: "10003",
+              key: "EX-2",
+              self: "http://www.example.com/jira/rest/api/2/issue/EX-2",
+              fields: {
+                status: {
+                  iconUrl:
+                    "http://www.example.com/jira//images/icons/statuses/open.png",
+                  name: "Open",
+                },
+              },
+            },
           },
-          'created': '2018-06-07T05:42:08.015+0000',
-          'updated': '2018-06-07T05:42:08.015+0000',
-          'visibility': {
-            'type': 'role',
-            'value': 'Administrators'
+        ],
+        description: "example bug report",
+        project: {
+          self: "http://www.example.com/jira/rest/api/2/project/EX",
+          id: "10000",
+          key: "EX",
+          name: "Example",
+          avatarUrls: {
+            "48x48":
+              "http://www.example.com/jira/secure/projectavatar?size=large&pid=10000",
+            "24x24":
+              "http://www.example.com/jira/secure/projectavatar?size=small&pid=10000",
+            "16x16":
+              "http://www.example.com/jira/secure/projectavatar?size=xsmall&pid=10000",
+            "32x32":
+              "http://www.example.com/jira/secure/projectavatar?size=medium&pid=10000",
           },
-          'jsdPublic': true
-        }
-      ],
-      'issuelinks': [
-        {
-          'id': '10001',
-          'type': {
-            'id': '10000',
-            'name': 'Dependent',
-            'inward': 'depends on',
-            'outward': 'is depended by'
+          projectCategory: {
+            self:
+              "http://www.example.com/jira/rest/api/2/projectCategory/10000",
+            id: "10000",
+            name: "FIRST",
+            description: "First Project Category",
           },
-          'outwardIssue': {
-            'id': '10004L',
-            'key': 'PRJ-2',
-            'self': 'http://www.example.com/jira/rest/api/2/issue/PRJ-2',
-            'fields': {
-              'status': {
-                'iconUrl': 'http://www.example.com/jira//images/icons/statuses/open.png',
-                'name': 'Open'
-              }
-            }
-          }
+          simplified: false,
         },
-        {
-          'id': '10002',
-          'type': {
-            'id': '10000',
-            'name': 'Dependent',
-            'inward': 'depends on',
-            'outward': 'is depended by'
+        comment: [
+          {
+            self:
+              "http://www.example.com/jira/rest/api/2/issue/" +
+              id +
+              "/comment/10000",
+            id: "10000",
+            author: {
+              self: "http://www.example.com/jira/rest/api/2/user?username=fred",
+              name: "fred",
+              displayName: "Fred F. User",
+              active: false,
+            },
+            body:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget venenatis elit. Duis eu justo eget augue iaculis fermentum. Sed semper quam laoreet nisi egestas at posuere augue semper.",
+            updateAuthor: {
+              self: "http://www.example.com/jira/rest/api/2/user?username=fred",
+              name: "fred",
+              displayName: "Fred F. User",
+              active: false,
+            },
+            created: "2018-06-07T05:42:08.015+0000",
+            updated: "2018-06-07T05:42:08.015+0000",
+            visibility: {
+              type: "role",
+              value: "Administrators",
+            },
+            jsdPublic: true,
           },
-          'inwardIssue': {
-            'id': '10004',
-            'key': 'PRJ-3',
-            'self': 'http://www.example.com/jira/rest/api/2/issue/PRJ-3',
-            'fields': {
-              'status': {
-                'iconUrl': 'http://www.example.com/jira//images/icons/statuses/open.png',
-                'name': 'Open'
-              }
-            }
-          }
-        }
-      ],
-      'worklog': [
-        {
-          'self': 'http://www.example.com/jira/rest/api/2/issue/10010/worklog/10000',
-          'author': {
-            'self': 'http://www.example.com/jira/rest/api/2/user?username=fred',
-            'name': 'fred',
-            'displayName': 'Fred F. User',
-            'active': false
+        ],
+        issuelinks: [
+          {
+            id: "10001",
+            type: {
+              id: "10000",
+              name: "Dependent",
+              inward: "depends on",
+              outward: "is depended by",
+            },
+            outwardIssue: {
+              id: "10004L",
+              key: "PRJ-2",
+              self: "http://www.example.com/jira/rest/api/2/issue/PRJ-2",
+              fields: {
+                status: {
+                  iconUrl:
+                    "http://www.example.com/jira//images/icons/statuses/open.png",
+                  name: "Open",
+                },
+              },
+            },
           },
-          'updateAuthor': {
-            'self': 'http://www.example.com/jira/rest/api/2/user?username=fred',
-            'name': 'fred',
-            'displayName': 'Fred F. User',
-            'active': false
+          {
+            id: "10002",
+            type: {
+              id: "10000",
+              name: "Dependent",
+              inward: "depends on",
+              outward: "is depended by",
+            },
+            inwardIssue: {
+              id: "10004",
+              key: "PRJ-3",
+              self: "http://www.example.com/jira/rest/api/2/issue/PRJ-3",
+              fields: {
+                status: {
+                  iconUrl:
+                    "http://www.example.com/jira//images/icons/statuses/open.png",
+                  name: "Open",
+                },
+              },
+            },
           },
-          'comment': 'I did some work here.',
-          'updated': '2018-06-07T05:42:08.018+0000',
-          'visibility': {
-            'type': 'group',
-            'value': 'jira-developers'
+        ],
+        worklog: [
+          {
+            self:
+              "http://www.example.com/jira/rest/api/2/issue/10010/worklog/10000",
+            author: {
+              self: "http://www.example.com/jira/rest/api/2/user?username=fred",
+              name: "fred",
+              displayName: "Fred F. User",
+              active: false,
+            },
+            updateAuthor: {
+              self: "http://www.example.com/jira/rest/api/2/user?username=fred",
+              name: "fred",
+              displayName: "Fred F. User",
+              active: false,
+            },
+            comment: "I did some work here.",
+            updated: "2018-06-07T05:42:08.018+0000",
+            visibility: {
+              type: "group",
+              value: "jira-developers",
+            },
+            started: "2018-06-07T05:42:08.018+0000",
+            timeSpent: "3h 20m",
+            timeSpentSeconds: 12000,
+            id: "100028",
+            issueId: "10002",
           },
-          'started': '2018-06-07T05:42:08.018+0000',
-          'timeSpent': '3h 20m',
-          'timeSpentSeconds': 12000,
-          'id': '100028',
-          'issueId': '10002'
-        }
-      ],
-      'updated': 1,
-      'timetracking': {
-        'originalEstimate': '10m',
-        'remainingEstimate': '3m',
-        'timeSpent': '6m',
-        'originalEstimateSeconds': 600,
-        'remainingEstimateSeconds': 200,
-        'timeSpentSeconds': 400
+        ],
+        updated: 1,
+        timetracking: {
+          originalEstimate: "10m",
+          remainingEstimate: "3m",
+          timeSpent: "6m",
+          originalEstimateSeconds: 600,
+          remainingEstimateSeconds: 200,
+          timeSpentSeconds: 400,
+        },
       }
-    })
-  }
+    ),
+  };
 }

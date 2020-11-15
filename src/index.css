@@ -15,7 +15,7 @@
 
 .total {
   border-bottom: 1px solid;
-  text-align: right
+  text-align: right;
 }
 
 .total {
@@ -33,7 +33,8 @@
   font-size: 0.8em;
 }
 
-.col-sm-1,.col-sm-2 {
+.col-sm-1,
+.col-sm-2 {
   padding-right: 0px;
 }
 
@@ -46,14 +47,15 @@
 }
 
 .parent .summary {
-  margin-left : -1em;
-  margin-right : 1em;
+  margin-left: -1em;
+  margin-right: 1em;
 }
 
-.comment, .summary {
+.comment,
+.summary {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow:    ellipsis;
+  text-overflow: ellipsis;
 }
 
 .summary {
@@ -71,7 +73,7 @@
 .issue .time td {
   color: #bbb;
   width: 2em;
-  font-size : 50%;
+  font-size: 50%;
   text-align: center;
   border: 1px solid #bbb;
   background-color: #fff;
