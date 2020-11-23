@@ -28,7 +28,7 @@
     "websocket-extensions": "^0.1.4"
   },
   "dependencies": {
-    "fetch-mock": "^9.10.7",
+    "fetch-mock": "^9.11.0",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "nock": "^13.0.5",
@@ -45,6 +45,6 @@
   },
   "devDependencies": {
     "format-package": "^6.1.0",
-    "prettier": "^2.1.2"
+    "prettier": "^2.2.0"
   }
 }
