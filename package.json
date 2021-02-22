@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "fetch-mock": "^9.11.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "nock": "^13.0.7",
     "prop-types": "^15.7.2",
